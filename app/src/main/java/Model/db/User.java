@@ -1,17 +1,19 @@
 package Model.db;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
 public class User implements Serializable {
 
     @PrimaryKey(autoGenerate = false)
-    private String email;
+    @NonNull private String email;
 
     @ColumnInfo(name = "prenom")
     private String prenom;
@@ -23,7 +25,7 @@ public class User implements Serializable {
     private String motDePasse;
 
     @ColumnInfo(name = "dateNaissance")
-    private Date dateNaissance;
+    private String dateNaissance;
 
     @ColumnInfo(name = "image")
     private String srcImage;
@@ -62,4 +64,33 @@ public class User implements Serializable {
         this.nom = nom;
     }
 
+    public String getMotDePasse()
+    {
+        return motDePasse;
+    }
+
+    public void setMotDePasse(String motDePasse)
+    {
+        this.motDePasse = motDePasse;
+    }
+
+    public String getDateNaissance()
+    {
+        return dateNaissance;
+    }
+
+    public void setDateNaissance(String dateNaissance)
+    {
+        this.dateNaissance = dateNaissance;
+    }
+
+    public String getSrcImage()
+    {
+        return srcImage;
+    }
+
+    public void setSrcImage(String srcImage)
+    {
+        this.srcImage = srcImage;
+    }
 }
