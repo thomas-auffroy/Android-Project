@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Android Application</string>
+    <string name="NAME">Sauve Qui Peut</string>
+    <string name="NO_CONNECTION">Vous pouvez jouer en anonyme mais vous perderez toute progression à la fermeture de l\'application !</string>
 </resources>
