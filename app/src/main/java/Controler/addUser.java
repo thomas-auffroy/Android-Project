@@ -1,19 +1,29 @@
 package Controler;
 
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.androidapplication.R;
 
 import Model.db.DatabaseClient;
+import Model.db.User;
 
-public class addUser  extends AppCompatActivity {
+
+public class addUser  extends AppCompatActivity
+{
     // DATA
     private DatabaseClient mDb;
 
     //VIEW
-    private EditText prenom;
-    private EditText nom;
+    private EditText name;
+    private EditText surname;
+    private EditText email;
+    private EditText password;
+    private EditText birthDate;
     private Button saveUser;
 
     @Override
@@ -27,8 +37,12 @@ public class addUser  extends AppCompatActivity {
         mDb = DatabaseClient.getInstance(getApplicationContext());
 
         // Récupérer les vues
-        prenom = findViewById(R.id.dataPrenom);
-        nom = findViewById(R.id.dataNom);
+
+        name = findViewById(R.id.dataName);
+        surname = findViewById(R.id.dataSurname);
+        email = findViewById(R.id.dataEmail);
+        password = findViewById(R.id.dataPassword);
+        birthDate = findViewById(R.id.dataBirthDate);
         saveUser = findViewById(R.id.buttonSaveUser);
 
         // Associer un événement au bouton save
@@ -43,19 +57,19 @@ public class addUser  extends AppCompatActivity {
     private void saveNewUser() {
 
         // Récupérer les informations contenues dans les vues
-        final String sPrenom = prenom.getText().toString();
-        final String sNom = nom.getText().toString();
+        final String sPrenom = name.getText().toString();
+        final String sNom = surname.getText().toString();
 
         // Vérifier les informations fournies par l'utilisateur
         if (sPrenom.isEmpty()) {
-            prenom.setError("Entre ton prénom :)");
-            prenom.requestFocus();
+            name.setError("Entre ton prénom :)");
+            name.requestFocus();
             return;
         }
 
         if (sNom.isEmpty()) {
-            nom.setError("Entre ton nom :)");
-            nom.requestFocus();
+            surname.setError("Entre ton nom :)");
+            surname.requestFocus();
             return;
         }
 
