@@ -4,11 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import java.io.Serializable;
 import java.sql.Date;
 
+import Model.ConvertersDate;
+
 @Entity
+@TypeConverters({ConvertersDate.class})
+
 public class User implements Serializable {
 
     @PrimaryKey(autoGenerate = false)

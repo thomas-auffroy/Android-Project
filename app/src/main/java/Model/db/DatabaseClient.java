@@ -24,7 +24,7 @@ public class DatabaseClient {
 
         ////////// REMPLIR LA BD à la première création à l'aide de l'objet roomDatabaseCallback
         // Ajout de la méthode addCallback permettant de populate (remplir) la base de données à sa création
-        //appDatabase = Room.databaseBuilder(context, AppDatabase.class, "MyToDos").addCallback(roomDatabaseCallback).build();
+        //AppDatabase = Room.databaseBuilder(context, AppDatabase.class, "EcoleDesLoustics").addCallback(roomDatabaseCallback).build();
     }
 
     // Méthode statique
@@ -50,8 +50,8 @@ public class DatabaseClient {
             super.onCreate(db);
 
             //
-            db.execSQL("INSERT INTO task (task, description) VALUES(\"tâche 1\", \"installer la librairie Room\");");
-            db.execSQL("INSERT INTO task (task, description) VALUES(\"tâche 2\", \" Créer DatabaseClient\");");
+            db.execSQL("INSERT INTO user (email, prenom, nom, motDePasse, dateNaissance, srcImage) VALUES(\"test@gmail.com\", \"Théo\", \"Hauray\", \"tt\", \"1997-12-29\", \"test\");");
+            db.execSQL("INSERT INTO user (email, prenom, nom, motDePasse, dateNaissance, srcImage) VALUES(\"test@gmail.com\", \"Théo\", \"Hauray\", \"tt\", \"1997-12-29\", \"test\");");
 
         }
     };

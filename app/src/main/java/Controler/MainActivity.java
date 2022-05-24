@@ -13,11 +13,15 @@ import Model.db.DatabaseClient;
 
 public class MainActivity  extends AppCompatActivity {
     private Button buttonAdd;
+    private DatabaseClient mDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_main);
+
+        //Initialise DB
+        mDb = DatabaseClient.getInstance(getApplicationContext());
 
         // Récupérer les vues
         buttonAdd = findViewById(R.id.addUser);
@@ -31,4 +35,10 @@ public class MainActivity  extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
 }

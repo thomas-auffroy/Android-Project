@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.androidapplication.R;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,6 +24,7 @@ import Model.db.User;
 public class AddUser extends AppCompatActivity {
     // DATA
     private DatabaseClient mDb;
+    private List<String> emailsInDb;
 
     //VIEW
     private EditText prenom;
@@ -29,6 +32,7 @@ public class AddUser extends AppCompatActivity {
     private EditText email;
     private EditText motDePasse;
     private EditText dateNaissance;
+    private EditText imageSrc;
     private Button saveUser;
 
     @Override
@@ -40,9 +44,9 @@ public class AddUser extends AppCompatActivity {
 
         // Récupération du DatabaseClient
         mDb = DatabaseClient.getInstance(getApplicationContext());
+        emailsInDb = null;
 
         // Récupérer les vues
-
         prenom = findViewById(R.id.dataName);
         nom = findViewById(R.id.dataSurname);
         email = findViewById(R.id.dataEmail);
@@ -57,6 +61,29 @@ public class AddUser extends AppCompatActivity {
                 saveNewUser();
             }
         });
+
+        // Récupérer les emails dans la base
+        class GetEmails extends AsyncTask<Void, Void, List<String>> {
+
+            @Override
+            protected List<String> doInBackground(Void... voids) {
+
+                // adding to database
+                emailsInDb = mDb.getAppDatabase().userDao().getAllEmails();
+                System.out.println(emailsInDb.size());
+
+                return emailsInDb;
+            }
+
+            @Override
+            protected void onPostExecute(List<String> emails) {
+                super.onPostExecute(emails);
+            }
+        }
+
+        // Executer tache asynchrone
+        GetEmails getEmails = new GetEmails();
+        getEmails.execute();
     }
 
     private void saveNewUser() {
@@ -71,9 +98,8 @@ public class AddUser extends AppCompatActivity {
         Date sDateNaissanceChecked = null; //Var de type java.sql.Date pour intégration dans DB
         Date now = new Date(System.currentTimeMillis()); //Var de type java.sql.Date pour test dateNaissance < now
 
-
         //Expression régulière pour conformité @ mail
-        String emailRegx = "^(.+)@(\\S+) $";
+        String emailRegx = "^(.+)@(\\S+)$";
         Pattern emailRegxPattern = Pattern.compile(emailRegx);
         Matcher sEmailCheck = emailRegxPattern.matcher(sEmail);
 
@@ -108,6 +134,13 @@ public class AddUser extends AppCompatActivity {
             return;
         }
 
+        if (emailsInDb != null && emailsInDb.contains(sEmail))
+        {
+            email.setError("L'email existe déjà dans la base");
+            email.requestFocus();
+            return;
+        }
+
         //Test date de naissance
         try {
             sDateNaissanceChecked = Date.valueOf(sDateNaissanceUnchecked);
@@ -117,7 +150,7 @@ public class AddUser extends AppCompatActivity {
             return;
         }
 
-        if (sDateNaissanceChecked != null && sDateNaissanceChecked.after(now)) {
+        if (sDateNaissanceChecked.after(now)) {
             dateNaissance.setError("La date de naissance doit être antérieure à la date du jour");
             dateNaissance.requestFocus();
             return;
@@ -130,18 +163,19 @@ public class AddUser extends AppCompatActivity {
 
         Date finalSDateNaissanceChecked = sDateNaissanceChecked;
 
-        class SaveTask extends AsyncTask<Void, Void, User> {
+        class SaveUser extends AsyncTask<Void, Void, User> {
 
             @Override
             protected User doInBackground(Void... voids) {
 
-                // creating a task
+                // creating a user
                 User user = new User();
+                user.setEmail(sEmail);
                 user.setPrenom(sPrenom);
                 user.setNom(sNom);
                 user.setDateNaissance(finalSDateNaissanceChecked);
                 user.setMotDePasse(sMotDePasse);
-                //user.setSrcImage();
+                user.setSrcImage("");
 
                 // adding to database
                 mDb.getAppDatabase().userDao().insert(user);
@@ -162,7 +196,7 @@ public class AddUser extends AppCompatActivity {
 
         //////////////////////////
         // IMPORTANT bien penser à executer la demande asynchrone
-        SaveTask st = new SaveTask();
-        st.execute();
+        SaveUser saveUser = new SaveUser();
+        saveUser.execute();
     }
 }
