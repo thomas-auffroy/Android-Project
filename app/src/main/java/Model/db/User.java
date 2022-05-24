@@ -6,14 +6,14 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 public class User implements Serializable {
 
     @PrimaryKey(autoGenerate = false)
-    @NonNull private String email;
+    @NonNull
+    private String email;
 
     @ColumnInfo(name = "prenom")
     private String prenom;
@@ -25,7 +25,7 @@ public class User implements Serializable {
     private String motDePasse;
 
     @ColumnInfo(name = "dateNaissance")
-    private String dateNaissance;
+    private Date dateNaissance;
 
     @ColumnInfo(name = "image")
     private String srcImage;
@@ -74,12 +74,12 @@ public class User implements Serializable {
         this.motDePasse = motDePasse;
     }
 
-    public String getDateNaissance()
+    public Date getDateNaissance()
     {
         return dateNaissance;
     }
 
-    public void setDateNaissance(String dateNaissance)
+    public void setDateNaissance(Date dateNaissance)
     {
         this.dateNaissance = dateNaissance;
     }
