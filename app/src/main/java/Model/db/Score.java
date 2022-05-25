@@ -10,9 +10,9 @@ import androidx.room.TypeConverters;
 import java.io.Serializable;
 import java.time.Duration;
 
-import Model.ConvertersDuration;
-import Model.ConvertersMedails;
-import Model.Medails;
+import Model.Converters.ConvertersDuration;
+import Model.Converters.ConvertersMedails;
+import Model.Enum.Medails;
 
 @Entity(
         foreignKeys = {

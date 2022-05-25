@@ -9,7 +9,7 @@ import androidx.room.TypeConverters;
 import java.io.Serializable;
 import java.sql.Date;
 
-import Model.ConvertersDate;
+import Model.Converters.ConvertersDate;
 
 @Entity
 @TypeConverters({ConvertersDate.class})

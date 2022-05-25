@@ -1,6 +1,8 @@
-package Model;
+package Model.Converters;
 
 import androidx.room.TypeConverter;
+
+import Model.Enum.Medails;
 
 public class ConvertersMedails {
 

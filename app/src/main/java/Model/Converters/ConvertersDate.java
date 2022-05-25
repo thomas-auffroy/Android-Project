@@ -1,4 +1,4 @@
-package Model;
+package Model.Converters;
 
 import androidx.room.TypeConverter;
 

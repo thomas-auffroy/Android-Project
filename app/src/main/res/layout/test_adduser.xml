@@ -14,35 +14,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/dataName"
-            android:text="Prenom">
+            android:hint="Prenom">
         </EditText>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/dataSurname"
-            android:text="Nom">
+            android:hint="Nom">
         </EditText>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/dataEmail"
-            android:text="Email">
+            android:hint="Email">
         </EditText>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/dataPassword"
-            android:text="mot de passe">
+            android:hint="mot de passe">
         </EditText>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/dataBirthDate"
-            android:text="date naissance">
+            android:hint="date naissance">
         </EditText>
 
         <Button

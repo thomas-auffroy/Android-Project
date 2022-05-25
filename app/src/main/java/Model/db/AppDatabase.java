@@ -2,9 +2,6 @@ package Model.db;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
-import androidx.room.TypeConverters;
-
-import Model.ConvertersDate;
 
 @Database(entities = {User.class, Game.class, Score.class}, version = 1, exportSchema = false)
 

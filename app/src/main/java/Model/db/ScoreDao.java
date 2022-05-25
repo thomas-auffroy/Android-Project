@@ -9,8 +9,8 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import Model.ConvertersDuration;
-import Model.ConvertersMedails;
+import Model.Converters.ConvertersDuration;
+import Model.Converters.ConvertersMedails;
 
 @Dao
 @TypeConverters({ConvertersDuration.class, ConvertersMedails.class})
