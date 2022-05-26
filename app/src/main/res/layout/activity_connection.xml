@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/green_bg"
+    >
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/backward"
+
+        android:layout_margin="20dp"
+        android:background="@color/green_bg"
+        android:src="@drawable/ic_backwardarrow"
+
+        android:onClick="backward"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="40dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Adresse email"
+                android:textColor="@color/lightBeige_txt"
+                android:textSize="20sp"
+                />
+
+            <EditText
+                android:id="@+id/mailData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:textSize="11sp"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/white"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Mot de passe"
+                android:textColor="@color/lightBeige_txt"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/passwordData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:textSize="11sp"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/white"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/forgotPassword"
+
+            android:text="Mot de passe oublié ?"
+            android:textStyle="italic"
+            android:textColor="@color/lightBeige_txt"
+            android:layout_marginTop="20dp"
+
+            android:onClick="functionForgotPassword"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <android.widget.Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnConnection"
+
+            android:text="Se connecter"
+            android:layout_marginTop="60dp"
+            android:layout_gravity="center"
+            android:textColor="@color/brown_txt_cta"
+            android:background="@drawable/cw_cta_shadow"
+
+            android:onClick="connection"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/notYetSignedUp"
+
+        android:text="Pas encore de compte ? Inscrivez-vous !"
+        android:layout_marginBottom="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/lightBeige_txt"
+        />
+
+
+
+
+
+</RelativeLayout>
