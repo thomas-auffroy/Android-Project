@@ -5,13 +5,14 @@
     android:background="@color/green_bg"
     >
 
+    <!-- background = null sinon gris bizarre -->
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/backward"
 
         android:layout_margin="20dp"
-        android:background="@color/green_bg"
+        android:background="@null"
         android:src="@drawable/ic_backwardarrow"
 
         android:onClick="backward"
@@ -20,16 +21,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_marginTop="80dp"
         android:orientation="vertical"
-        android:paddingHorizontal="40dp"
-        android:layout_centerInParent="true">
+        android:paddingHorizontal="40dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -37,18 +38,17 @@
 
                 android:text="Adresse email"
                 android:textColor="@color/lightBeige_txt"
-                android:textSize="20sp"
-                />
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/dataEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:textSize="17sp"
-                android:textColor="@color/white"
                 android:backgroundTint="@color/white"
-                android:inputType="textEmailAddress"/>
+                android:inputType="textEmailAddress"
+                android:textColor="@color/white"
+                android:textSize="17sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -69,41 +69,47 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:textSize="17sp"
+                android:backgroundTint="@color/white"
                 android:inputType="textPassword"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/white"/>
+                android:textSize="17sp" />
         </LinearLayout>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/forgotPassword"
-
-            android:text="Mot de passe oublié ?"
-            android:textStyle="italic"
-            android:textColor="@color/lightBeige_txt"
-            android:layout_marginTop="20dp"
-
-            android:onClick="functionForgotPassword"
-            android:clickable="true"
-            android:focusable="true"/>
-
-        <android.widget.Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
+            android:layout_marginTop="20dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="functionForgotPassword"
+
+            android:text="Mot de passe oublié ? "
+            android:textColor="@color/lightBeige_txt"
+            android:textStyle="italic" />
+
+        <!-- stateListAnimator sert à remove les shadows du bouton -->
+        <android.widget.Button
             android:id="@+id/btnConnection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-            android:text="Se connecter"
-            android:textSize="20sp"
-            android:layout_marginTop="60dp"
             android:layout_gravity="center"
-            android:textAllCaps="false"
-            android:textColor="@color/brown_txt_cta"
+            android:layout_marginTop="60dp"
             android:background="@drawable/cw_cta_shadow"
-
             android:onClick="connection"
-            />
+            android:paddingHorizontal="40dp"
+            android:paddingBottom="7dp"
+
+            android:stateListAnimator="@null"
+            android:text="Se connecter"
+
+            android:textAllCaps="false"
+
+            android:textColor="@color/brown_txt_cta"
+
+            android:textSize="20sp" />
     </LinearLayout>
 
     <TextView
