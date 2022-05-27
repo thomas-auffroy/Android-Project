@@ -20,9 +20,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="80dp"
         android:orientation="vertical"
-        android:paddingHorizontal="40dp">
+        android:paddingHorizontal="40dp"
+        android:layout_centerInParent="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,13 +41,14 @@
                 />
 
             <EditText
-                android:id="@+id/mailData"
+                android:id="@+id/dataEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:textSize="11sp"
+                android:textSize="17sp"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/white"/>
+                android:backgroundTint="@color/white"
+                android:inputType="textEmailAddress"/>
         </LinearLayout>
 
         <LinearLayout
@@ -63,11 +65,12 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/passwordData"
+                android:id="@+id/dataPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:textSize="11sp"
+                android:textSize="17sp"
+                android:inputType="textPassword"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/white"/>
         </LinearLayout>
@@ -92,8 +95,10 @@
             android:id="@+id/btnConnection"
 
             android:text="Se connecter"
+            android:textSize="20sp"
             android:layout_marginTop="60dp"
             android:layout_gravity="center"
+            android:textAllCaps="false"
             android:textColor="@color/brown_txt_cta"
             android:background="@drawable/cw_cta_shadow"
 
@@ -111,6 +116,10 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:textColor="@color/lightBeige_txt"
+
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="signUp"
         />
 
 
