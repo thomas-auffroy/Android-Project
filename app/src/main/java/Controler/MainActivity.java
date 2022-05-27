@@ -18,6 +18,24 @@ public class MainActivity  extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.acitvity_homepage_no_login);
+
+        View decorView = getWindow().getDecorView();
+// Hide both the navigation bar and the status bar.
+// SYSTEM_UI_FLAG_FULLSCREEN is only available on Android 4.1 and higher, but as
+// a general rule, you should design your app to hide the status bar whenever you
+// hide the navigation bar.
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+
+
+        Button loginBTN = findViewById(R.id.btnConnection);
+
+        /*
+        setContentView(R.layout.activity_connection);
+        */
+        /*
         setContentView(R.layout.test_main);
 
         //Initialise DB
@@ -34,11 +52,24 @@ public class MainActivity  extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        */
     }
 
     @Override
     protected void onStart() {
+        // Permet de cacher la barre de navigation du bas
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                //|View.SYSTEM_UI_FLAG_FULLSCREEN // Si on veut cacher la barre android du haut
+        );
         super.onStart();
+    }
+
+    public void login(View view){
+        Intent intent = new Intent(this, LoginUser.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
     }
 
 }
