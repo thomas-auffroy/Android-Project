@@ -1,4 +1,5 @@
 <resources>
     <string name="NAME">Marelle</string>
     <string name="NO_CONNECTION">Vous pouvez jouer en anonyme mais vous perderez toute progression à la fermeture de l\'application !</string>
+    <string name="WELCOMME">Bonjour</string>
 </resources>
