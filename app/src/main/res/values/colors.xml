@@ -8,7 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     
-    <color name="green_bg">#91D159</color> //Opacity 83%
+    <color name="green_bg">#CC91D159</color> //Opacity 80%
     <color name="gold_bg_cta">#FDEF00</color> //Opacity 100%
     <color name="gold_shadow_cta">#E1D500</color> //Opacity 100%
     <color name="brown_txt_cta">#A16E03</color> //Opacity 100%
