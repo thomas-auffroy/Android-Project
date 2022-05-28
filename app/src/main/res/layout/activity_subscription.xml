@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/green_bg"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/green_bg">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -181,17 +181,34 @@
                     android:textColor="@color/lightBeige_txt"
                     android:textSize="20sp" />
 
-                <EditText
-                    android:id="@+id/dataPassword"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent">
 
-                    android:backgroundTint="@color/white"
-                    android:inputType="textPassword"
-                    android:textColor="@color/white"
+                    <EditText
+                        android:id="@+id/dataPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
 
-                    android:textSize="17sp" />
+
+                        android:backgroundTint="@color/white"
+                        android:inputType="textPassword"
+                        android:textColor="@color/white"
+
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:src="@drawable/ic_password_show"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:onClick="tooglePassword"/>
+                </RelativeLayout>
+
             </LinearLayout>
+
 
             <!-- stateListAnimator sert à remove les shadows du bouton -->
             <android.widget.Button
