@@ -160,9 +160,11 @@
                     android:layout_height="wrap_content"
 
                     android:backgroundTint="@color/white"
-                    android:inputType="datetime"
+                    android:inputType="date"
                     android:textColor="@color/white"
-                    android:textSize="17sp" />
+                    android:textSize="17sp"
+                    android:focusable="false"
+                    android:onClick="chooseDate"/>
             </LinearLayout>
 
             <LinearLayout
@@ -200,7 +202,7 @@
                 android:layout_gravity="center"
                 android:layout_marginVertical="40dp"
                 android:background="@drawable/cw_cta_shadow"
-                android:onClick="subscription"
+                android:onClick="subscribe"
                 android:paddingHorizontal="40dp"
                 android:paddingBottom="7dp"
 
