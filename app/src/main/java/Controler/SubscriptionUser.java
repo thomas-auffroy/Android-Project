@@ -3,6 +3,8 @@ package Controler;
 import android.app.DatePickerDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -96,7 +98,7 @@ public class SubscriptionUser extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year,
                                   int monthOfYear, int dayOfMonth) {
 
-                dateNaissance.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                dateNaissance.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
 
                 lastSelectedYear = year;
                 lastSelectedMonth = monthOfYear;
@@ -107,12 +109,13 @@ public class SubscriptionUser extends AppCompatActivity {
         DatePickerDialog datePickerDialog = null;
 
         datePickerDialog = new DatePickerDialog(this,
+                android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
                 dateSetListener, lastSelectedYear, lastSelectedMonth, lastSelectedDayOfMonth);
         datePickerDialog.show();
     }
 
 
-    private void subscription() {
+    public void subscribe(View view) {
 
         // Récupérer les informations contenues dans les vues
         final String sPrenom = prenom.getText().toString();
@@ -228,6 +231,26 @@ public class SubscriptionUser extends AppCompatActivity {
     public void backward(View view) {
         super.finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
+    }
+
+    public void tooglePassword(View view){
+
+
+        // a améliorer
+
+        int inputMode = motDePasse.getInputType();
+        System.out.println(inputMode);
+        System.out.println(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
+        //motDePasse.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        motDePasse.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
+
+        if (inputMode == InputType.TYPE_CLASS_TEXT) {
+            motDePasse.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        } else if (inputMode == InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+            motDePasse.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT);
+        }
+
     }
 
     @Override
