@@ -52,6 +52,7 @@
             android:text="@string/NAME"
             android:fontFamily="@font/gloria_hallelujah_regular"
             android:textColor="@color/white"
+            android:letterSpacing="0.05"
             android:textStyle="bold"
             android:textSize="60sp"
             android:padding="10dp"

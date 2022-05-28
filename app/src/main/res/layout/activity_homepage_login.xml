@@ -49,6 +49,7 @@
             android:id="@+id/applicationName"
 
             android:text="@string/NAME"
+            android:letterSpacing="0.05"
             android:fontFamily="@font/gloria_hallelujah_regular"
             android:textColor="@color/white"
             android:textStyle="bold"
