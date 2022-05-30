@@ -20,11 +20,11 @@ public class DatabaseClient {
         // Créer l'objet représentant la base de données de votre application
         // à l'aide du "Room database builder"
         // MyToDos est le nom de la base de données
-        AppDatabase = Room.databaseBuilder(context, AppDatabase.class, "EcoleDesLoustics").build();
+        //AppDatabase = Room.databaseBuilder(context, AppDatabase.class, "Marelle").build();
 
         ////////// REMPLIR LA BD à la première création à l'aide de l'objet roomDatabaseCallback
         // Ajout de la méthode addCallback permettant de populate (remplir) la base de données à sa création
-        //AppDatabase = Room.databaseBuilder(context, AppDatabase.class, "EcoleDesLoustics").addCallback(roomDatabaseCallback).build();
+        AppDatabase = Room.databaseBuilder(context, AppDatabase.class, "Marelle").addCallback(roomDatabaseCallback).build();
     }
 
     // Méthode statique
@@ -50,7 +50,7 @@ public class DatabaseClient {
             super.onCreate(db);
 
             //
-            db.execSQL("INSERT INTO user (email, prenom, nom, motDePasse, dateNaissance, srcImage) VALUES(\"test@gmail.com\", \"Théo\", \"Hauray\", \"tt\", \"1997-12-29\", \"test\");");
+            db.execSQL("INSERT INTO game (categorie, description) VALUES ('Math', 'Les espaces vectoriels en un click')");
             db.execSQL("INSERT INTO user (email, prenom, nom, motDePasse, dateNaissance, srcImage) VALUES(\"test@gmail.com\", \"Théo\", \"Hauray\", \"tt\", \"1997-12-29\", \"test\");");
 
         }
