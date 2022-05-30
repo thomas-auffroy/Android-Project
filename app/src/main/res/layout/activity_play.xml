@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/green_bg">
+    android:background="@color/green_bg"
+    >
 
     <ImageView
         android:layout_width="wrap_content"
@@ -36,128 +36,47 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="100dp"
-        android:background="@drawable/ic_plus"/>
+        android:background="@drawable/ic_plus"/>s
+    <!-- background = null sinon gris bizarre -->
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/backward"
+
+        android:layout_margin="20dp"
+        android:background="@null"
+        android:src="@drawable/ic_backwardarrow"
+
+        android:onClick="backward"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_marginTop="80dp"
         android:orientation="vertical">
-        <TextView
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/applicationName"
-
-            android:text="@string/NAME"
-            android:letterSpacing="0.05"
-            android:fontFamily="@font/gloria_hallelujah_regular"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="50sp"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="20dp"
             android:padding="10dp"
-            android:gravity="center"/>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:text="@string/WELCOMME"
-                android:textSize="25sp"
-                android:gravity="center"/>
+            android:background="@drawable/categorie_border">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/dataSurname"
+                android:text="Mathématiques"/>
 
-                android:text="Thomas"
-                android:paddingLeft="10dp"
-                android:fontFamily="@font/gloria_hallelujah_regular"
-                android:textSize="25sp"
-                android:gravity="center"/>
+
         </LinearLayout>
+
 
     </LinearLayout>
 
-    <android.widget.Button
-        android:id="@+id/btnPlay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_centerInParent="true"
-        android:stateListAnimator="@null"
-
-        android:background="@drawable/cw_cta_shadow"
-
-        android:gravity="center"
-        android:onClick="play"
-
-        android:paddingHorizontal="70dp"
-
-        android:paddingBottom="7dp"
-        android:text="Jouer"
-        android:textAllCaps="false"
-        android:textColor="@color/brown_txt_cta"
-        android:textSize="40sp" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginHorizontal="20dp"
-        android:orientation="horizontal">
-
-        <android.widget.Button
-            android:id="@+id/btnScore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_alignParentStart="true"
-            android:stateListAnimator="@null"
 
 
-            android:background="@drawable/cw_cta_shadow"
-            android:gravity="center"
-            android:onClick="score"
-            android:paddingHorizontal="20dp"
-
-            android:paddingBottom="7dp"
-            android:text="Score"
-            android:textAllCaps="false"
-
-            android:textColor="@color/brown_txt_cta"
-            android:textSize="25sp" />
-
-        <android.widget.Button
-            android:id="@+id/btnProfil"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-
-            android:background="@drawable/cw_cta_shadow"
-            android:gravity="center"
-            android:onClick="profil"
-            android:stateListAnimator="@null"
-
-            android:paddingHorizontal="30dp"
-
-            android:paddingBottom="7dp"
-
-            android:text="Profil"
-            android:textAllCaps="false"
-
-            android:textColor="@color/brown_txt_cta"
-            android:textSize="25sp" />
-
-
-
-    </RelativeLayout>
 
 
 
