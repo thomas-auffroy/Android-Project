@@ -21,6 +21,7 @@
         <activity android:name="Controler.AddUser" />
         <activity android:name="Controler.LoginUser"/>
         <activity android:name="Controler.SubscriptionUser"/>
+        <activity android:name="Controler.PlayActivity"/>
     </application>
 
 </manifest>
