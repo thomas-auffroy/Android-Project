@@ -70,7 +70,6 @@ public class AddUser extends AppCompatActivity {
 
                 // adding to database
                 emailsInDb = mDb.getAppDatabase().userDao().getAllEmails();
-                System.out.println(emailsInDb.size());
 
                 return emailsInDb;
             }

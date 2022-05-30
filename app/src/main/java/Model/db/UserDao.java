@@ -22,6 +22,12 @@ public interface UserDao {
     @Query("SELECT email FROM user")
     List<String> getAllEmails();
 
+    @Query("SELECT * FROM user WHERE email = :email")
+    User getUser(String email);
+
+    @Query("SELECT motDePasse FROM user WHERE email = :email")
+    String getMotDePasse(String email);
+
     @Insert
     void insert(User user);
 
@@ -33,5 +39,6 @@ public interface UserDao {
 
     @Update
     void update(User user);
+
 
 }
