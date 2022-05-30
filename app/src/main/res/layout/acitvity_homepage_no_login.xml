@@ -81,6 +81,7 @@
             android:paddingBottom="7dp"
             android:textColor="@color/brown_txt_cta"
             android:background="@drawable/cw_cta_shadow"
+            android:onClick="play"
             />
 
         <TextView
