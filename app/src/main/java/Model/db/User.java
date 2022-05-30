@@ -32,7 +32,7 @@ public class User implements Serializable {
     @ColumnInfo(name = "dateNaissance")
     private Date dateNaissance;
 
-    @ColumnInfo(name = "image")
+    @ColumnInfo(name = "srcImage")
     private String srcImage;
 
 
@@ -98,4 +98,5 @@ public class User implements Serializable {
     {
         this.srcImage = srcImage;
     }
+
 }
