@@ -27,7 +27,6 @@ public class LoginUser extends AppCompatActivity {
     //VIEW
     private EditText email;
     private EditText motDePasse;
-    private String tempMotDePasse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,8 +83,6 @@ public class LoginUser extends AppCompatActivity {
 
         else
         {
-
-
             // Récupérer les emails dans la base
             class GetUser extends AsyncTask<Void, Void, User> {
 
@@ -93,13 +90,13 @@ public class LoginUser extends AppCompatActivity {
                 protected User doInBackground(Void... voids) {
 
                     // adding to database
-                    tempMotDePasse = mDb.getAppDatabase().userDao().getMotDePasse(sEmail);
-                    return tempMotDePasse;
+                    user = mDb.getAppDatabase().userDao().getUser(sEmail);
+                    return user;
                 }
 
                 @Override
-                protected void onPostExecute(String tempMotDePasse) {
-                    super.onPostExecute(tempMotDePasse);
+                protected void onPostExecute(User user) {
+                    super.onPostExecute(user);
                 }
             }
 
@@ -107,13 +104,12 @@ public class LoginUser extends AppCompatActivity {
             GetUser getUser = new GetUser();
             getUser.execute();
 
-            if(sMotDePasse != tempMotDePasse)
+            if(sMotDePasse != user.getMotDePasse())
             {
                 motDePasse.setError("Le mot de passe est incorrect");
                 motDePasse.requestFocus();
                 return;
             }
-
             else
             {
 
@@ -122,7 +118,8 @@ public class LoginUser extends AppCompatActivity {
     }
 
         public void backward(View view){
-        super.finish();
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
     }
 
