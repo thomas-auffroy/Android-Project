@@ -17,6 +17,9 @@ public interface GameDao {
     @Query("SELECT * FROM game WHERE categorie = :categorie")
     List<Game> getAllFromCategory(String categorie);
 
+    @Query("SELECT categorie FROM game GROUP BY categorie")
+    List<String> getAllCategory();
+
     @Insert
     void insert(Game game);
 
