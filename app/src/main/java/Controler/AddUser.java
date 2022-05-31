@@ -1,5 +1,6 @@
 package Controler;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ public class AddUser extends AppCompatActivity {
     // DATA
     private DatabaseClient mDb;
     private List<String> emailsInDb;
+    private User user;
 
     //VIEW
     private EditText prenom;
@@ -34,6 +36,9 @@ public class AddUser extends AppCompatActivity {
     private EditText dateNaissance;
     private EditText imageSrc;
     private Button saveUser;
+
+    public AddUser() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,7 +173,7 @@ public class AddUser extends AppCompatActivity {
             protected User doInBackground(Void... voids) {
 
                 // creating a user
-                User user = new User();
+                user = new User();
                 user.setEmail(sEmail);
                 user.setPrenom(sPrenom);
                 user.setNom(sNom);
@@ -187,8 +192,11 @@ public class AddUser extends AppCompatActivity {
                 super.onPostExecute(user);
 
                 // Quand la tache est créée, on arrête l'activité AddTaskActivity (on l'enleve de la pile d'activités)
-                setResult(RESULT_OK);
-                finish();
+                Intent intent = new Intent(AddUser.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra(MainActivity.USER, user);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
+                startActivity(intent);
                 Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
             }
         }

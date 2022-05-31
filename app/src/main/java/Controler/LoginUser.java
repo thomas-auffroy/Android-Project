@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,12 +28,14 @@ public class LoginUser extends AppCompatActivity {
     //VIEW
     private EditText email;
     private EditText motDePasse;
+    private Button connect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_connection);
+        user = new User();
 
         // Récupération du DatabaseClient
         mDb = DatabaseClient.getInstance(getApplicationContext());
@@ -41,6 +44,15 @@ public class LoginUser extends AppCompatActivity {
         // Récupérer les vues
         email = findViewById(R.id.dataEmailConnection);
         motDePasse = findViewById(R.id.dataPasswordConnection);
+        connect = findViewById(R.id.btnConnection);
+
+        // Associer un événement au bouton save
+        connect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Connection();
+            }
+        });
 
         // Récupérer les emails dans la base
         class GetEmails extends AsyncTask<Void, Void, List<String>> {
@@ -81,6 +93,13 @@ public class LoginUser extends AppCompatActivity {
             return;
         }
 
+        else if(sMotDePasse.isEmpty())
+        {
+            motDePasse.setError("Entre un mot de passe");
+            motDePasse.requestFocus();
+            return;
+        }
+
         else
         {
             // Récupérer les emails dans la base
@@ -89,7 +108,8 @@ public class LoginUser extends AppCompatActivity {
                 @Override
                 protected User doInBackground(Void... voids) {
 
-                    // adding to database
+                    // Getting user
+
                     user = mDb.getAppDatabase().userDao().getUser(sEmail);
                     return user;
                 }
@@ -104,7 +124,7 @@ public class LoginUser extends AppCompatActivity {
             GetUser getUser = new GetUser();
             getUser.execute();
 
-            if(sMotDePasse != user.getMotDePasse())
+            if(!sMotDePasse.equals(user.getMotDePasse()))
             {
                 motDePasse.setError("Le mot de passe est incorrect");
                 motDePasse.requestFocus();
@@ -112,19 +132,22 @@ public class LoginUser extends AppCompatActivity {
             }
             else
             {
-
+                backward(null);
             }
         }
     }
 
         public void backward(View view){
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
+            startActivity(intent);
+            Toast.makeText(getApplicationContext(), "Connected", Toast.LENGTH_LONG).show();
     }
 
     public void signUp(View view){
         Intent intent = new Intent(this, SubscriptionUser.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
     }

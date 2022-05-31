@@ -12,6 +12,7 @@ import com.example.androidapplication.R;
 import Model.db.DatabaseClient;
 
 public class MainActivity  extends AppCompatActivity {
+    public static final String USER = null;
     private Button buttonAdd;
     private DatabaseClient mDb;
 
