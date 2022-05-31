@@ -1,50 +1,55 @@
 package Controler;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.ListView;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.androidapplication.R;
 
 import java.util.List;
 
+import Model.CategoryListViewAdapter;
 import Model.db.DatabaseClient;
 import Model.db.Game;
 
 public class PlayActivity extends AppCompatActivity {
 
-    private List<Game> jeux;
+    private List<String> categories;
     private DatabaseClient mDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_play);
         mDb = DatabaseClient.getInstance(getApplicationContext());
 
-        System.out.println("faeaf");
 
         // Récupérer les jeux dans la base en fonction d'une catégorie
-        class GetGames extends AsyncTask<Void, Void, List<Game>> {
+        class GetCategory extends AsyncTask<Void, Void, List<String>> {
 
             @Override
-            protected List<Game> doInBackground(Void... voids) {
-
-                // get
-                jeux = mDb.getAppDatabase().gameDao().getAllFromCategory("Math");
-                System.out.println(jeux.get(0).getDescription());
-                return jeux;
+            protected List<String> doInBackground(Void... voids) {
+                categories = mDb.getAppDatabase().gameDao().getAllCategory();
+                return categories;
             }
 
             @Override
-            protected void onPostExecute(List<Game> jeux) {
+            protected void onPostExecute(List<String> jeux) {
+                ListView listView = findViewById(R.id.listViewCategories);
+
+                CategoryListViewAdapter adapter = new CategoryListViewAdapter(PlayActivity.this, categories);
+                listView.setAdapter(adapter);
                 super.onPostExecute(jeux);
             }
         }
 
         // Executer tache asynchrone
-        GetGames getGames = new GetGames();
-        getGames.execute();
-
+        GetCategory getCategory = new GetCategory();
+        getCategory.execute();
 
 
     }
