@@ -2,7 +2,13 @@ package Model;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.androidapplication.R;
 
 import java.util.List;
 
@@ -11,7 +17,7 @@ import Model.db.Game;
 
 public class CategorieTemplate extends AppCompatActivity {
 
-    private List<Game> jeux;
+    private List<String> categories;
     private DatabaseClient mDb;
 
     @Override
@@ -22,28 +28,36 @@ public class CategorieTemplate extends AppCompatActivity {
         mDb = DatabaseClient.getInstance(getApplicationContext());
 
         // Récupérer les jeux dans la base en fonction d'une catégorie
-        class GetGames extends AsyncTask<Void, Void, List<Game>> {
+        class GetCategory extends AsyncTask<Void, Void, List<String>> {
 
             @Override
-            protected List<Game> doInBackground(Void... voids) {
+            protected List<String> doInBackground(Void... voids) {
 
                 // get
-                jeux = mDb.getAppDatabase().gameDao().getAllFromCategory("Math");
-                System.out.println(jeux);
-                return jeux;
+                categories = mDb.getAppDatabase().gameDao().getAllCategory();
+                System.out.println(categories);
+                return categories;
             }
 
             @Override
-            protected void onPostExecute(List<Game> jeux) {
+            protected void onPostExecute(List<String> jeux) {
                 super.onPostExecute(jeux);
             }
         }
 
         // Executer tache asynchrone
-        GetGames getGames = new GetGames();
-        getGames.execute();
+        GetCategory getCategory = new GetCategory();
+        getCategory.execute();
+
+        ListView listView = findViewById(R.id.listViewCategories);
+
+        CategoryListViewAdapter adapter = new CategoryListViewAdapter(this, categories);
+        listView.setAdapter(adapter);
+
 
 
 
     }
+
+
 }
