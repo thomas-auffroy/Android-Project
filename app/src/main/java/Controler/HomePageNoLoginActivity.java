@@ -3,40 +3,17 @@ package Controler;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.androidapplication.R;
 
-import Model.db.DatabaseClient;
-import Model.db.User;
-
-public class MainActivity  extends AppCompatActivity {
-    public static final String USER = null;
-    private User user;
+public class HomePageNoLoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        user = (User) getIntent().getSerializableExtra(USER);
-
-        if(USER == null)
-        {
-            Intent intent = new Intent(MainActivity.this, HomePageNoLoginActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
-            startActivity(intent);
-        }
-        else
-        {
-            Intent intent = new Intent(MainActivity.this, HomePageLoginActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.putExtra(HomePageLoginActivity.USER, user);
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
-            startActivity(intent);
-        }
-
+        setContentView(R.layout.acitvity_homepage_no_login);
     }
 
     @Override
@@ -44,13 +21,12 @@ public class MainActivity  extends AppCompatActivity {
         // Permet de cacher la barre de navigation du bas
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                        |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                 //|View.SYSTEM_UI_FLAG_FULLSCREEN // Si on veut cacher la barre android du haut
         );
         super.onStart();
     }
 
-    /*
     public void login(View view){
         Intent intent = new Intent(this, LoginUser.class);
         startActivity(intent);
@@ -63,7 +39,4 @@ public class MainActivity  extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
 
     }
-    */
-
-
 }

@@ -14,7 +14,7 @@ import Model.Converters.ConvertersDate;
 @Entity
 @TypeConverters({ConvertersDate.class})
 
-public class User implements Serializable {
+public class User implements Serializable{
 
     @PrimaryKey(autoGenerate = false)
     @NonNull
