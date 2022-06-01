@@ -1,17 +1,23 @@
 package Model;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.androidapplication.R;
 
 import java.util.List;
+
+import Controler.ListGamesActivity;
+import Controler.LoginUser;
+import Controler.PlayActivity;
 
 
 /**
@@ -38,19 +44,29 @@ public class CategoryListViewAdapter extends ArrayAdapter<String> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        // Récupération de la multiplication
         final String category = values.get(position);
 
-        // Charge le template XML
-        LayoutInflater inflater = (LayoutInflater) getContext()
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View rowView = inflater.inflate(R.layout.template_categorie, parent, false);
 
-        // Récupération des objets graphiques dans le template
-        TextView title = rowView.findViewById(R.id.titleCategory);
 
-        // Modification de l'objet graphique en fonction de la multiplication
+        TextView title = rowView.findViewById(R.id.titleCategory);
         title.setText(category);
+
+        LinearLayout box = rowView.findViewById(R.id.layoutCategory);
+        box.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                TextView title = view.findViewById(R.id.titleCategory);
+                System.out.println(title.getText());
+
+                Intent intent = new Intent(view.getContext(), ListGamesActivity.class);
+                view.getContext().startActivity(intent);
+                //view.getContext().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
+
+
+            }
+        });
 
         //
         return rowView;
