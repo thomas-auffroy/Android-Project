@@ -1,5 +1,6 @@
 package Controler;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,7 +21,9 @@ public class ListGamesActivity extends AppCompatActivity {
 
     private List<String> games;
     private DatabaseClient mDb;
-    private static String category;
+    public static final String CATEGORY = "category";
+    public static String category;
+    private Activity thisActivity = (Activity) this; // Permet de savoir quelle activié à appelé cet adapter. Utile pour set des aniamtions
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +31,7 @@ public class ListGamesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_games);
         mDb = DatabaseClient.getInstance(getApplicationContext());
-
+        category = getIntent().getStringExtra(CATEGORY);
 
         // Récupérer les jeux dans la base en fonction d'une catégorie
         class GetGames extends AsyncTask<Void, Void, List<String>> {
@@ -43,7 +46,7 @@ public class ListGamesActivity extends AppCompatActivity {
             protected void onPostExecute(List<String> jeux) {
                 ListView listView = findViewById(R.id.listViewGames);
 
-                GameListViewAdapter adapter = new GameListViewAdapter(ListGamesActivity.this, games);
+                GameListViewAdapter adapter = new GameListViewAdapter(ListGamesActivity.this, games, thisActivity);
                 listView.setAdapter(adapter);
                 super.onPostExecute(jeux);
             }
