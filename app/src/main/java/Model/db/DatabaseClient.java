@@ -50,9 +50,9 @@ public class DatabaseClient {
             super.onCreate(db);
 
             //
-            db.execSQL("INSERT INTO game (categorie, description) VALUES ('Mathématiques', 'Les espaces vectoriels en un click')");
-            db.execSQL("INSERT INTO game (categorie, description) VALUES ('Anglais', 'yes')");
-            db.execSQL("INSERT INTO game (categorie, description) VALUES ('Français', 'oui')");
+            db.execSQL("INSERT INTO game (categorie, description, name) VALUES ('Mathématiques', 'Les espaces vectoriels en un click', 'Equa Diff')");
+            db.execSQL("INSERT INTO game (categorie, description, name) VALUES ('Anglais', 'yes', 'PineApple')");
+            db.execSQL("INSERT INTO game (categorie, description, name) VALUES ('Français', 'oui', 'Diantre')");
             db.execSQL("INSERT INTO user (email, prenom, nom, motDePasse, dateNaissance, srcImage) VALUES(\"test@gmail.com\", \"Théo\", \"Hauray\", \"tt\", \"1997-12-29\", \"test\");");
 
         }
