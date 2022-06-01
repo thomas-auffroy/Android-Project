@@ -22,6 +22,7 @@
         <activity android:name="Controler.LoginUser"/>
         <activity android:name="Controler.SubscriptionUser"/>
         <activity android:name="Controler.PlayActivity"/>
+        <activity android:name="Controler.ListGamesActivity"/>
     </application>
 
 </manifest>
