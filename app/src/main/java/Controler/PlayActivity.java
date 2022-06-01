@@ -1,5 +1,6 @@
 package Controler;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -22,6 +23,7 @@ public class PlayActivity extends AppCompatActivity {
 
     private List<String> categories;
     private DatabaseClient mDb;
+    private Activity thisActivity = (Activity) this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,7 @@ public class PlayActivity extends AppCompatActivity {
             protected void onPostExecute(List<String> jeux) {
                 ListView listView = findViewById(R.id.listViewCategories);
 
-                CategoryListViewAdapter adapter = new CategoryListViewAdapter(PlayActivity.this, categories);
+                CategoryListViewAdapter adapter = new CategoryListViewAdapter(PlayActivity.this, categories, thisActivity);
                 listView.setAdapter(adapter);
                 super.onPostExecute(jeux);
             }
