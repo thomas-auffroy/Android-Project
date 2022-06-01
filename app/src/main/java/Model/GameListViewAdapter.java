@@ -1,5 +1,6 @@
 package Model;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
@@ -26,10 +27,12 @@ import Controler.PlayActivity;
 public class GameListViewAdapter extends ArrayAdapter<String> {
 
     private final List<String> values;
+    private Activity parentActivity;
 
-    public GameListViewAdapter(Context context, List<String> values) {
+    public GameListViewAdapter(Context context, List<String> values, Activity parentActivity) {
         super(context, R.layout.template_categorie, values);
         this.values = values;
+        this.parentActivity = parentActivity;
     }
 
     /**
@@ -52,20 +55,22 @@ public class GameListViewAdapter extends ArrayAdapter<String> {
         TextView title = rowView.findViewById(R.id.gameName);
         title.setText(category);
 
+
         LinearLayout box = rowView.findViewById(R.id.layoutCategory);
         box.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                /*
+
                 TextView title = view.findViewById(R.id.titleCategory);
                 System.out.println(title.getText());
 
                 Intent intent = new Intent(view.getContext(), LoginUser.class);
                 view.getContext().startActivity(intent);
-                */
+
 
             }
         });
+
 
         //
         return rowView;

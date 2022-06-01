@@ -1,5 +1,6 @@
 package Model;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import Controler.ListGamesActivity;
 import Controler.LoginUser;
+import Controler.MainActivity;
 import Controler.PlayActivity;
 
 
@@ -27,10 +29,13 @@ import Controler.PlayActivity;
 public class CategoryListViewAdapter extends ArrayAdapter<String> {
 
     private final List<String> values;
+    private Activity parentActivity;
 
-    public CategoryListViewAdapter(Context context, List<String> values) {
+    public CategoryListViewAdapter(Context context, List<String> values, Activity parentActivity) {
         super(context, R.layout.template_categorie, values);
         this.values = values;
+
+        this.parentActivity = parentActivity;
     }
 
     /**
@@ -57,14 +62,12 @@ public class CategoryListViewAdapter extends ArrayAdapter<String> {
         box.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                TextView title = view.findViewById(R.id.titleCategory);
-                System.out.println(title.getText());
+                TextView name = view.findViewById(R.id.titleCategory);
+                Intent intent = new Intent(parentActivity, ListGamesActivity.class);
+                intent.putExtra(ListGamesActivity.CATEGORY, name.getText());
+                parentActivity.startActivity(intent);
 
-                Intent intent = new Intent(view.getContext(), ListGamesActivity.class);
-                view.getContext().startActivity(intent);
-                //view.getContext().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
-
-
+                parentActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
             }
         });
 
