@@ -36,7 +36,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="100dp"
-        android:background="@drawable/ic_plus"/>s
+        android:background="@drawable/ic_plus"/>
     <!-- background = null sinon gris bizarre -->
     <ImageButton
         android:layout_width="wrap_content"
