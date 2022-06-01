@@ -20,6 +20,9 @@ public class Game implements Serializable {
     @ColumnInfo(name = "description")
     private String description;
 
+    @ColumnInfo(name = "name")
+    private String name;
+
     /*
      * Getters and Setters
      * */
@@ -45,5 +48,15 @@ public class Game implements Serializable {
     public void setDescription(String description)
     {
         this.description = description;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
     }
 }
