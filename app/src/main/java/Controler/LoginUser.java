@@ -20,9 +20,10 @@ import Model.db.User;
 
 public class LoginUser extends AppCompatActivity {
 
+    private static final int CREATION_REQUEST = 0;
     // DATA
     private DatabaseClient mDb;
-    private List<String> emailsInDb;
+    private String passwordDb;
     private User user;
 
     //VIEW
@@ -35,11 +36,11 @@ public class LoginUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_connection);
-        user = new User();
 
-        // Récupération du DatabaseClient
+        // Initialisation attributs
+        user = new User();
+        passwordDb = null;
         mDb = DatabaseClient.getInstance(getApplicationContext());
-        emailsInDb = null;
 
         // Récupérer les vues
         email = findViewById(R.id.dataEmailConnection);
@@ -54,41 +55,15 @@ public class LoginUser extends AppCompatActivity {
             }
         });
 
-        // Récupérer les emails dans la base
-        class GetEmails extends AsyncTask<Void, Void, List<String>> {
-
-            @Override
-            protected List<String> doInBackground(Void... voids) {
-
-                // adding to database
-                emailsInDb = mDb.getAppDatabase().userDao().getAllEmails();
-                return emailsInDb;
-            }
-
-            @Override
-            protected void onPostExecute(List<String> emails) {
-                super.onPostExecute(emails);
-            }
-        }
-
-        // Executer tache asynchrone
-        GetEmails getEmails = new GetEmails();
-        getEmails.execute();
     }
 
     private void Connection() {
         final String sEmail = email.getText().toString();
         final String sMotDePasse = motDePasse.getText().toString();
 
+        // Test entrées utilisateur
         if (sEmail.isEmpty()) {
             email.setError("Entre une adresse email");
-            email.requestFocus();
-            return;
-        }
-
-        else if (emailsInDb != null && !emailsInDb.contains(sEmail))
-        {
-            email.setError("L'email n'existe pas dans la base");
             email.requestFocus();
             return;
         }
@@ -100,49 +75,73 @@ public class LoginUser extends AppCompatActivity {
             return;
         }
 
-        else
-        {
-            // Récupérer les emails dans la base
-            class GetUser extends AsyncTask<Void, Void, User> {
+        else {
+            //Tâche asyncrhone -> Obtenir le MdP du User
+            class GetPassword extends AsyncTask<Void, Void, String> {
 
                 @Override
-                protected User doInBackground(Void... voids) {
+                protected String doInBackground(Void... voids) {
 
                     // Getting user
 
-                    user = mDb.getAppDatabase().userDao().getUser(sEmail);
-                    return user;
+                    passwordDb = mDb.getAppDatabase().userDao().getMotDePasse(sEmail);
+                    return passwordDb;
                 }
 
                 @Override
-                protected void onPostExecute(User user) {
-                    super.onPostExecute(user);
+                protected void onPostExecute(String password) {
+                    // Test existence email
+                    if (passwordDb == null) {
+                        email.setError("L'email n'existe pas dans la base");
+                        email.requestFocus();
+                        return;
+                    }
+
+                    // Test concordance MdP
+                    else if (!sMotDePasse.equals(passwordDb)) {
+                        motDePasse.setError("Le mot de passe est incorrect");
+                        motDePasse.requestFocus();
+                        return;
+                    }
+
+                    // MdP et Email concordent -> On récupère le User
+                    else
+                    {
+                        // //Tâche asyncrhone -> Récupérer le User
+                        class GetUser extends AsyncTask<Void, Void, User> {
+
+                            @Override
+                            protected User doInBackground(Void... voids) {
+                                user = mDb.getAppDatabase().userDao().getUser(sEmail);
+                                return user;
+                            }
+
+                            @Override
+                            protected void onPostExecute(User user) {
+                                super.onPostExecute(user);
+                                backward(null);
+                            }
+                        }
+
+                        // Executer tache asynchrone User
+                        GetUser getUser = new GetUser();
+                        getUser.execute();
+                    }
                 }
             }
-
-            // Executer tache asynchrone
-            GetUser getUser = new GetUser();
-            getUser.execute();
-
-            if(!sMotDePasse.equals(user.getMotDePasse()))
-            {
-                motDePasse.setError("Le mot de passe est incorrect");
-                motDePasse.requestFocus();
-                return;
-            }
-            else
-            {
-                backward(null);
-            }
+            // Executer tache asynchrone Password
+            GetPassword getPassword = new GetPassword();
+            getPassword.execute();
         }
     }
 
-        public void backward(View view){
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
-            startActivity(intent);
-            Toast.makeText(getApplicationContext(), "Connected", Toast.LENGTH_LONG).show();
+    public void backward(View view){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra(MainActivity.USER, user);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
+        startActivity(intent);
+        Toast.makeText(getApplicationContext(), "Connected", Toast.LENGTH_LONG).show();
     }
 
     public void signUp(View view){

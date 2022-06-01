@@ -1,6 +1,7 @@
 package Controler;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.InputType;
@@ -213,11 +214,15 @@ public class SubscriptionUser extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(User user) {
+                // Quand la tache est créée, on arrête l'activité AddTaskActivity (on l'enleve de la pile d'activités)
                 super.onPostExecute(user);
 
                 // Quand la tache est créée, on arrête l'activité AddTaskActivity (on l'enleve de la pile d'activités)
-                setResult(RESULT_OK);
-                finish();
+                Intent intent = new Intent(SubscriptionUser.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra(MainActivity.USER, user);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
+                startActivity(intent);
                 Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
             }
         }
