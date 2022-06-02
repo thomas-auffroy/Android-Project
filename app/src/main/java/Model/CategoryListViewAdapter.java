@@ -15,6 +15,7 @@ import com.example.androidapplication.R;
 import java.util.List;
 
 import Controler.ListGamesActivity;
+import Model.db.User;
 
 
 /**
@@ -25,10 +26,12 @@ public class CategoryListViewAdapter extends ArrayAdapter<String> {
 
     private final List<String> values;
     private Activity parentActivity;
+    private User user;
 
-    public CategoryListViewAdapter(Context context, List<String> values, Activity parentActivity) {
+    public CategoryListViewAdapter(Context context, List<String> values, Activity parentActivity, User user) {
         super(context, R.layout.template_categorie, values);
         this.values = values;
+        this.user = user;
 
         this.parentActivity = parentActivity;
     }
@@ -60,6 +63,7 @@ public class CategoryListViewAdapter extends ArrayAdapter<String> {
                 TextView name = view.findViewById(R.id.titleCategory);
                 Intent intent = new Intent(parentActivity, ListGamesActivity.class);
                 intent.putExtra(ListGamesActivity.CATEGORY, name.getText());
+                intent.putExtra(ListGamesActivity.USER, user);
                 parentActivity.startActivity(intent);
 
                 parentActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)

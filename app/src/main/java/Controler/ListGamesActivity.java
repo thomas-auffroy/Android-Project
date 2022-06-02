@@ -16,14 +16,19 @@ import java.util.List;
 
 import Model.GameListViewAdapter;
 import Model.db.DatabaseClient;
+import Model.db.User;
 
 public class ListGamesActivity extends AppCompatActivity {
 
+    public static final String USER = null;
+
+    private User user;
     private List<String> games;
     private DatabaseClient mDb;
     public static final String CATEGORY = "category";
     public static String category;
     private Activity thisActivity = (Activity) this; // Permet de savoir quelle activié à appelé cet adapter. Utile pour set des aniamtions
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,7 @@ public class ListGamesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_games);
         mDb = DatabaseClient.getInstance(getApplicationContext());
         category = getIntent().getStringExtra(CATEGORY);
+        user = (User) getIntent().getSerializableExtra(USER);
 
         // Récupérer les jeux dans la base en fonction d'une catégorie
         class GetGames extends AsyncTask<Void, Void, List<String>> {
@@ -46,7 +52,7 @@ public class ListGamesActivity extends AppCompatActivity {
             protected void onPostExecute(List<String> jeux) {
                 ListView listView = findViewById(R.id.listViewGames);
 
-                GameListViewAdapter adapter = new GameListViewAdapter(ListGamesActivity.this, games, thisActivity);
+                GameListViewAdapter adapter = new GameListViewAdapter(ListGamesActivity.this, games, thisActivity, user);
                 listView.setAdapter(adapter);
                 super.onPostExecute(jeux);
             }
@@ -55,7 +61,6 @@ public class ListGamesActivity extends AppCompatActivity {
         // Executer tache asynchrone
         GetGames getGames = new GetGames();
         getGames.execute();
-
 
     }
 

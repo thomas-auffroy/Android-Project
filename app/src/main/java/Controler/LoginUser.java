@@ -21,7 +21,6 @@ import Model.db.User;
 
 public class LoginUser extends AppCompatActivity {
 
-    private static final int CREATION_REQUEST = 0;
     // DATA
     private DatabaseClient mDb;
     private String passwordDb;
@@ -139,7 +138,7 @@ public class LoginUser extends AppCompatActivity {
     public void backward(View view){
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        if(view == null)
+        if(view == null) // Backward utilisé en fin de connection
         {
             intent.putExtra(MainActivity.USER, user);
         }

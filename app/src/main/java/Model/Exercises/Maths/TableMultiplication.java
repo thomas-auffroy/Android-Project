@@ -3,20 +3,33 @@ package Model.Exercises.Maths;
 import java.util.ArrayList;
 
 public class TableMultiplication {
-    private ArrayList<Multiplication> tableMultiplication;
+    private int nombre;
+    private ArrayList<Multiplication> multiplications;
 
-    public TableMultiplication(int table)
-    {
-        this.tableMultiplication = new ArrayList<Multiplication>();
+    public TableMultiplication(int nombre, int nombreOperations) {
+        this.nombre = nombre;
 
-        for(int i = 1; i <= 10; i++)
-        {
-            this.tableMultiplication.add(new Multiplication(table, i));
+        // Initialisation
+        multiplications = new ArrayList<Multiplication>(nombreOperations);
+        for (int i=1; i <= nombreOperations; i++) {
+            Multiplication mult = new Multiplication(i, nombre);
+            multiplications.add(mult);
         }
     }
 
-    public ArrayList<Multiplication> getTableMultiplication()
-    {
-        return this.tableMultiplication;
+    public int getNombre() {
+        return nombre;
+    }
+
+    public int getNombreOperations() {
+        return multiplications.size();
+    }
+
+    public Multiplication getMultiplication(int i) {
+        return multiplications.get(i);
+    }
+
+    public ArrayList<Multiplication> getMultiplications() {
+        return multiplications;
     }
 }
