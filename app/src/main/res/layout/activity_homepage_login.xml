@@ -143,11 +143,11 @@
             android:background="@drawable/cw_cta_shadow"
             android:gravity="center"
             android:onClick="profil"
-            android:stateListAnimator="@null"
-
             android:paddingHorizontal="30dp"
 
             android:paddingBottom="7dp"
+
+            android:stateListAnimator="@null"
 
             android:text="Profil"
             android:textAllCaps="false"

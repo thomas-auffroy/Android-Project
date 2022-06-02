@@ -80,7 +80,7 @@
                     android:textSize="20sp" />
 
                 <EditText
-                    android:id="@+id/dataName"
+                    android:id="@+id/dataSurname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
@@ -105,7 +105,7 @@
                     android:textSize="20sp" />
 
                 <EditText
-                    android:id="@+id/dataSurname"
+                    android:id="@+id/dataName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 

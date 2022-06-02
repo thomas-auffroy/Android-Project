@@ -3,8 +3,6 @@ package Model;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +15,6 @@ import com.example.androidapplication.R;
 import java.util.List;
 
 import Controler.ListGamesActivity;
-import Controler.LoginUser;
-import Controler.MainActivity;
-import Controler.PlayActivity;
 
 
 /**
