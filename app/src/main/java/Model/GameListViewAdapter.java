@@ -3,8 +3,6 @@ package Model;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +15,6 @@ import com.example.androidapplication.R;
 import java.util.List;
 
 import Controler.LoginUser;
-import Controler.PlayActivity;
 
 
 /**
@@ -30,7 +27,7 @@ public class GameListViewAdapter extends ArrayAdapter<String> {
     private Activity parentActivity;
 
     public GameListViewAdapter(Context context, List<String> values, Activity parentActivity) {
-        super(context, R.layout.template_categorie, values);
+        super(context, R.layout.template_list_games, values);
         this.values = values;
         this.parentActivity = parentActivity;
     }
@@ -56,16 +53,16 @@ public class GameListViewAdapter extends ArrayAdapter<String> {
         title.setText(category);
 
 
-        LinearLayout box = rowView.findViewById(R.id.layoutCategory);
+        LinearLayout box = rowView.findViewById(R.id.layoutGame);
         box.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
 
-                TextView title = view.findViewById(R.id.titleCategory);
-                System.out.println(title.getText());
+                TextView title = view.findViewById(R.id.gameName);
 
-                Intent intent = new Intent(view.getContext(), LoginUser.class);
-                view.getContext().startActivity(intent);
+                Intent intent = new Intent(parentActivity, LoginUser.class);
+                parentActivity.startActivity(intent);
+                parentActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
 
 
             }
