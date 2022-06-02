@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/green_bg"
+    >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_equal"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="20dp"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/ic_plus"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/ic_minus"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/ic_plus"/>s
+    <!-- background = null sinon gris bizarre -->
+    <ImageButton
+        android:id="@+id/backward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@null"
+        android:onClick="backward"
+        android:src="@drawable/ic_backwardarrow" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_margin="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/categorie_border"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="logout"
+        android:textColor="@color/white"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="8dp"
+        android:text="Déconnexion" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="80dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="40dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_arcticons_cat_avatar_generator"/>
+
+            <TextView
+                android:id="@+id/dataFullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Thomas Auffroy"
+                android:textColor="@color/white"
+                android:layout_gravity="center_vertical"
+                android:textSize="30sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Adresse email"
+                android:textColor="@color/lightBeige_txt"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/dataEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:backgroundTint="@color/white"
+                android:inputType="textEmailAddress"
+                android:focusable="false"
+                android:text="thomas.auffroy@gmail.com"
+                android:textColor="@color/white"
+                android:textSize="17sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Date de naissance"
+                android:textColor="@color/lightBeige_txt"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/dataBirthDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:backgroundTint="@color/white"
+                android:inputType="date"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:focusable="false"
+                android:text="08-02-1999"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Mot de passe"
+                android:textColor="@color/lightBeige_txt"
+                android:textSize="20sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/dataPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+
+                    android:backgroundTint="@color/white"
+                    android:inputType="textPassword"
+                    android:textColor="@color/white"
+                    android:focusable="false"
+                    android:text="*************"
+
+                    android:textSize="17sp" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:src="@drawable/ic_password_show"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:onClick="tooglePassword"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+
+        <!-- stateListAnimator sert à remove les shadows du bouton -->
+        <android.widget.Button
+            android:id="@+id/btnModify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/cw_cta_shadow"
+            android:onClick="modify"
+            android:paddingHorizontal="40dp"
+            android:paddingBottom="7dp"
+
+            android:stateListAnimator="@null"
+            android:text="Modifier"
+
+            android:textAllCaps="false"
+
+            android:textColor="@color/brown_txt_cta"
+
+            android:textSize="20sp" />
+    </LinearLayout>
+
+
+
+
+
+
+</RelativeLayout>
