@@ -47,7 +47,9 @@ public class HomePageLoginActivity extends AppCompatActivity {
 
     public void profil(View view) {
         Intent intent = new Intent(this, ProfilActivity.class);
+        intent.putExtra(MainActivity.USER, user);
         startActivity(intent);
+
         //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
 
     }

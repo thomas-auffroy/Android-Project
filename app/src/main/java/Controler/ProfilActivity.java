@@ -3,9 +3,12 @@ package Controler;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
@@ -15,139 +18,73 @@ import com.example.androidapplication.R;
 
 import java.util.List;
 
+import Model.CategoryListViewAdapter;
 import Model.db.DatabaseClient;
 import Model.db.User;
 
 public class ProfilActivity extends AppCompatActivity {
 
-    private static final int CREATION_REQUEST = 0;
     // DATA
-    private DatabaseClient mDb;
-    private String passwordDb;
     private User user;
 
     //VIEW
-    private EditText email;
-    private EditText motDePasse;
-    private Button connect;
+    private TextView fullName;
+    private EditText dateNaissance;
+    private EditText adresseMail;
+    private EditText password;
+
+
+    public static final String USER = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_profil);
+        user = (User) getIntent().getSerializableExtra(USER);
 
-        /*
+        fullName = findViewById(R.id.dataFullName);
+        fullName.setText(user.getPrenom() + " " + user.getNom());
 
-        // Initialisation attributs
-        user = new User();
-        passwordDb = null;
-        mDb = DatabaseClient.getInstance(getApplicationContext());
+        dateNaissance = findViewById(R.id.dataBirthDate);
+        dateNaissance.setText(user.getDateNaissance().toString());
 
-        // Récupérer les vues
-        email = findViewById(R.id.dataEmailConnection);
-        motDePasse = findViewById(R.id.dataPasswordConnection);
-        connect = findViewById(R.id.btnConnection);
+        adresseMail = findViewById(R.id.dataEmail);
+        adresseMail.setText(user.getEmail());
 
-        // Associer un événement au bouton save
-        connect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Connection();
-            }
-        });
-
-         */
-
+        password = findViewById(R.id.dataPassword);
+        password.setText(user.getMotDePasse());
     }
-/*
-    private void Connection() {
-        final String sEmail = email.getText().toString();
-        final String sMotDePasse = motDePasse.getText().toString();
 
-        // Test entrées utilisateur
-        if (sEmail.isEmpty()) {
-            email.setError("Entre une adresse email");
-            email.requestFocus();
-            return;
-        }
-
-        else if(sMotDePasse.isEmpty())
-        {
-            motDePasse.setError("Entre un mot de passe");
-            motDePasse.requestFocus();
-            return;
-        }
-
-        else {
-            //Tâche asyncrhone -> Obtenir le MdP du User
-            class GetPassword extends AsyncTask<Void, Void, String> {
-
-                @Override
-                protected String doInBackground(Void... voids) {
-
-                    // Getting user
-
-                    passwordDb = mDb.getAppDatabase().userDao().getMotDePasse(sEmail);
-                    return passwordDb;
-                }
-
-                @Override
-                protected void onPostExecute(String password) {
-                    // Test existence email
-                    if (passwordDb == null) {
-                        email.setError("L'email n'existe pas dans la base");
-                        email.requestFocus();
-                        return;
-                    }
-
-                    // Test concordance MdP
-                    else if (!sMotDePasse.equals(passwordDb)) {
-                        motDePasse.setError("Le mot de passe est incorrect");
-                        motDePasse.requestFocus();
-                        return;
-                    }
-
-                    // MdP et Email concordent -> On récupère le User
-                    else
-                    {
-                        // //Tâche asyncrhone -> Récupérer le User
-                        class GetUser extends AsyncTask<Void, Void, User> {
-
-                            @Override
-                            protected User doInBackground(Void... voids) {
-                                user = mDb.getAppDatabase().userDao().getUser(sEmail);
-                                return user;
-                            }
-
-                            @Override
-                            protected void onPostExecute(User user) {
-                                super.onPostExecute(user);
-                                backward(null);
-                            }
-                        }
-
-                        // Executer tache asynchrone User
-                        GetUser getUser = new GetUser();
-                        getUser.execute();
-                    }
-                }
-            }
-            // Executer tache asynchrone Password
-            GetPassword getPassword = new GetPassword();
-            getPassword.execute();
-        }
-    }
-*/
     public void backward(View view){
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        if(view == null)
-        {
-            intent.putExtra(MainActivity.USER, user);
-        }
+        intent.putExtra(MainActivity.USER, user);
+
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
         startActivity(intent);
+    }
+
+    public void logout(View view){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
+        startActivity(intent);
+    }
+
+    public void tooglePassword(View view){
+        // a améliorer
+        int inputMode = password.getInputType();
+
+        //motDePasse.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
+
+        if (inputMode == InputType.TYPE_CLASS_TEXT) {
+            password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        } else if (inputMode == InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+            password.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT);
+        }
     }
 
 
