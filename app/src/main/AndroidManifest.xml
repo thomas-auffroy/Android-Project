@@ -18,11 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="Controler.AddUser" />
         <activity android:name="Controler.LoginUser"/>
         <activity android:name="Controler.SubscriptionUser"/>
-        <activity android:name="Controler.PlayActivity"/>
+        <activity android:name="Controler.ListCategoriesActivity"/>
         <activity android:name="Controler.ListGamesActivity"/>
+        <activity android:name="Controler.HomePageNoLoginActivity"/>
+        <activity android:name="Controler.HomePageLoginActivity"/>
+        <activity android:name="Controler.ProfilActivity"/>
     </application>
 
 </manifest>
