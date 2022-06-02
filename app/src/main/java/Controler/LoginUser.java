@@ -3,6 +3,7 @@ package Controler;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,7 +45,7 @@ public class LoginUser extends AppCompatActivity {
 
         // Récupérer les vues
         email = findViewById(R.id.dataEmailConnection);
-        motDePasse = findViewById(R.id.dataPasswordConnection);
+        motDePasse = findViewById(R.id.dataPassword);
         connect = findViewById(R.id.btnConnection);
 
         // Associer un événement au bouton save
@@ -151,6 +152,20 @@ public class LoginUser extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
+    }
+
+    public void tooglePassword(View view){
+        // a améliorer
+        int inputMode = motDePasse.getInputType();
+
+        //motDePasse.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        motDePasse.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
+
+        if (inputMode == InputType.TYPE_CLASS_TEXT) {
+            motDePasse.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        } else if (inputMode == InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+            motDePasse.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT);
+        }
     }
 
     //Essayer d'intégrer le code dans le onCreate
