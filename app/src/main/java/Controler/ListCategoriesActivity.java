@@ -1,13 +1,10 @@
 package Controler;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,9 +14,8 @@ import java.util.List;
 
 import Model.CategoryListViewAdapter;
 import Model.db.DatabaseClient;
-import Model.db.Game;
 
-public class PlayActivity extends AppCompatActivity {
+public class ListCategoriesActivity extends AppCompatActivity {
 
     private List<String> categories;
     private DatabaseClient mDb;
@@ -46,7 +42,7 @@ public class PlayActivity extends AppCompatActivity {
             protected void onPostExecute(List<String> jeux) {
                 ListView listView = findViewById(R.id.listViewCategories);
 
-                CategoryListViewAdapter adapter = new CategoryListViewAdapter(PlayActivity.this, categories, thisActivity);
+                CategoryListViewAdapter adapter = new CategoryListViewAdapter(ListCategoriesActivity.this, categories, thisActivity);
                 listView.setAdapter(adapter);
                 super.onPostExecute(jeux);
             }
