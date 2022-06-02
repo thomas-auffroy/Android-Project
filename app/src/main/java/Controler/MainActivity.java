@@ -21,7 +21,7 @@ public class MainActivity  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         user = (User) getIntent().getSerializableExtra(USER);
 
-        if(USER == null)
+        if(user == null)
         {
             Intent intent = new Intent(MainActivity.this, HomePageNoLoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

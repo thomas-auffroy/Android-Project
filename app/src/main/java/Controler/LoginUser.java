@@ -138,10 +138,12 @@ public class LoginUser extends AppCompatActivity {
     public void backward(View view){
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra(MainActivity.USER, user);
+        if(view == null)
+        {
+            intent.putExtra(MainActivity.USER, user);
+        }
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
         startActivity(intent);
-        Toast.makeText(getApplicationContext(), "Connected", Toast.LENGTH_LONG).show();
     }
 
     public void signUp(View view){

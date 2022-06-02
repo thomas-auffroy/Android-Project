@@ -223,7 +223,6 @@ public class SubscriptionUser extends AppCompatActivity {
                 intent.putExtra(MainActivity.USER, user);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
                 startActivity(intent);
-                Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
             }
         }
 
