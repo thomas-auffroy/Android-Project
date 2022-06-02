@@ -3,7 +3,6 @@ package Controler;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,8 +40,15 @@ public class HomePageLoginActivity extends AppCompatActivity {
     }
 
     public void play(View view){
-        Intent intent = new Intent(this, PlayActivity.class);
+        Intent intent = new Intent(this, ListCategoriesActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
+    }
+
+    public void profil(View view) {
+        Intent intent = new Intent(this, ProfilActivity.class);
+        startActivity(intent);
+        //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
+
     }
 }
