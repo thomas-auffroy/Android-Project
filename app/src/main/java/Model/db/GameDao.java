@@ -23,6 +23,9 @@ public interface GameDao {
     @Query("SELECT name FROM game WHERE categorie = :categorie")
     List<String> getGamesFromCategory(String categorie);
 
+    @Query("SELECT * FROM game WHERE name = :name")
+    Game getGame(String name);
+
     @Insert
     void insert(Game game);
 
