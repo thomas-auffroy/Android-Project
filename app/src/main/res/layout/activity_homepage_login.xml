@@ -67,6 +67,7 @@
 
                 android:text="@string/WELCOMME"
                 android:textSize="25sp"
+                android:textColor="@color/white"
                 android:gravity="center"/>
 
             <TextView
@@ -74,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/dataSurname"
 
-                android:text="Thomas"
+                android:textColor="@color/white"
                 android:paddingLeft="10dp"
                 android:fontFamily="@font/gloria_hallelujah_regular"
                 android:textSize="25sp"

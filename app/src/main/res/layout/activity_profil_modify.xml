@@ -123,7 +123,6 @@
 
                 android:backgroundTint="@color/white"
                 android:inputType="textEmailAddress"
-                android:focusable="false"
                 android:textColor="@color/white"
                 android:textSize="17sp" />
         </LinearLayout>
@@ -149,9 +148,10 @@
 
                 android:backgroundTint="@color/white"
                 android:inputType="date"
+                android:focusable="false"
+                android:onClick="chooseDate"
                 android:textColor="@color/white"
                 android:textSize="17sp"
-                android:focusable="false"
                 />
         </LinearLayout>
 
@@ -178,9 +178,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
-
                     android:backgroundTint="@color/white"
-                    android:focusable="false"
                     android:inputType="textPassword"
                     android:textColor="@color/white"
 
@@ -209,12 +207,12 @@
             android:layout_gravity="center"
             android:layout_marginTop="60dp"
             android:background="@drawable/cw_cta_shadow"
-            android:onClick="modifyContent"
+            android:onClick="acceptContent"
             android:paddingHorizontal="40dp"
             android:paddingBottom="7dp"
 
             android:stateListAnimator="@null"
-            android:text="Modifier"
+            android:text="Accepter"
 
             android:textAllCaps="false"
 
