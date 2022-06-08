@@ -1,8 +1,9 @@
 package Model.Exercises.Maths;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TableMultiplication {
+public class TableMultiplication  implements Serializable {
     private int nombre;
     private ArrayList<Multiplication> multiplications;
 
