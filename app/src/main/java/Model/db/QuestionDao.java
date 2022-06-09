@@ -1,5 +1,6 @@
 package Model.db;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -13,6 +14,16 @@ import java.util.List;
 @Dao
 public interface QuestionDao {
 
+    /*
+    public class reponseTuple{
+        @ColumnInfo(name = "reponse")
+        public String reponse;
+
+        @ColumnInfo(name = "estVrai")
+        public boolean estVrai;
+    }
+    */
+
     @Query("SELECT * FROM question")
     List<Question> getAll();
 
@@ -21,6 +32,9 @@ public interface QuestionDao {
 
     @Query("SELECT question FROM question WHERE gameId = :id")
     List<String> getAllQuestionsFromId(int id);
+
+    @Query("SELECT gameId from question")
+    List<Integer> getAllGameId();
 
 
     @Insert

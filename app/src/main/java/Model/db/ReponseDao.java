@@ -23,6 +23,9 @@ public interface ReponseDao {
     @Query("SELECT estVrai FROM reponse WHERE gameId=:id")
     boolean estVrai(int id); // Permet de récupérer la véracité d'une réponse en fonction d'un id de jeu / de question
 
+    @Query("SELECT * FROM reponse WHERE gameId = :id")
+    List<Reponse> getAllReponses(int id);
+
 
     @Insert
     void insert(Reponse reponse);

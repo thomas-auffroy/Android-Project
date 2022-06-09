@@ -21,9 +21,13 @@ import java.util.ArrayList;
 )
 public class Question implements Serializable {
 
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
     @NonNull
-    private int gameId;
+    @ColumnInfo(name = "questionId")
+    private int questionId;
+
+    @ColumnInfo(name = "gameId")
+    private Integer gameId;
 
     @ColumnInfo(name = "question")
     private String question;
@@ -32,9 +36,12 @@ public class Question implements Serializable {
     /*
      * Getters and Setters
      * */
-    public int getGameId() { return gameId; }
-    public void setGameId(int gameId) { this.gameId = gameId; }
+    public Integer getGameId() { return gameId; }
+    public void setGameId(Integer gameId) { this.gameId = gameId; }
 
     public String getQuestion() { return question; }
     public void setQuestion(String question) { this.question = question;}
+
+    public int getQuestionId() { return questionId; }
+    public void setQuestionId(int questionId) { this.questionId = questionId; }
 }
