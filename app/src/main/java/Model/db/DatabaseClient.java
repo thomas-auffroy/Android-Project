@@ -1,11 +1,14 @@
 package Model.db;
 
 import android.content.Context;
+import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
+
+import java.util.List;
 
 public class DatabaseClient {
     // Instance unique permettant de faire le lien avec la base de données
@@ -49,12 +52,48 @@ public class DatabaseClient {
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
 
+
+            // Create Game Anglais
+            db.execSQL("INSERT INTO game (categorie, description, name) VALUES ('Anglais', 'Traduire un mot français en anglais', 'Translation')");
+
+
+            class GetId extends AsyncTask<Void, Void, Integer> {
+
+                @Override
+                protected Integer doInBackground(Void... voids) {
+                    Integer id = AppDatabase.gameDao().getIdFromName("Translation");
+                    return id;
+                }
+
+                @Override
+                protected void onPostExecute(Integer id) {
+                    db.execSQL("INSERT INTO question(gameId, question) VALUES ("+id+", 'Comment dit-on \"Pommme\" ?')");
+                    db.execSQL("INSERT INTO reponse(gameId, reponse, estVrai) VALUES ("+id+", 'Pineapple', false)");
+                    db.execSQL("INSERT INTO reponse(gameId, reponse, estVrai) VALUES ("+id+", 'Triangle', false)");
+                    db.execSQL("INSERT INTO reponse(gameId, reponse, estVrai) VALUES ("+id+", 'Waffle', false)");
+                    db.execSQL("INSERT INTO reponse(gameId, reponse, estVrai) VALUES ("+id+", 'Apple', true)");
+                }
+            }
+
+            // Executer tache asynchrone
+            GetId getId = new GetId();
+            getId.execute();
+
+
+
             //
             db.execSQL("INSERT INTO game (categorie, description, name) VALUES ('Mathématiques', 'Les espaces vectoriels en un click', 'Equa Diff')");
             db.execSQL("INSERT INTO game (categorie, description, name) VALUES ('Anglais', 'yes', 'PineApple')");
             db.execSQL("INSERT INTO game (categorie, description, name) VALUES ('Français', 'oui', 'Diantre')");
             db.execSQL("INSERT INTO user (email, prenom, nom, motDePasse, dateNaissance, srcImage) VALUES(\"test@gmail.com\", \"Théo\", \"Hauray\", \"tt\", \"1997-12-29\", \"test\");");
 
+            /*
+            db.execSQL("INSERT INTO question (question) VALUES ('Test de question ?')");
+            db.execSQL("INSERT INTO question (question) VALUES ('Test de queazdzastion ?')");
+            db.execSQL("INSERT INTO question (question) VALUES ('Test de quezadzadazdstion ?')");
+            db.execSQL("INSERT INTO question (question) VALUES ('Test de queazdazdazstion ?')");
+            db.execSQL("INSERT INTO question (question) VALUES ('Tazdazdaest de question ?')");
+            */
         }
     };
 }
