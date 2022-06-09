@@ -16,6 +16,7 @@ import java.util.List;
 
 import Model.GameListViewAdapter;
 import Model.db.DatabaseClient;
+import Model.db.Game;
 import Model.db.User;
 
 public class ListGamesActivity extends AppCompatActivity {
@@ -23,7 +24,7 @@ public class ListGamesActivity extends AppCompatActivity {
     public static final String USER = null;
 
     private User user;
-    private List<String> games;
+    private List<Game> games;
     private DatabaseClient mDb;
     public static final String CATEGORY = "category";
     public static String category;
@@ -40,16 +41,16 @@ public class ListGamesActivity extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra(USER);
 
         // Récupérer les jeux dans la base en fonction d'une catégorie
-        class GetGames extends AsyncTask<Void, Void, List<String>> {
+        class GetGames extends AsyncTask<Void, Void, List<Game>> {
 
             @Override
-            protected List<String> doInBackground(Void... voids) {
-                games = mDb.getAppDatabase().gameDao().getGamesFromCategory(category);
+            protected List<Game> doInBackground(Void... voids) {
+                games = mDb.getAppDatabase().gameDao().getAllFromCategory(category);
                 return games;
             }
 
             @Override
-            protected void onPostExecute(List<String> jeux) {
+            protected void onPostExecute(List<Game> jeux) {
                 ListView listView = findViewById(R.id.listViewGames);
 
                 GameListViewAdapter adapter = new GameListViewAdapter(ListGamesActivity.this, games, thisActivity, user);

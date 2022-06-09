@@ -26,6 +26,8 @@
         <activity android:name="Controler.HomePageLoginActivity"/>
         <activity android:name="Controler.ProfilActivity"/>
         <activity android:name="Controler.ModifyProfilActivity"/>
+        <activity android:name="Controler.Exercices.MathActivity"/>
+
     </application>
 
 </manifest>

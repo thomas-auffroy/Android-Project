@@ -25,22 +25,20 @@ import Model.db.User;
 
 public class MathActivity  extends AppCompatActivity {
 
-    public static final String GAMENAME = "";
     public static final String USER = null;
+    public static final String GAME = null;
 
-    private DatabaseClient mDb;
     private User user;
-    private String gameName;
-
+    private Game game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        game = (Game) getIntent().getSerializableExtra(GAME);
         user = (User) getIntent().getSerializableExtra(USER);
-        gameName = (String) getIntent().getSerializableExtra(GAMENAME);
 
-        switch (gameName)
+        switch (game.getName())
         {
             case "Multiplication":
                 setMultiplicationExercice();
@@ -52,25 +50,10 @@ public class MathActivity  extends AppCompatActivity {
 
     private void setMultiplicationExercice()
     {
-        Random random = new Random();
-        TableMultiplication table = new TableMultiplication(random.nextInt(1+10)+1, 10);
-
         Intent intent = new Intent(this,MultiplicationActivity.class);
         intent.putExtra(MultiplicationActivity.USER, user);
-        intent.putExtra(MultiplicationActivity.TABLE, table);
-        intent.putExtra(MultiplicationActivity.NAME, gameName);
+        intent.putExtra(MultiplicationActivity.GAME, game);
     }
 
-    private void getMultiplicationExercice()
-    {
-        Random random = new Random();
 
-        TableMultiplication table = new TableMultiplication(random.nextInt(1+10)+1, 10);
-
-        Intent intent = new Intent(this,MultiplicationActivity.class);
-        intent.putExtra(MultiplicationActivity.USER, user);
-        intent.putExtra(MultiplicationActivity.TABLE, table);
-
-        startActivity(intent);
-    }
 }
