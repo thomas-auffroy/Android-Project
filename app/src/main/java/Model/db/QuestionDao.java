@@ -14,15 +14,6 @@ import java.util.List;
 @Dao
 public interface QuestionDao {
 
-    /*
-    public class reponseTuple{
-        @ColumnInfo(name = "reponse")
-        public String reponse;
-
-        @ColumnInfo(name = "estVrai")
-        public boolean estVrai;
-    }
-    */
 
     @Query("SELECT * FROM question")
     List<Question> getAll();
@@ -33,9 +24,11 @@ public interface QuestionDao {
     @Query("SELECT question FROM question WHERE gameId = :id")
     List<String> getAllQuestionsFromId(int id);
 
+    @Query("SELECT question FROM question where gameId = :gameId AND questionId = :questionId")
+    String getQuestionFromIds(Integer gameId, Integer questionId);
+
     @Query("SELECT gameId from question")
     List<Integer> getAllGameId();
-
 
     @Insert
     void insert(Question question);
