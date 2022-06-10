@@ -25,7 +25,7 @@ public class ExerciseSuccess  extends AppCompatActivity {
 
         user = (User) getIntent().getSerializableExtra("USER");
         game = (Game) getIntent().getSerializableExtra("GAME");
-        nb_Erreur = (Integer) getIntent().getIntExtra("NB_ERROR", 0);
+        nb_Erreur = getIntent().getIntExtra("NB_ERROR", 0);
 
         System.out.println("Nombre erreur : "+nb_Erreur);
         if(nb_Erreur == 0)

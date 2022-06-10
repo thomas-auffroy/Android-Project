@@ -25,12 +25,20 @@ public class MainActivity  extends AppCompatActivity {
 
         if(user == null)
         {
+            user = new User();
+            user.setNom("anonymous");
+        }
+
+        if(user.getNom() == "anonymous")
+        {
             Intent intent = new Intent(MainActivity.this, HomePageNoLoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("USER", user);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
             startActivity(intent);
         }
-        else
+
+        if(user != null && user.getNom() != "anonymous")
         {
             Intent intent = new Intent(MainActivity.this, HomePageLoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

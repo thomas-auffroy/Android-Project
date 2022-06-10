@@ -33,7 +33,8 @@ public class HomePageNoLoginActivity extends AppCompatActivity {
         setContentView(R.layout.acitvity_homepage_no_login);
 
         mDb = DatabaseClient.getInstance(getApplicationContext());
-        user = new User();
+        user = (User) getIntent().getSerializableExtra("USER");
+
     }
 
     @Override
@@ -55,6 +56,7 @@ public class HomePageNoLoginActivity extends AppCompatActivity {
 
     public void play(View view){
         Intent intent = new Intent(this, ListCategoriesActivity.class);
+        intent.putExtra(ListCategoriesActivity.USER, user);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
 
