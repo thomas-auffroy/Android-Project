@@ -1,13 +1,19 @@
 package Controler.Exercices;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.androidapplication.R;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import Model.Exercises.Maths.MultiplicationListViewAdapter;
@@ -17,29 +23,75 @@ import Model.db.Game;
 import Model.db.User;
 
 public class MultiplicationActivity extends AppCompatActivity {
-    public static final String USER = null;
-    public static final String GAME = null;
-
-    private ListView listView;
 
     private TableMultiplication tableMultiplication;
     private User user;
     private Game game;
+    private ArrayList<EditText> reponses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_table_multiplication);
+        setContentView(R.layout.activity_table_multiplication_reponse);
 
-        user = (User) getIntent().getSerializableExtra(USER);
-        game = (Game) getIntent().getSerializableExtra(GAME);
+        user = (User) getIntent().getSerializableExtra("USER");
+        game = (Game) getIntent().getSerializableExtra("GAME");
 
         Random random = new Random();
-        tableMultiplication = new TableMultiplication(random.nextInt(1+10)+1, 10);
+        tableMultiplication = new TableMultiplication(random.nextInt((10-1)+1)+1, 10);
 
-        listView = findViewById(R.id.generation_listview);
+        this.reponses = new ArrayList<EditText>();
 
-        MultiplicationListViewAdapter adapter = new MultiplicationListViewAdapter(this, tableMultiplication.getMultiplications());
-        listView.setAdapter(adapter);
+        setTableMultiplication();
+    }
+
+    public void setTableMultiplication()
+    {
+        for(int i = 0; i < this.tableMultiplication.getMultiplications().size(); i++)
+        {
+            LinearLayout linearLayoutPrincipal = findViewById(R.id.multLinearPrincip);
+
+            LinearLayout linearLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.template_calcul, null);
+
+            TextView ligne = (TextView) linearLayout.findViewById(R.id.template_calcul);
+            ligne.setText(tableMultiplication.getMultiplication(i).getOperande1()+" x "+tableMultiplication.getMultiplication(i).getOperande2()+" = ");
+
+            EditText rep = (EditText) linearLayout.findViewById(R.id.template_resultat);
+            reponses.add(rep);
+
+            linearLayoutPrincipal.addView(linearLayout);
+        }
+    }
+
+    public void getResult(View view)
+    {
+        int nbError = 0;
+
+        for(int i = 0; i < reponses.size(); i++)
+        {
+            String value = reponses.get(i).getText().toString();
+            System.out.println("Réponse : "+i+" = "+value);
+
+            if(!value.isEmpty())
+            {
+                int finalValue = Integer.parseInt(value);
+
+                if(finalValue != this.tableMultiplication.getMultiplications().get(i).getResult())
+                {
+                    nbError++;
+                }
+            }
+            else
+            {
+                nbError++;
+            }
+        }
+
+        Intent intent =  new Intent(this,ExerciseSuccess.class);
+        intent.putExtra("NB_ERROR", nbError);
+        intent.putExtra("USER", user);
+        intent.putExtra("GAME", game);
+
+        startActivity(intent);
     }
 }

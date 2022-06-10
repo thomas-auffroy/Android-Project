@@ -28,6 +28,9 @@
         <activity android:name="Controler.ModifyProfilActivity"/>
         <activity android:name="Controler.Exercices.MathActivity"/>
         <activity android:name="Controler.GameQcmActivity"/>
+        <activity android:name="Controler.Exercices.MultiplicationActivity"/>
+        <activity android:name="Controler.Exercices.ExerciseSuccess"/>
+
 
     </application>
 

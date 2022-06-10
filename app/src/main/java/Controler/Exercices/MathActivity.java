@@ -25,9 +25,6 @@ import Model.db.User;
 
 public class MathActivity  extends AppCompatActivity {
 
-    public static final String USER = null;
-    public static final String GAME = null;
-
     private User user;
     private Game game;
 
@@ -35,11 +32,9 @@ public class MathActivity  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        game = (Game) getIntent().getSerializableExtra(GAME);
+        game = (Game) getIntent().getSerializableExtra("GAME"); // Bizarre
         user = (User) getIntent().getSerializableExtra("USER"); // Bizarre
 
-        System.out.println("1" + user);
-        System.out.println("2" + game);
 
         switch (game.getName())
         {
@@ -54,8 +49,9 @@ public class MathActivity  extends AppCompatActivity {
     private void setMultiplicationExercice()
     {
         Intent intent = new Intent(this,MultiplicationActivity.class);
-        intent.putExtra(MultiplicationActivity.USER, user);
-        intent.putExtra(MultiplicationActivity.GAME, game);
+        intent.putExtra("USER", user);
+        intent.putExtra("GAME", game);
+        startActivity(intent);
     }
 
 
