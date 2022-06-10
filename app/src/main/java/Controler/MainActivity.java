@@ -21,6 +21,8 @@ public class MainActivity  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         user = (User) getIntent().getSerializableExtra(USER);
 
+        System.out.println(user);
+
         if(user == null)
         {
             Intent intent = new Intent(MainActivity.this, HomePageNoLoginActivity.class);

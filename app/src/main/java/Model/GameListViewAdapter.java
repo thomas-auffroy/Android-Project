@@ -21,6 +21,7 @@ import com.example.androidapplication.R;
 import java.util.List;
 
 import Controler.Exercices.MathActivity;
+import Controler.GameQcmActivity;
 import Controler.ListCategoriesActivity;
 import Controler.ProfilActivity;
 import Model.db.DatabaseClient;
@@ -45,7 +46,6 @@ public class GameListViewAdapter extends ArrayAdapter<Game> {
         this.values = values;
         this.parentActivity = parentActivity;
         this.user = user;
-        System.out.println("oui" + this.user);
         this.mDb = DatabaseClient.getInstance(context.getApplicationContext());
     }
 
@@ -89,28 +89,30 @@ public class GameListViewAdapter extends ArrayAdapter<Game> {
                     @Override
                     protected void onPostExecute(Game jeu) {
 
-                        System.out.println(game);
-                        System.out.println(user);
                         Intent intent;
 
                         switch(game.getTypeJeu())
                         {
                             case "maths":
-                                intent = new Intent(view.getContext(), MathActivity.class);
+                                intent = new Intent(parentActivity, MathActivity.class);
                                 intent.putExtra(MathActivity.USER, user);
                                 intent.putExtra(MathActivity.GAME, game);
                                 break;
                             case "qcm":
-                                intent = new Intent(view.getContext(), MathActivity.class);
-                                intent.putExtra(MathActivity.USER, user);
-                                intent.putExtra(MathActivity.GAME, game);
+                                intent = new Intent(parentActivity, GameQcmActivity.class);
+                                System.out.println(user);
+                                System.out.println(game);
+                                intent.putExtra(GameQcmActivity.USER, user);
+                                intent.putExtra(GameQcmActivity.GAME, game);
                                 break;
                             default :
                                 intent = new Intent(view.getContext(), MathActivity.class);
                                 break;
                         }
-                        view.getContext().startActivity(intent);
-                        super.onPostExecute(jeu);
+                        parentActivity.startActivity(intent);
+                        parentActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
+
+                        //super.onPostExecute(jeu);
                     }
                 }
                 GetGame getGame = new GetGame();

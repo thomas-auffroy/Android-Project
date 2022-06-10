@@ -17,12 +17,15 @@ import java.util.List;
 import java.util.ListIterator;
 
 import Model.db.DatabaseClient;
+import Model.db.Question;
 import Model.db.QuestionDao;
 import Model.db.Reponse;
 import Model.db.User;
 
 public class GameQcmActivity extends AppCompatActivity {
 
+    public static final String USER =  null;
+    public static final String GAME =  null;
     private User user;
     private DatabaseClient mDb;
 
@@ -45,8 +48,12 @@ public class GameQcmActivity extends AppCompatActivity {
 
         mDb = DatabaseClient.getInstance(getApplicationContext());
 
+        System.out.println("lolzedez" + getIntent().getSerializableExtra(USER));
+        System.out.println(getIntent().getSerializableExtra(GAME));
+       // user = (User) getIntent().getSerializableExtra(USER);
 
 
+/*
         // Récupérer les jeux dans la base en fonction d'une catégorie
         class GetQuestion extends AsyncTask<Void, Void, String> {
 
@@ -64,8 +71,28 @@ public class GameQcmActivity extends AppCompatActivity {
             }
         }
 
+
+ */
+        class GetQuestions extends AsyncTask<Void, Void, List<Question>> {
+
+            @Override
+            protected List<Question> doInBackground(Void... voids) {
+                List<Question> question = mDb.getAppDatabase().questionDao().getAll();
+                return question;
+            }
+
+            @Override
+            protected void onPostExecute(List<Question> foo) {
+
+                System.out.println(foo.get(0).getQuestion());
+                System.out.println(foo.get(0).getGameId());
+                System.out.println(foo.get(0).getQuestionId());
+
+            }
+        }
+
         // Executer tache asynchrone
-        GetQuestion getQuestion = new GetQuestion();
+        GetQuestions getQuestion = new GetQuestions();
         getQuestion.execute();
 
     }
@@ -82,11 +109,11 @@ public class GameQcmActivity extends AppCompatActivity {
     }
 
     public void backward(View view){
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, ListGamesActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         if(view == null) // Backward utilisé en fin de connection
         {
-            intent.putExtra(MainActivity.USER, user);
+            intent.putExtra(ListGamesActivity.USER, user);
         }
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
         startActivity(intent);
