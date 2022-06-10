@@ -95,14 +95,15 @@ public class GameListViewAdapter extends ArrayAdapter<Game> {
                         {
                             case "maths":
                                 intent = new Intent(parentActivity, MathActivity.class);
-                                intent.putExtra(MathActivity.USER, user);
+                                //intent.putExtra(MathActivity.USER, user);
+                                intent.putExtra("USER", user);
                                 intent.putExtra(MathActivity.GAME, game);
                                 break;
                             case "qcm":
                                 intent = new Intent(parentActivity, GameQcmActivity.class);
                                 System.out.println(user);
                                 System.out.println(game);
-                                intent.putExtra(GameQcmActivity.USER, user);
+                                intent.putExtra("test", user);
                                 intent.putExtra(GameQcmActivity.GAME, game);
                                 break;
                             default :

@@ -48,7 +48,7 @@ public class GameQcmActivity extends AppCompatActivity {
 
         mDb = DatabaseClient.getInstance(getApplicationContext());
 
-        System.out.println("lolzedez" + getIntent().getSerializableExtra(USER));
+        System.out.println("lolzedez" + getIntent().getSerializableExtra("USER"));
         System.out.println(getIntent().getSerializableExtra(GAME));
        // user = (User) getIntent().getSerializableExtra(USER);
 

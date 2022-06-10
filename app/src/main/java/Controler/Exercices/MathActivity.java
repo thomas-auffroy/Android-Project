@@ -36,7 +36,10 @@ public class MathActivity  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         game = (Game) getIntent().getSerializableExtra(GAME);
-        user = (User) getIntent().getSerializableExtra(USER);
+        user = (User) getIntent().getSerializableExtra("USER"); // Bizarre
+
+        System.out.println("1" + user);
+        System.out.println("2" + game);
 
         switch (game.getName())
         {
