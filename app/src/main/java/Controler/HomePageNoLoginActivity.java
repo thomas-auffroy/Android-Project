@@ -25,41 +25,15 @@ public class HomePageNoLoginActivity extends AppCompatActivity {
     private Integer questions;
     private DatabaseClient mDb;
 
+    private User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitvity_homepage_no_login);
 
-
         mDb = DatabaseClient.getInstance(getApplicationContext());
-
-        // Récupérer les jeux dans la base en fonction d'une catégorie
-        class GetQuestion extends AsyncTask<Void, Void, List<Reponse>> {
-
-            @Override
-            protected List<Reponse> doInBackground(Void... voids) {
-                //Integer id = mDb.getAppDatabase().gameDao().getIdFromName("Translation");
-                //List<String> id = mDb.getAppDatabase().reponseDao().getAllReponsesFromId(1);
-                List<Reponse> id = mDb.getAppDatabase().reponseDao().getAllReponses(1);
-                return id;
-            }
-
-            @Override
-            protected void onPostExecute(List<Reponse> foo) {
-
-                ListIterator<Reponse> test = foo.listIterator();
-
-                while (test.hasNext()){
-                    Reponse buffer = test.next();
-                    System.out.println(buffer.getReponse() + " -> " + buffer.getEstVrai());
-                }
-
-            }
-        }
-
-        // Executer tache asynchrone
-        GetQuestion getQuestions = new GetQuestion();
-        getQuestions.execute();
+        user = new User();
     }
 
     @Override
