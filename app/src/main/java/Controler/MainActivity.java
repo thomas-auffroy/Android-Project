@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.androidapplication.R;
 
 import Model.db.DatabaseClient;
+import Model.db.Score;
 import Model.db.User;
 
 public class MainActivity  extends AppCompatActivity {
@@ -24,10 +25,17 @@ public class MainActivity  extends AppCompatActivity {
         if(user == null)
         {
             user = new User();
-            user.setNom("anonymous");
+            user.setEmail("anonymous");
         }
 
-        if(user.getNom() == "anonymous")
+        if(Score.scoresAnonyme != null)
+        {
+            Score score = Score.scoresAnonyme.get(0);
+
+            System.out.println("Medaille : "+score.getMedaille());
+        }
+
+        if(user.getEmail() == "anonymous")
         {
             Intent intent = new Intent(MainActivity.this, HomePageNoLoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -36,7 +44,7 @@ public class MainActivity  extends AppCompatActivity {
             startActivity(intent);
         }
 
-        if(user != null && user.getNom() != "anonymous")
+        if(user.getEmail() != "anonymous")
         {
             Intent intent = new Intent(MainActivity.this, HomePageLoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

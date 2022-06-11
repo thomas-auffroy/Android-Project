@@ -1,12 +1,10 @@
 package Controler.Exercices;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,9 +14,7 @@ import com.example.androidapplication.R;
 import java.util.ArrayList;
 import java.util.Random;
 
-import Model.Exercises.Maths.MultiplicationListViewAdapter;
 import Model.Exercises.Maths.TableMultiplication;
-import Model.db.DatabaseClient;
 import Model.db.Game;
 import Model.db.User;
 
@@ -27,7 +23,10 @@ public class MultiplicationActivity extends AppCompatActivity {
     private TableMultiplication tableMultiplication;
     private User user;
     private Game game;
-    private ArrayList<EditText> reponses;
+    private ArrayList<EditText> reponsesTextView;
+    private ArrayList<Integer> reponsesJoueur;
+    private ArrayList<Integer> bonnesReponses;
+    private ArrayList<String> questions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,10 @@ public class MultiplicationActivity extends AppCompatActivity {
         Random random = new Random();
         tableMultiplication = new TableMultiplication(random.nextInt((10-1)+1)+1, 10);
 
-        this.reponses = new ArrayList<EditText>();
+        reponsesTextView = new ArrayList<EditText>();
+        reponsesJoueur = new ArrayList<Integer>();
+        bonnesReponses = new ArrayList<Integer>();
+        questions = new ArrayList<String>();
 
         setTableMultiplication();
     }
@@ -49,15 +51,21 @@ public class MultiplicationActivity extends AppCompatActivity {
     {
         for(int i = 0; i < this.tableMultiplication.getMultiplications().size(); i++)
         {
+            String question = tableMultiplication.getMultiplication(i).getOperande1()+" x "+tableMultiplication.getMultiplication(i).getOperande2()+" = ";
+            questions.add(question);
+            bonnesReponses.add(tableMultiplication.getMultiplication(i).getResult());
+
             LinearLayout linearLayoutPrincipal = findViewById(R.id.multLinearPrincip);
 
             LinearLayout linearLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.template_calcul, null);
 
+
             TextView ligne = (TextView) linearLayout.findViewById(R.id.template_calcul);
-            ligne.setText(tableMultiplication.getMultiplication(i).getOperande1()+" x "+tableMultiplication.getMultiplication(i).getOperande2()+" = ");
+            ligne.setText(question);
+
 
             EditText rep = (EditText) linearLayout.findViewById(R.id.template_resultat);
-            reponses.add(rep);
+            reponsesTextView.add(rep);
 
             linearLayoutPrincipal.addView(linearLayout);
         }
@@ -67,9 +75,9 @@ public class MultiplicationActivity extends AppCompatActivity {
     {
         int nbError = 0;
 
-        for(int i = 0; i < reponses.size(); i++)
+        for(int i = 0; i < reponsesTextView.size(); i++)
         {
-            String value = reponses.get(i).getText().toString();
+            String value = reponsesTextView.get(i).getText().toString();
             System.out.println("Réponse : "+i+" = "+value);
 
             if(!value.isEmpty())
@@ -80,10 +88,13 @@ public class MultiplicationActivity extends AppCompatActivity {
                 {
                     nbError++;
                 }
+
+                reponsesJoueur.add(finalValue);
             }
             else
             {
                 nbError++;
+                reponsesJoueur.add(0);
             }
         }
 
@@ -91,6 +102,9 @@ public class MultiplicationActivity extends AppCompatActivity {
         intent.putExtra("NB_ERROR", nbError);
         intent.putExtra("USER", user);
         intent.putExtra("GAME", game);
+        intent.putExtra("REPONSESJOUEUR", reponsesJoueur);
+        intent.putExtra("BONNESREPONSES", bonnesReponses);
+        intent.putExtra("QUESTIONS", questions);
 
         startActivity(intent);
     }

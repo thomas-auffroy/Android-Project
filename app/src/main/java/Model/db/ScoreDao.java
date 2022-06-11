@@ -13,7 +13,7 @@ import Model.Converters.ConvertersDuration;
 import Model.Converters.ConvertersMedails;
 
 @Dao
-@TypeConverters({ConvertersDuration.class, ConvertersMedails.class})
+@TypeConverters({ConvertersMedails.class})
 
 public interface ScoreDao {
     @Query("SELECT * FROM score")

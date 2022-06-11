@@ -1,6 +1,8 @@
 package Model.Exercises.Maths;
 
-public class Multiplication {
+import java.io.Serializable;
+
+public class Multiplication implements Serializable {
     private int operande1;
     private int operande2;
 

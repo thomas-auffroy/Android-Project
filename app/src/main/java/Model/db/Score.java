@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 import java.io.Serializable;
 import java.time.Duration;
+import java.util.ArrayList;
 
 import Model.Converters.ConvertersDuration;
 import Model.Converters.ConvertersMedails;
@@ -31,7 +33,7 @@ import Model.Enum.Medails;
         }
 )
 
-@TypeConverters({ConvertersDuration.class, ConvertersMedails.class})
+@TypeConverters({ConvertersMedails.class})
 
 public class Score implements Serializable {
     @PrimaryKey(autoGenerate = false)
@@ -44,12 +46,16 @@ public class Score implements Serializable {
     @ColumnInfo(name = "score")
     private float score;
 
-    @ColumnInfo(name = "temps")
-    private Duration temps;
-
     @ColumnInfo(name = "medaille")
     private Medails medaille;
 
+    @Ignore
+    public static ArrayList<Score> scoresAnonyme;
+
+    public Score()
+    {
+        scoresAnonyme = new ArrayList<Score>();
+    }
     /*
      * Getters and Setters
      * */
@@ -75,16 +81,6 @@ public class Score implements Serializable {
     public void setScore(float score)
     {
         this.score = score;
-    }
-
-    public Duration getTemps()
-    {
-        return temps;
-    }
-
-    public void setTemps(Duration temps)
-    {
-        this.temps = temps;
     }
 
     public Medails getMedaille()
