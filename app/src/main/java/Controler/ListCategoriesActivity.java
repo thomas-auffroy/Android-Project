@@ -28,7 +28,7 @@ public class ListCategoriesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_play);
+        setContentView(R.layout.activity_list_category);
         mDb = DatabaseClient.getInstance(getApplicationContext());
         user = (User) getIntent().getSerializableExtra(USER);
 
