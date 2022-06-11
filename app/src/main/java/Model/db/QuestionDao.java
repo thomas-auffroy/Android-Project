@@ -27,7 +27,7 @@ public interface QuestionDao {
     @Query("SELECT count(*) FROM question WHERE gameId = :gameId")
     Integer getNombreQuestions(Integer gameId);
 
-    @Query("SELECT * FROM question WHERE gameId = :gameId LIMIT :limit")
+    @Query("SELECT * FROM question WHERE gameId = :gameId ORDER BY RANDOM() LIMIT :limit") // Permet de récupérer ':limit' ligne de manière random
     List<Question> getAllQuestionsFromGameId(Integer gameId, Integer limit);
 
 
