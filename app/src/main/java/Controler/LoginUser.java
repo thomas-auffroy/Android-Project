@@ -1,5 +1,6 @@
 package Controler;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ public class LoginUser extends AppCompatActivity {
     private DatabaseClient mDb;
     private String passwordDb;
     private User user;
+    private Activity thisActivity;
 
     //VIEW
     private EditText email;
@@ -34,6 +36,8 @@ public class LoginUser extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+         thisActivity = (Activity) this;
 
         setContentView(R.layout.activity_connection);
 
@@ -118,8 +122,15 @@ public class LoginUser extends AppCompatActivity {
 
                             @Override
                             protected void onPostExecute(User user) {
+                                /*
                                 super.onPostExecute(user);
                                 backward(null);
+                                */
+                                Intent intent = new Intent(thisActivity, MainActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.putExtra(MainActivity.USER, user);
+                                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
+                                startActivity(intent);
                             }
                         }
 
@@ -136,6 +147,7 @@ public class LoginUser extends AppCompatActivity {
     }
 
     public void backward(View view){
+        /*
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         if(view == null) // Backward utilisé en fin de connection
@@ -144,6 +156,10 @@ public class LoginUser extends AppCompatActivity {
         }
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
         startActivity(intent);
+        */
+
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
     }
 
     public void signUp(View view){

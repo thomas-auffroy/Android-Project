@@ -173,13 +173,7 @@ public class GameQcmActivity extends AppCompatActivity {
     }
 
     public void backward(View view){
-        Intent intent = new Intent(this, ListGamesActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        if(view == null) // Backward utilisé en fin de connection
-        {
-            intent.putExtra(ListGamesActivity.USER, user);
-        }
+        super.finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
-        startActivity(intent);
     }
 }
