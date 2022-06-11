@@ -56,7 +56,6 @@ public class DatabaseClient {
             // Create Game Anglais
             db.execSQL("INSERT INTO game (categorie, description, name, typeJeu) VALUES ('Anglais', 'Traduire un mot français en anglais', 'Translation', 'qcm')");
 
-
             class GetId extends AsyncTask<Void, Void, Integer> {
 
                 @Override
@@ -67,11 +66,34 @@ public class DatabaseClient {
 
                 @Override
                 protected void onPostExecute(Integer id) {
-                    db.execSQL("INSERT INTO question(gameId, question) VALUES ("+id+", 'Comment dit-on \"Pommme\" ?')");
-                    db.execSQL("INSERT INTO reponse(gameId, reponse, estVrai) VALUES ("+id+", 'Pineapple', false)");
-                    db.execSQL("INSERT INTO reponse(gameId, reponse, estVrai) VALUES ("+id+", 'Triangle', false)");
-                    db.execSQL("INSERT INTO reponse(gameId, reponse, estVrai) VALUES ("+id+", 'Waffle', false)");
-                    db.execSQL("INSERT INTO reponse(gameId, reponse, estVrai) VALUES ("+id+", 'Apple', true)");
+                    Integer questionId = 0;
+                    db.execSQL("INSERT INTO question(gameId, question, questionId) VALUES ("+id+", 'How do we say \"Pommme\" ?',"+questionId+")");
+                    db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+questionId+", 'Pineapple', 0)");
+                    db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+questionId+", 'Triangle', 0)");
+                    db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+questionId+", 'Waffle', 0)");
+                    db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+questionId+", 'Apple', 1)");
+
+
+                    questionId = 1;
+                    db.execSQL("INSERT INTO question(gameId, question, questionId) VALUES ("+id+", 'How do we say \"Poire\" ?', "+questionId+")");
+                    db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+questionId+", 'Pineapple', 0)");
+                    db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+questionId+", 'Triangle', 0)");
+                    db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+questionId+", 'Waffle', 0)");
+                    db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+questionId+", 'Pear', 1)");
+
+                    questionId = 2;
+                    db.execSQL("INSERT INTO question(gameId, question, questionId) VALUES ("+id+", 'How do we say \"Voiture\" ?', "+questionId+")");
+                    db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+questionId+", 'Bike', 0)");
+                    db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+questionId+", 'Bus', 0)");
+                    db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+questionId+", 'Metro', 0)");
+                    db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+questionId+", 'Car', 1)");
+
+                    questionId = 3;
+                    db.execSQL("INSERT INTO question(gameId, question, questionId) VALUES ("+id+", 'How do we say \"Maison\" ?', "+questionId+")");
+                    db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+questionId+", 'Home', 0)");
+                    db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+questionId+", 'Building', 0)");
+                    db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+questionId+", 'Flat', 0)");
+                    db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+questionId+", 'House', 1)");
                 }
             }
 
@@ -81,12 +103,14 @@ public class DatabaseClient {
 
 
 
+
+
             //
-            db.execSQL("INSERT INTO game (categorie, description, name, typeJeu) VALUES ('Mathématiques', 'Les espaces vectoriels en un click', 'Equa Diff','qcm')");
+            //db.execSQL("INSERT INTO game (categorie, description, name, typeJeu) VALUES ('Mathématiques', 'Les espaces vectoriels en un click', 'Equa Diff','qcm')");
             db.execSQL("INSERT INTO game (categorie, description, name, typeJeu) VALUES ('Mathématiques', 'Les tables de multiplication', 'Multiplication','maths')");
-            db.execSQL("INSERT INTO game (categorie, description, name, typeJeu) VALUES ('Anglais', 'yes', 'PineApple','qcm')");
-            db.execSQL("INSERT INTO game (categorie, description, name, typeJeu) VALUES ('Français', 'oui', 'Diantre','qcm')");
-            db.execSQL("INSERT INTO user (email, prenom, nom, motDePasse, dateNaissance, srcImage) VALUES(\"test@gmail.com\", \"Théo\", \"Hauray\", \"tt\", \"1997-12-29\", \"test\");");
+            //db.execSQL("INSERT INTO game (categorie, description, name, typeJeu) VALUES ('Anglais', 'yes', 'PineApple','qcm')");
+            //db.execSQL("INSERT INTO game (categorie, description, name, typeJeu) VALUES ('Français', 'oui', 'Diantre','qcm')");
+            //db.execSQL("INSERT INTO user (email, prenom, nom, motDePasse, dateNaissance, srcImage) VALUES(\"test@gmail.com\", \"Théo\", \"Hauray\", \"tt\", \"1997-12-29\", \"test\");");
 
             /*
             db.execSQL("INSERT INTO question (question) VALUES ('Test de question ?')");
@@ -95,6 +119,9 @@ public class DatabaseClient {
             db.execSQL("INSERT INTO question (question) VALUES ('Test de queazdazdazstion ?')");
             db.execSQL("INSERT INTO question (question) VALUES ('Tazdazdaest de question ?')");
             */
+
+            // User test
+            db.execSQL("INSERT INTO user (email, prenom, nom, motDePasse, dateNaissance, srcImage) VALUES ('a@a', 'test', 'test', 'a', '2000-01-01', '')");
         }
     };
 }
