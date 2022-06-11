@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +32,8 @@ public class ListGamesActivity extends AppCompatActivity {
     public static String category;
     private Activity thisActivity = (Activity) this; // Permet de savoir quelle activié à appelé cet adapter. Utile pour set des aniamtions
 
+    private TextView nameCategory;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,9 @@ public class ListGamesActivity extends AppCompatActivity {
         mDb = DatabaseClient.getInstance(getApplicationContext());
         category = getIntent().getStringExtra(CATEGORY);
         user = (User) getIntent().getSerializableExtra(USER);
+
+        nameCategory = findViewById(R.id.nameCategoryListGames);
+        nameCategory.setText(category);
 
         // Récupérer les jeux dans la base en fonction d'une catégorie
         class GetGames extends AsyncTask<Void, Void, List<Game>> {
