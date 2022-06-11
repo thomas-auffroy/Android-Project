@@ -109,22 +109,21 @@ public class GameQcmActivity extends AppCompatActivity {
                                 buffer.add(2);
                                 buffer.add(3);
 
-                                int random = (int) Math.floor(Math.random()*(3));
+                                int random = (int) Math.floor(Math.random()*(4));
+                                answer1View.setText(reponses.get(buffer.get(random)).getReponse());
                                 buffer.remove(random);
-                                answer1View.setText(reponses.get(random).getReponse());
 
+                                random = (int) Math.floor(Math.random()*(3));
+                                answer2View.setText(reponses.get(buffer.get(random)).getReponse());
+                                buffer.remove(random);
 
                                 random = (int) Math.floor(Math.random()*(2));
+                                answer3View.setText(reponses.get(buffer.get(random)).getReponse());
                                 buffer.remove(random);
-                                answer2View.setText(reponses.get(random).getReponse());
 
                                 random = (int) Math.floor(Math.random()*(1));
+                                answer4View.setText(reponses.get(buffer.get(random)).getReponse());
                                 buffer.remove(random);
-                                answer3View.setText(reponses.get(random).getReponse());
-
-                                random = (int) Math.floor(Math.random()*(0));
-                                buffer.remove(random);
-                                answer4View.setText(reponses.get(random).getReponse());
                             }
                         }
 
