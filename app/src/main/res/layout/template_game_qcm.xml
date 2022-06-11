@@ -178,6 +178,8 @@
             android:stateListAnimator="@null"
             android:text="Suivant"
             android:textAllCaps="false"
+            android:id="@+id/btnNextQcm"
+            android:alpha="0.5"
             android:textColor="@color/brown_txt_cta"
             android:textSize="25sp" />
 
