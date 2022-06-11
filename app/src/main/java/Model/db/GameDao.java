@@ -25,12 +25,6 @@ public interface GameDao {
     @Query("SELECT categorie FROM game GROUP BY categorie")
     List<String> getAllCategory();
 
-    @Query("SELECT name FROM game WHERE categorie = :categorie")
-    List<String> getGamesFromCategory(String categorie);
-
-    @Query("SELECT id FROM game")
-    List<Integer> getAllId();
-
     @Query("SELECT id FROM game WHERE name = :name")
     Integer getIdFromName(String name);
 
