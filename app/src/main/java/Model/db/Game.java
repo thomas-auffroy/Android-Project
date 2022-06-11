@@ -38,7 +38,7 @@ public class Game implements Serializable {
         return categorie;
     }
 
-    public void setCategorie(String email)
+    public void setCategorie(String categorie)
     {
         this.categorie = categorie;
     }
