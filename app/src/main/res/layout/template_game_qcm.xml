@@ -49,6 +49,16 @@
 
         android:onClick="backward"
         />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="120dp"
+        android:id="@+id/nameCategoryGameQcm"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/gloria_hallelujah_regular"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,6 +67,15 @@
         android:gravity="center"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/numeroQuestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:text="Question N°3 sur 10"
+
+            android:textColor="@color/white"
+            android:textSize="18sp" />
         <TextView
             android:id="@+id/questionQCM"
             android:layout_width="wrap_content"
@@ -153,11 +172,11 @@
             android:layout_gravity="center"
             android:layout_marginTop="60dp"
             android:background="@drawable/cw_cta_shadow"
-            android:onClick="playAgain"
+            android:onClick="next"
             android:paddingHorizontal="20dp"
             android:paddingBottom="7dp"
             android:stateListAnimator="@null"
-            android:text="Rejouer"
+            android:text="Suivant"
             android:textAllCaps="false"
             android:textColor="@color/brown_txt_cta"
             android:textSize="25sp" />
