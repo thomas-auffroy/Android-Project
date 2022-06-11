@@ -41,6 +41,7 @@ public class GameQcmActivity extends AppCompatActivity {
     private Button answer3View;
     private Button answer4View;
     private String rightAnswer;
+    private Button btnNext;
 
     private boolean haveAnswered = false;
 
@@ -78,11 +79,14 @@ public class GameQcmActivity extends AppCompatActivity {
         answer3View = findViewById(R.id.answerQCM3);
         answer4View = findViewById(R.id.answerQCM4);
 
+        btnNext = findViewById(R.id.btnNextQcm);
+
         rightAnswer = "";
     }
 
 
     public void checkAnswer(View view) {
+        btnNext.setAlpha(1);
         Button btnClicked = findViewById(view.getId());
 
         if (haveAnswered == false) {
@@ -98,20 +102,26 @@ public class GameQcmActivity extends AppCompatActivity {
 
     public void next(View view) {
 
+        if (!haveAnswered){
+            return;
+        }
+
         // Reload activty
         if (availableQuestions.size() > 0) {
             numeroQuestion += 1;
             finish();
             startActivity(getIntent());
         } else {
-            availableQuestions = null;
-            numeroQuestion = 1;
+            resetStaticVariables();
 
             Intent intent = new Intent(this, ResultQcmActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.putExtra("USER", user);
             intent.putExtra("GAME", game);
-            intent.putExtra("FOO", goodAnswers);
+
+            intent.putExtra("GOOD_ANSWERS", goodAnswers);
+            intent.putExtra("TOTAL_QUESTION", maxQuestions);
+
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
         }
@@ -128,14 +138,24 @@ public class GameQcmActivity extends AppCompatActivity {
         super.onStart();
     }
 
-    public void backward(View view) {
+    @Override
+    public void onBackPressed(){
+        // Permet de reset les variables lors d'un retour arrière à l'aide du menu de navigation android
+        resetStaticVariables();
+        super.onBackPressed();
+    }
+
+    private void resetStaticVariables(){
         numeroQuestion = 1;
         availableQuestions = null;
+    }
+
+    public void backward(View view) {
+        resetStaticVariables();
 
         super.finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
     }
-
 
     private void getAllQuestionsFromGameId(Integer gameId) {
 
@@ -148,13 +168,6 @@ public class GameQcmActivity extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(List<Question> questions) {
-                /*
-                ListIterator<Question> it = questions.listIterator();
-                while (it.hasNext()) {
-                    System.out.println(it.next());
-                }
-                */
-
                 availableQuestions = questions;
                 Question aQuestion = chooseRandomly();
                 questionView.setText(aQuestion.getQuestion());
@@ -163,7 +176,6 @@ public class GameQcmActivity extends AppCompatActivity {
         }
         GetQuestions getQuestion = new GetQuestions();
         getQuestion.execute();
-
     }
 
     private void displayAnswer(Question question) {
