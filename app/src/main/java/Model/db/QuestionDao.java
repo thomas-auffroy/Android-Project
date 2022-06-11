@@ -21,8 +21,15 @@ public interface QuestionDao {
     @Query("SELECT * FROM question WHERE gameId = :gameId AND questionId = :questionId")
     Question getQuestionFromIds(Integer gameId, Integer questionId);
 
+    @Query("SELECT * FROM question WHERE gameId = :gameId")
+    List<Question> getAllQuestionsFromGameId(Integer gameId);
+
     @Query("SELECT count(*) FROM question WHERE gameId = :gameId")
     Integer getNombreQuestions(Integer gameId);
+
+    @Query("SELECT * FROM question WHERE gameId = :gameId LIMIT :limit")
+    List<Question> getAllQuestionsFromGameId(Integer gameId, Integer limit);
+
 
 
     @Insert
