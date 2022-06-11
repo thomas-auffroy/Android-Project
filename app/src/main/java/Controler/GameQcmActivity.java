@@ -1,6 +1,7 @@
 package Controler;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 import Model.db.DatabaseClient;
+import Model.db.Game;
 import Model.db.Question;
 import Model.db.QuestionDao;
 import Model.db.Reponse;
@@ -24,77 +26,140 @@ import Model.db.User;
 
 public class GameQcmActivity extends AppCompatActivity {
 
-    public static final String USER =  null;
-    public static final String GAME =  null;
     private User user;
+    private Game game;
+
     private DatabaseClient mDb;
 
-    private TextView question;
-    private Button answer1;
-    private Button answer2;
-    private Button answer3;
-    private Button answer4;
+    private TextView questionView;
+    private Button answer1View;
+    private Button answer2View;
+    private Button answer3View;
+    private Button answer4View;
+    private String rightAnswer;
+
+    private boolean haveAnswered = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.template_game_qcm);
 
-        question = findViewById(R.id.questionQCM);
-        answer1 = findViewById(R.id.answerQCM1);
-        answer2 = findViewById(R.id.answerQCM2);
-        answer3 = findViewById(R.id.answerQCM3);
-        answer4 = findViewById(R.id.answerQCM4);
+        questionView = findViewById(R.id.questionQCM);
+        answer1View = findViewById(R.id.answerQCM1);
+        answer2View = findViewById(R.id.answerQCM2);
+        answer3View = findViewById(R.id.answerQCM3);
+        answer4View = findViewById(R.id.answerQCM4);
+
+        rightAnswer = "";
 
         mDb = DatabaseClient.getInstance(getApplicationContext());
 
-        System.out.println("lolzedez" + getIntent().getSerializableExtra("USER"));
-        System.out.println(getIntent().getSerializableExtra(GAME));
-       // user = (User) getIntent().getSerializableExtra(USER);
+        user = (User) getIntent().getSerializableExtra("USER");
+        game = (Game) getIntent().getSerializableExtra("GAME");
 
-
-/*
-        // Récupérer les jeux dans la base en fonction d'une catégorie
-        class GetQuestion extends AsyncTask<Void, Void, String> {
+        class GetNombreQuestions extends AsyncTask<Void, Void, Integer> {
 
             @Override
-            protected String doInBackground(Void... voids) {
-                String question = mDb.getAppDatabase().questionDao().getQuestionFromIds(1,0);
-                return question;
+            protected Integer doInBackground(Void... voids) {
+                Integer nombre = mDb.getAppDatabase().questionDao().getNombreQuestions(game.getId());
+                return nombre;
             }
 
             @Override
-            protected void onPostExecute(String foo) {
+            protected void onPostExecute(Integer nombreQuestions) {
+                class GetQuestion extends AsyncTask<Void, Void, Question> {
 
-                System.out.println(foo);
+                    @Override
+                    protected Question doInBackground(Void... voids) {
+                        int random_int = (int) Math.floor(Math.random()*(nombreQuestions));
 
+                        Question question = mDb.getAppDatabase().questionDao().getQuestionFromIds(game.getId(), random_int);
+                        return question;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Question question) {
+                        questionView.setText(question.getQuestion());
+
+                        class GetReponses extends AsyncTask<Void, Void, List<Reponse>> {
+
+                            @Override
+                            protected List<Reponse> doInBackground(Void... voids) {
+                                List<Reponse> reponses = mDb.getAppDatabase().reponseDao().getAllReponsesFromQuestionId(question.getQuestionId());
+                                return reponses;
+                            }
+
+                            @Override
+                            protected void onPostExecute(List<Reponse> reponses) {
+
+                                ListIterator<Reponse> it = reponses.listIterator();
+
+                                while (it.hasNext() && rightAnswer == ""){
+                                    Reponse buffer = it.next();
+                                    if (buffer.getEstVrai() == 1) {
+                                        rightAnswer = buffer.getReponse();
+                                    }
+                                }
+
+                                // Position aléatoirement les réponses
+                                ArrayList<Integer> buffer = new ArrayList<>();
+                                buffer.add(0);
+                                buffer.add(1);
+                                buffer.add(2);
+                                buffer.add(3);
+
+                                int random = (int) Math.floor(Math.random()*(3));
+                                buffer.remove(random);
+                                answer1View.setText(reponses.get(random).getReponse());
+
+
+                                random = (int) Math.floor(Math.random()*(2));
+                                buffer.remove(random);
+                                answer2View.setText(reponses.get(random).getReponse());
+
+                                random = (int) Math.floor(Math.random()*(1));
+                                buffer.remove(random);
+                                answer3View.setText(reponses.get(random).getReponse());
+
+                                random = (int) Math.floor(Math.random()*(0));
+                                buffer.remove(random);
+                                answer4View.setText(reponses.get(random).getReponse());
+                            }
+                        }
+
+                        GetReponses getReponses = new GetReponses();
+                        getReponses.execute();
+                    }
+                }
+
+                GetQuestion getQuestion = new GetQuestion();
+                getQuestion.execute();
             }
         }
+        GetNombreQuestions getNombreQuestions = new GetNombreQuestions();
+        getNombreQuestions.execute();
+    }
 
 
- */
-        class GetQuestions extends AsyncTask<Void, Void, List<Question>> {
+    public void checkAnswer(View view){
+        Button btnClicked = findViewById(view.getId());
 
-            @Override
-            protected List<Question> doInBackground(Void... voids) {
-                List<Question> question = mDb.getAppDatabase().questionDao().getAll();
-                return question;
-            }
-
-            @Override
-            protected void onPostExecute(List<Question> foo) {
-
-                System.out.println(foo.get(0).getQuestion());
-                System.out.println(foo.get(0).getGameId());
-                System.out.println(foo.get(0).getQuestionId());
-
+        if (haveAnswered == false){
+            if (btnClicked.getText() == rightAnswer){
+                btnClicked.setTextColor(Color.GREEN);
+            } else {
+                btnClicked.setTextColor(Color.RED);
             }
         }
+        haveAnswered = true;
+    }
 
-        // Executer tache asynchrone
-        GetQuestions getQuestion = new GetQuestions();
-        getQuestion.execute();
+    public void playAgain(View view){
 
+        // Reload activty
+        finish();
+        startActivity(getIntent());
     }
 
     @Override
