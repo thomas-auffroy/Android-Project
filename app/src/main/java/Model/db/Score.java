@@ -16,7 +16,9 @@ import Model.Converters.ConvertersDuration;
 import Model.Converters.ConvertersMedails;
 import Model.Enum.Medails;
 
-@Entity(
+@Entity
+
+        /*(
         foreignKeys = {
                 @ForeignKey(
                         entity = User.class,
@@ -32,6 +34,7 @@ import Model.Enum.Medails;
                 )
         }
 )
+*/
 
 @TypeConverters({ConvertersMedails.class})
 
@@ -52,10 +55,6 @@ public class Score implements Serializable {
     @Ignore
     public static ArrayList<Score> scoresAnonyme;
 
-    public Score()
-    {
-        scoresAnonyme = new ArrayList<Score>();
-    }
     /*
      * Getters and Setters
      * */

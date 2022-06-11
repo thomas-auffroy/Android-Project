@@ -28,12 +28,6 @@ public class MainActivity  extends AppCompatActivity {
             user.setEmail("anonymous");
         }
 
-        if(Score.scoresAnonyme != null)
-        {
-            Score score = Score.scoresAnonyme.get(0);
-
-            System.out.println("Medaille : "+score.getMedaille());
-        }
 
         if(user.getEmail() == "anonymous")
         {
@@ -63,6 +57,9 @@ public class MainActivity  extends AppCompatActivity {
                 |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                 //|View.SYSTEM_UI_FLAG_FULLSCREEN // Si on veut cacher la barre android du haut
         );
+
+
+
         super.onStart();
     }
 

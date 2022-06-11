@@ -11,22 +11,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.androidapplication.R;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import Controler.ListCategoriesActivity;
+import Controler.LoginUser;
 import Controler.MainActivity;
 import Model.CategoryListViewAdapter;
 import Model.Exercises.Maths.TableMultiplication;
 import Model.db.AppDatabase;
 import Model.db.DatabaseClient;
 import Model.db.Game;
+import Model.db.Score;
 import Model.db.User;
 
 public class MathActivity  extends AppCompatActivity {
 
     private User user;
     private Game game;
+    private DatabaseClient mDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,7 @@ public class MathActivity  extends AppCompatActivity {
         game = (Game) getIntent().getSerializableExtra("GAME"); // Bizarre
         user = (User) getIntent().getSerializableExtra("USER"); // Bizarre
 
+        mDb = DatabaseClient.getInstance(getApplicationContext());
 
         switch (game.getName())
         {

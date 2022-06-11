@@ -18,6 +18,7 @@ import Model.db.DatabaseClient;
 import Model.db.GameDao;
 import Model.db.QuestionDao;
 import Model.db.Reponse;
+import Model.db.Score;
 import Model.db.User;
 
 public class HomePageNoLoginActivity extends AppCompatActivity {
@@ -34,6 +35,7 @@ public class HomePageNoLoginActivity extends AppCompatActivity {
 
         mDb = DatabaseClient.getInstance(getApplicationContext());
         user = (User) getIntent().getSerializableExtra("USER");
+
     }
 
     @Override

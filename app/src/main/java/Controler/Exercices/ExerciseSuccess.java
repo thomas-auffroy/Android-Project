@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.androidapplication.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import Controler.ListCategoriesActivity;
 import Controler.MainActivity;
@@ -59,6 +60,7 @@ public class ExerciseSuccess  extends AppCompatActivity {
         majScore();
 
         System.out.println("Nombre erreur : "+nb_Erreur);
+
     }
 
 
@@ -106,7 +108,7 @@ public class ExerciseSuccess  extends AppCompatActivity {
         Integer gameID = game.getId();
         String userEmail = user.getEmail();
 
-        int successPercentage = (nb_Erreur * 100) / questions.size();
+        int successPercentage = ((questions.size() - nb_Erreur) / questions.size()) * 100;
 
         if(successPercentage <= 50)
         {
@@ -134,7 +136,7 @@ public class ExerciseSuccess  extends AppCompatActivity {
         score.setUser(userEmail);
         score.setGame(gameID);
 
-        if(user.getEmail() != "anonymous")
+        if(!user.getEmail().equals("anonymous"))
         {
             class SaveScore extends AsyncTask<Void, Void, Score> {
 
@@ -148,13 +150,44 @@ public class ExerciseSuccess  extends AppCompatActivity {
 
                 @Override
                 protected void onPostExecute(Score score) {
+                    class GetUser extends AsyncTask<Void, Void, List<Score>> {
+
+                        @Override
+                        protected List<Score> doInBackground(Void... voids) {
+                            List<Score> scores = mDb.getAppDatabase().scoreDao().getAllScoreFromUser(user.getEmail());
+                            return scores;
+                        }
+
+                        @Override
+                        protected void onPostExecute(List<Score> scores) {
+                            for(int i = 0; i < scores.size(); i++)
+                            {
+                                System.out.println("Jeu : "+scores.get(i).getGame());
+                                System.out.println("Score : "+scores.get(i).getScore());
+                                System.out.println("Médaille : "+scores.get(i).getMedaille());
+
+                            }
+                        }
+                    }
+
+                    // Executer tache asynchrone User
+                    GetUser getUser = new GetUser();
+                    getUser.execute();
                 }
             }
+            SaveScore saveScore = new SaveScore();
+            saveScore.execute();
         }
         else
         {
+            if(Score.scoresAnonyme == null)
+            {
+                Score.scoresAnonyme = new ArrayList<Score>();
+            }
+
             Score.scoresAnonyme.add(score);
         }
+
 
     }
 
@@ -162,6 +195,7 @@ public class ExerciseSuccess  extends AppCompatActivity {
     {
         Intent intent = new Intent(this, MultiplicationActivity.class);
         intent.putExtra("USER", user);
+        intent.putExtra("GAME", game);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
