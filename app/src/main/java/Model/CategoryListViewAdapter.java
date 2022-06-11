@@ -49,11 +49,8 @@ public class CategoryListViewAdapter extends ArrayAdapter<String> {
 
         final String category = values.get(position);
 
-        System.out.println("lol" + user);
-
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View rowView = inflater.inflate(R.layout.template_categorie, parent, false);
-
 
         TextView title = rowView.findViewById(R.id.titleCategory);
         title.setText(category);
