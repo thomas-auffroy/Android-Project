@@ -32,7 +32,6 @@ public class ListCategoriesActivity extends AppCompatActivity {
         mDb = DatabaseClient.getInstance(getApplicationContext());
         user = (User) getIntent().getSerializableExtra(USER);
 
-        System.out.println(user.getNom());
         // Récupérer les jeux dans la base en fonction d'une catégorie
         class GetCategory extends AsyncTask<Void, Void, List<String>> {
 

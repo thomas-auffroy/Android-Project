@@ -74,7 +74,6 @@ public class SubscriptionUser extends AppCompatActivity {
 
                 // adding to database
                 emailsInDb = mDb.getAppDatabase().userDao().getAllEmails();
-                System.out.println(emailsInDb.size());
 
                 return emailsInDb;
             }
@@ -243,8 +242,6 @@ public class SubscriptionUser extends AppCompatActivity {
         // a améliorer
 
         int inputMode = motDePasse.getInputType();
-        System.out.println(inputMode);
-        System.out.println(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
         //motDePasse.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         motDePasse.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);

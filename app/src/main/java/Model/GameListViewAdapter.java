@@ -101,8 +101,6 @@ public class GameListViewAdapter extends ArrayAdapter<Game> {
                                 break;
                             case "qcm":
                                 intent = new Intent(parentActivity, GameQcmActivity.class);
-                                System.out.println(user);
-                                System.out.println(game);
                                 intent.putExtra("USER", user);
                                 intent.putExtra("GAME", game);
                                 break;
@@ -113,7 +111,6 @@ public class GameListViewAdapter extends ArrayAdapter<Game> {
                         parentActivity.startActivity(intent);
                         parentActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
 
-                        //super.onPostExecute(jeu);
                     }
                 }
                 GetGame getGame = new GetGame();
