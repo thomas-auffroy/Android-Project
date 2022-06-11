@@ -27,31 +27,29 @@ public class ModifyProfilActivity extends AppCompatActivity {
     private User user;
 
     //VIEW
-    private TextView fullName;
     private EditText dateNaissance;
-    private EditText adresseMail;
     private EditText password;
+    private EditText adresseMail;
+    private TextView fullName;
 
     private int lastSelectedYear;
     private int lastSelectedMonth;
     private int lastSelectedDayOfMonth;
-
-    public static final String USER = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mDb = DatabaseClient.getInstance(getApplicationContext());
-
         setContentView(R.layout.activity_profil_modify);
-        user = (User) getIntent().getSerializableExtra(USER);
+        user = (User) getIntent().getSerializableExtra("USER");
 
-        fullName = findViewById(R.id.dataFullName);
-        fullName.setText(user.getPrenom() + " " + user.getNom());
 
         dateNaissance = findViewById(R.id.dataBirthDate);
         dateNaissance.setText(user.getDateNaissance().toString());
+
+        fullName = findViewById(R.id.dataFullName);
+        fullName.setText(user.getPrenom() + " " + user.getNom());
 
         adresseMail = findViewById(R.id.dataEmail);
         adresseMail.setText(user.getEmail());
@@ -67,12 +65,16 @@ public class ModifyProfilActivity extends AppCompatActivity {
     }
 
     public void backward(View view){
+        super.finish();
+        /*
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra(MainActivity.USER, user);
 
+         */
+
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
-        startActivity(intent);
+        //startActivity(intent);
     }
 
     public void logout(View view){
@@ -130,32 +132,25 @@ public class ModifyProfilActivity extends AppCompatActivity {
             @Override
             protected User doInBackground(Void... voids) {
 
-
-                //user.setEmail(adresseMail.getText().toString());
                 user.setDateNaissance(dateNaissanceFormat);
                 user.setMotDePasse(password.getText().toString());
 
-                // adding to database
-                mDb.getAppDatabase().userDao().insert(user);
+                // updating to database
+                mDb.getAppDatabase().userDao().update(user);
 
                 return user;
             }
 
             @Override
             protected void onPostExecute(User user) {
-                super.onPostExecute(user);
-
-                // Quand la tache est créée, on arrête l'activité AddTaskActivity (on l'enleve de la pile d'activités)
-                Intent intent = new Intent(ModifyProfilActivity.this, MainActivity.class);
+                Intent intent = new Intent(ModifyProfilActivity.this, ProfilActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra(MainActivity.USER, user);
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
+                intent.putExtra("USER", user);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom); // Permet une animation de la vue (override le comportement de base)
             }
         }
 
-        //////////////////////////
-        // IMPORTANT bien penser à executer la demande asynchrone
         ModifyContent foo = new ModifyContent();
         foo.execute();
     }
