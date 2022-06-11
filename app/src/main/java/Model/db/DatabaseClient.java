@@ -67,7 +67,7 @@ public class DatabaseClient {
                 @Override
                 protected void onPostExecute(Integer id) {
                     Integer questionId = 0;
-                    db.execSQL("INSERT INTO question(gameId, question, questionId) VALUES ("+id+", 'How do we say \"Pommme\" ?',"+questionId+")");
+                    db.execSQL("INSERT INTO question(gameId, question, questionId) VALUES ("+id+", 'How do we say \"Pomme\" ?',"+questionId+")");
                     db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+questionId+", 'Pineapple', 0)");
                     db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+questionId+", 'Triangle', 0)");
                     db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+questionId+", 'Waffle', 0)");
