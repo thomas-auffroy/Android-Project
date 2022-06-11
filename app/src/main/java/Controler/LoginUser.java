@@ -26,7 +26,6 @@ public class LoginUser extends AppCompatActivity {
     private DatabaseClient mDb;
     private String passwordDb;
     private User user;
-    private Activity thisActivity;
 
     //VIEW
     private EditText email;
@@ -36,8 +35,6 @@ public class LoginUser extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-         thisActivity = (Activity) this;
 
         setContentView(R.layout.activity_connection);
 
@@ -126,7 +123,7 @@ public class LoginUser extends AppCompatActivity {
                                 super.onPostExecute(user);
                                 backward(null);
                                 */
-                                Intent intent = new Intent(thisActivity, MainActivity.class);
+                                Intent intent = new Intent(LoginUser.this, MainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 intent.putExtra(MainActivity.USER, user);
                                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
