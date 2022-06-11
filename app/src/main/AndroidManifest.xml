@@ -30,6 +30,7 @@
         <activity android:name="Controler.GameQcmActivity"/>
         <activity android:name="Controler.Exercices.MultiplicationActivity"/>
         <activity android:name="Controler.Exercices.ExerciseSuccess"/>
+        <activity android:name="Controler.ResultQcmActivity"/>
 
 
     </application>
