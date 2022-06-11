@@ -51,98 +51,116 @@
         />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:gravity="center"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/questionQCM"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
-            android:id="@+id/questionQCM"
+            android:text="xxxxxxxxxxxxxxxxx ?"
 
-            android:text="En quelle année oui le fun ?"
-            android:textSize="20sp"/>
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="10dp"
-            >
+            android:layout_marginVertical="10dp"
+            android:layout_marginHorizontal="40dp"
+            android:orientation="horizontal">
 
             <android.widget.Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:background="@drawable/cw_cta_shadow"
-                android:padding="10dp"
-                android:stateListAnimator="@null"
-
-                android:text="Waffle"
                 android:id="@+id/answerQCM1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:background="@drawable/cw_cta_shadow"
+                android:onClick="checkAnswer"
+                android:paddingHorizontal="20dp"
+                android:paddingBottom="7dp"
+                android:stateListAnimator="@null"
 
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:textColor="@color/brown_txt_cta"
+
+                android:textSize="15sp" />
 
             <android.widget.Button
+                android:id="@+id/answerQCM2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:background="@drawable/cw_cta_shadow"
-                android:padding="10dp"
 
+                android:onClick="checkAnswer"
+                android:paddingHorizontal="20dp"
+                android:paddingBottom="7dp"
                 android:stateListAnimator="@null"
-                android:text="Trianglfffffe"
-                android:id="@+id/answerQCM2"
+                android:textAllCaps="false"
+                android:textColor="@color/brown_txt_cta"
 
-                android:textAllCaps="false" />
+                android:textSize="15sp" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="10dp"
-            >
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginVertical="10dp"
+            android:orientation="horizontal">
 
             <android.widget.Button
+                android:id="@+id/answerQCM3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:background="@drawable/cw_cta_shadow"
-                android:padding="10dp"
+                android:onClick="checkAnswer"
+                android:paddingHorizontal="20dp"
+                android:paddingBottom="7dp"
+
                 android:stateListAnimator="@null"
+                android:textAllCaps="false"
+                android:textColor="@color/brown_txt_cta"
 
-                android:text="PineApple"
-                android:id="@+id/answerQCM3"
-
-                android:textAllCaps="false" />
+                android:textSize="15sp" />
 
             <android.widget.Button
+                android:id="@+id/answerQCM4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:background="@drawable/cw_cta_shadow"
-                android:padding="10dp"
+                android:onClick="checkAnswer"
+                android:paddingHorizontal="20dp"
+                android:paddingBottom="7dp"
                 android:stateListAnimator="@null"
 
-                android:text="Apple"
-                android:id="@+id/answerQCM4"
+                android:textAllCaps="false"
+                android:textColor="@color/brown_txt_cta"
 
-                android:textAllCaps="false" />
+                android:textSize="15sp" />
         </RelativeLayout>
 
-    <android.widget.Button
-        android:stateListAnimator="@null"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/cw_cta_shadow"
-        android:layout_gravity="center"
-        android:text="Rejouer"
-        android:onClick="playAgain"
-        android:layout_marginTop="60dp"
-        android:textAllCaps="false"/>
+        <android.widget.Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/cw_cta_shadow"
+            android:onClick="playAgain"
+            android:paddingHorizontal="20dp"
+            android:paddingBottom="7dp"
+            android:stateListAnimator="@null"
+            android:text="Rejouer"
+            android:textAllCaps="false"
+            android:textColor="@color/brown_txt_cta"
+            android:textSize="25sp" />
 
     </LinearLayout>
 
