@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:layout_marginStart="120dp"
-        android:id="@+id/nameCategoryGameQcm"
+        android:id="@+id/nameCategoryResultQcm"
         android:textSize="25sp"
         android:textColor="@color/white"
         android:fontFamily="@font/gloria_hallelujah_regular"
@@ -71,7 +71,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Vous avez obtenu X bonne(s) réponse(s) sur Y"
+            android:id="@+id/resultatQCMText"
             android:textColor="@color/white"
             android:gravity="center"
             android:textSize="20sp"/>
@@ -82,7 +82,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="60dp"
             android:background="@drawable/cw_cta_shadow"
-            android:onClick="next"
+            android:onClick="playAgain"
             android:paddingHorizontal="20dp"
             android:paddingBottom="7dp"
             android:stateListAnimator="@null"
