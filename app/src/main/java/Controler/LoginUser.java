@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.androidapplication.R;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import Model.db.DatabaseClient;
 import Model.db.User;
@@ -47,28 +49,23 @@ public class LoginUser extends AppCompatActivity {
         email = findViewById(R.id.dataEmailConnection);
         motDePasse = findViewById(R.id.dataPassword);
         connect = findViewById(R.id.btnConnection);
-
-        // Associer un événement au bouton save
-        connect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Connection();
-            }
-        });
-
     }
 
-    private void Connection() {
+    public void connect(View view) {
         final String sEmail = email.getText().toString();
         final String sMotDePasse = motDePasse.getText().toString();
 
         // Test entrées utilisateur
-        if (sEmail.isEmpty()) {
-            email.setError("Entre une adresse email");
+        //Expression régulière pour conformité @ mail
+        String emailRegx = "^(.+)@(\\S+)$";
+        Pattern emailRegxPattern = Pattern.compile(emailRegx);
+        Matcher emailCheck = emailRegxPattern.matcher(email.getText());
+
+        if (!emailCheck.matches() || sEmail.isEmpty()){
+            email.setError("Entrez un format d'adresse email valide (\"xxx@xxx.com\")");
             email.requestFocus();
             return;
         }
-
         else if(sMotDePasse.isEmpty())
         {
             motDePasse.setError("Entre un mot de passe");
@@ -144,19 +141,15 @@ public class LoginUser extends AppCompatActivity {
     }
 
     public void backward(View view){
-        /*
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        if(view == null) // Backward utilisé en fin de connection
-        {
-            intent.putExtra(MainActivity.USER, user);
-        }
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
-        startActivity(intent);
-        */
-
         super.finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
+    }
+
+    public void forgotPassword(View view){
+        Intent intent = new Intent(this, ResetPasswordActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_top); // Permet une animation de la vue (override le comportement de base)
     }
 
     public void signUp(View view){
