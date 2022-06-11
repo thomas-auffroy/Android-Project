@@ -21,10 +21,10 @@ import java.util.ArrayList;
 )
 public class Question implements Serializable {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = false)
     @NonNull
     @ColumnInfo(name = "questionId")
-    private int questionId;
+    private Integer questionId;
 
     @ColumnInfo(name = "gameId")
     private Integer gameId;
@@ -42,6 +42,6 @@ public class Question implements Serializable {
     public String getQuestion() { return question; }
     public void setQuestion(String question) { this.question = question;}
 
-    public int getQuestionId() { return questionId; }
-    public void setQuestionId(int questionId) { this.questionId = questionId; }
+    public Integer getQuestionId() { return questionId; }
+    public void setQuestionId(Integer questionId) { this.questionId = questionId; }
 }

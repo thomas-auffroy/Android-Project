@@ -18,17 +18,12 @@ public interface QuestionDao {
     @Query("SELECT * FROM question")
     List<Question> getAll();
 
-    @Query("SELECT question FROM question")
-    List<String> getAllQuestions();
+    @Query("SELECT * FROM question WHERE gameId = :gameId AND questionId = :questionId")
+    Question getQuestionFromIds(Integer gameId, Integer questionId);
 
-    @Query("SELECT question FROM question WHERE gameId = :id")
-    List<String> getAllQuestionsFromId(int id);
+    @Query("SELECT count(*) FROM question WHERE gameId = :gameId")
+    Integer getNombreQuestions(Integer gameId);
 
-    @Query("SELECT question FROM question where gameId = :gameId AND questionId = :questionId")
-    String getQuestionFromIds(Integer gameId, Integer questionId);
-
-    @Query("SELECT gameId from question")
-    List<Integer> getAllGameId();
 
     @Insert
     void insert(Question question);
