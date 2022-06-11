@@ -29,6 +29,10 @@ public class ResultQcmActivity extends AppCompatActivity {
     private User user;
     private Game game;
     private Integer goodAnswers;
+    private Integer totalQuestions;
+
+    private TextView result;
+    private TextView nameCategory;
 
 
     @Override
@@ -38,11 +42,19 @@ public class ResultQcmActivity extends AppCompatActivity {
 
         game = (Game) getIntent().getSerializableExtra("GAME");
         user = (User) getIntent().getSerializableExtra("USER");
+        goodAnswers = (Integer) getIntent().getSerializableExtra("GOOD_ANSWERS");
+        totalQuestions = (Integer) getIntent().getSerializableExtra("TOTAL_QUESTION");
+
+        nameCategory = findViewById(R.id.nameCategoryResultQcm);
+        nameCategory.setText(game.getCategorie());
 
 
-
-
-        System.out.println(game);
+        result = findViewById(R.id.resultatQCMText);
+        if (goodAnswers > 1) {
+            result.setText("Vous avez obtenu " + goodAnswers + " bonnes réponses sur " + totalQuestions);
+        } else {
+            result.setText("Vous avez obtenu " + goodAnswers + " bonne réponse sur " + totalQuestions + ". Courage, vous allez y arriver");
+        }
 
 
     }
@@ -64,7 +76,16 @@ public class ResultQcmActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("USER", user);
         intent.putExtra(ListGamesActivity.CATEGORY, game.getCategorie());
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
+    }
+
+    public void playAgain(View view){
+        Intent intent = new Intent(this, GameQcmActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("USER", user);
+        intent.putExtra("GAME", game);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
     }
 }
