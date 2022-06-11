@@ -17,7 +17,6 @@ import Model.db.DatabaseClient;
 import Model.db.User;
 
 public class ListCategoriesActivity extends AppCompatActivity {
-    public static final String USER = null;
 
     private User user;
     private List<String> categories;
@@ -30,7 +29,7 @@ public class ListCategoriesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_category);
         mDb = DatabaseClient.getInstance(getApplicationContext());
-        user = (User) getIntent().getSerializableExtra(USER);
+        user = (User) getIntent().getSerializableExtra("USER");
 
         // Récupérer les jeux dans la base en fonction d'une catégorie
         class GetCategory extends AsyncTask<Void, Void, List<String>> {

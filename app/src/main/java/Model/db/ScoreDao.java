@@ -22,6 +22,9 @@ public interface ScoreDao {
     @Query("SELECT * FROM score WHERE user = :user")
     List<Score> getAllScoreFromUser(String user);
 
+    @Query("SELECT * FROM score WHERE user = :user AND game = :game")
+    Score getScoreGameUser(String user, int game);
+
     @Insert
     void insert(Score score);
 

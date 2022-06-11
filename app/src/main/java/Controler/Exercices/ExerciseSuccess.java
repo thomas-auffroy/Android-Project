@@ -138,45 +138,83 @@ public class ExerciseSuccess  extends AppCompatActivity {
 
         if(!user.getEmail().equals("anonymous"))
         {
-            class SaveScore extends AsyncTask<Void, Void, Score> {
+            class GetScore extends AsyncTask<Void, Void, Score> {
 
                 @Override
                 protected Score doInBackground(Void... voids) {
                     // adding to database
-                    mDb.getAppDatabase().scoreDao().insert(score);
+                    Score score = mDb.getAppDatabase().scoreDao().getScoreGameUser(user.getEmail(), gameID);
 
                     return score;
                 }
 
                 @Override
-                protected void onPostExecute(Score score) {
-                    class GetUser extends AsyncTask<Void, Void, List<Score>> {
+                protected void onPostExecute(Score scoreRecup) {
 
-                        @Override
-                        protected List<Score> doInBackground(Void... voids) {
-                            List<Score> scores = mDb.getAppDatabase().scoreDao().getAllScoreFromUser(user.getEmail());
-                            return scores;
-                        }
+                    if(scoreRecup == null)
+                    {
+                        class SaveScore extends AsyncTask<Void, Void, Score> {
 
-                        @Override
-                        protected void onPostExecute(List<Score> scores) {
-                            for(int i = 0; i < scores.size(); i++)
-                            {
-                                System.out.println("Jeu : "+scores.get(i).getGame());
-                                System.out.println("Score : "+scores.get(i).getScore());
-                                System.out.println("Médaille : "+scores.get(i).getMedaille());
+                            @Override
+                            protected Score doInBackground(Void... voids) {
+                                mDb.getAppDatabase().scoreDao().insert(score);
+                                return score;
+                            }
 
+                            @Override
+                            protected void onPostExecute(Score score) {
                             }
                         }
-                    }
 
-                    // Executer tache asynchrone User
-                    GetUser getUser = new GetUser();
-                    getUser.execute();
+                        // Executer tache asynchrone User
+                        SaveScore saveScore = new SaveScore();
+                        saveScore.execute();
+                    }
+                    else
+                    {
+                        class UpdateScore extends AsyncTask<Void, Void, Score> {
+
+                            @Override
+                            protected Score doInBackground(Void... voids) {
+                                mDb.getAppDatabase().scoreDao().update(score);
+                                return score;
+                            }
+
+                            @Override
+                            protected void onPostExecute(Score score) {
+                            }
+                        }
+
+                        // Executer tache asynchrone User
+                        UpdateScore updateScore = new UpdateScore();
+                        updateScore.execute();
+                    }
                 }
             }
-            SaveScore saveScore = new SaveScore();
-            saveScore.execute();
+            GetScore getScore = new GetScore();
+            getScore.execute();
+
+            /*TEST SCORE
+            class PrintScore extends AsyncTask<Void, Void, List<Score>> {
+
+                @Override
+                protected List<Score> doInBackground(Void... voids) {
+                    return mDb.getAppDatabase().scoreDao().getAllScoreFromUser(user.getEmail());
+                }
+
+                @Override
+                protected void onPostExecute(List<Score> scores) {
+                    for(int i = 0; i < scores.size(); i++)
+                    {
+                        System.out.println("Medaille : "+scores.get(i).getMedaille());
+                    }
+                }
+            }
+
+            PrintScore printScore = new PrintScore();
+            printScore.execute();
+            */
+
         }
         else
         {
@@ -187,8 +225,6 @@ public class ExerciseSuccess  extends AppCompatActivity {
 
             Score.scoresAnonyme.add(score);
         }
-
-
     }
 
     public void autreTable(View view)
