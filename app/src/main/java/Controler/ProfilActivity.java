@@ -32,7 +32,7 @@ public class ProfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_profil);
-        user = (User) getIntent().getSerializableExtra(USER);
+        user = (User) getIntent().getSerializableExtra("USER");
 
         fullName = findViewById(R.id.dataFullName);
         fullName.setText(user.getPrenom() + " " + user.getNom());
@@ -48,12 +48,24 @@ public class ProfilActivity extends AppCompatActivity {
     }
 
     public void backward(View view){
+        super.finish();
+        /*
+        Intent intent = new Intent(this, ModifyProfilActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra(ModifyProfilActivity.USER, user);
+
+         */
+
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
+        //startActivity(intent);
+        /*
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra(MainActivity.USER, user);
 
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
         startActivity(intent);
+        */
     }
 
     public void logout(View view){
@@ -79,16 +91,12 @@ public class ProfilActivity extends AppCompatActivity {
     }
 
     public void modifyContent(View view){
-        super.finish();
-        /*
         Intent intent = new Intent(this, ModifyProfilActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra(ModifyProfilActivity.USER, user);
+        intent.putExtra("USER", user);
 
-         */
-
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
-        //startActivity(intent);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_top); // Permet une animation de la vue (override le comportement de base)
     }
 
     //Essayer d'intégrer le code dans le onCreate
