@@ -133,7 +133,7 @@
             android:layout_marginTop="20dp"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="functionForgotPassword"
+            android:onClick="forgotPassword"
 
             android:text="Mot de passe oublié ? "
             android:textColor="@color/lightBeige_txt"
@@ -148,7 +148,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="60dp"
             android:background="@drawable/cw_cta_shadow"
-            android:onClick="connection"
+            android:onClick="connect"
             android:paddingHorizontal="40dp"
             android:paddingBottom="7dp"
 
