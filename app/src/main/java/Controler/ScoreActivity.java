@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.androidapplication.R;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,9 +25,9 @@ public class ScoreActivity extends AppCompatActivity {
 
     private User user;
     private List<Score> scores;
-    private ArrayList<String> categories;
+    private List<String> categories;
+    private List<Integer> games;
     private DatabaseClient mDb;
-    private int gameId;
     private LinearLayout linearLayoutPrincipal;
 
     @Override
@@ -38,8 +39,6 @@ public class ScoreActivity extends AppCompatActivity {
 
         user = (User) getIntent().getSerializableExtra("USER");
         mDb = DatabaseClient.getInstance(getApplicationContext());
-
-        categories = new ArrayList<String>();
 
         if(user.getEmail().equals("anonymous"))
         {
@@ -59,7 +58,37 @@ public class ScoreActivity extends AppCompatActivity {
 
                 @Override
                 protected void onPostExecute(List<Score> scores) {
-                    afficheScores();
+                    class GetCategories extends AsyncTask<Void, Void, List<String>> {
+
+                        @Override
+                        protected List<String> doInBackground(Void... voids) {
+                            categories = mDb.getAppDatabase().scoreDao().getCategoryFromScore(user.getEmail());
+                            System.out.println("Nb category : "+categories.size());
+                            return categories;
+                        }
+
+                        @Override
+                        protected void onPostExecute(List<String> categories) {
+                            class GetGames extends AsyncTask<Void, Void, List<Integer>> {
+
+                                @Override
+                                protected List<Integer> doInBackground(Void... voids) {
+                                    games = mDb.getAppDatabase().scoreDao().getGameFromScore(user.getEmail());
+                                    System.out.println("Taille jeux : "+games.size());
+                                    return games;
+                                }
+
+                                @Override
+                                protected void onPostExecute(List<Integer> scores) {
+                                    afficheScores();
+                                }
+                            }
+                            GetGames getGames = new GetGames();
+                            getGames.execute();
+                        }
+                    }
+                    GetCategories getCategories = new GetCategories();
+                    getCategories.execute();
                 }
             }
             GetScoreUser getScoreUser = new GetScoreUser();
@@ -71,65 +100,68 @@ public class ScoreActivity extends AppCompatActivity {
     {
         if(scores != null)
         {
-            for(int i = 0; i < scores.size(); i++)
-            {
-                if(!categories.contains(scores.get(i).getCategory()))
-                {
-                    categories.add(scores.get(i).getCategory());
-                }
-            }
+            ArrayList<Score> scoresFromCategory;
+            ArrayList<Integer> nbPlayPerGame;
 
+            /*
             //On parcours toutes les catégories issues des scores
             for(int i = 0; i < categories.size(); i++)
             {
-                ArrayList<Score> scoresFromCategory = new ArrayList<Score>();
-                ArrayList<Integer> nbPlayPerGame = new ArrayList<Integer>();
+                scoresFromCategory = new ArrayList<Score>();
+                nbPlayPerGame = new ArrayList<Integer>();
 
                 //On parcours chaque score pour déterminer le plus élevé
+                for(int j = 0; j < games.size(); j++)
+                {
+                    Score finalScore = null;
+                    int nbPlay = 0;
+
+                    for(int k = 0; k < scores.size(); k++)
+                    {
+                        if(scores.get(k).getCategory().equals(categories.get(i)) && scores.get(k).getGame() == games.get(j))
+                        {
+                            if(finalScore == null || scores.get(k).getMedaille().compareTo(finalScore.getMedaille()) > 0)
+                            {
+                                finalScore = scores.get(k);
+                            }
+                            nbPlay++;
+                        }
+                    }
+                    if(finalScore != null)
+                    {
+                        scoresFromCategory.add(finalScore);
+                    }
+
+                    nbPlayPerGame.add(nbPlay);
+                }
+                afficheScoresCategory(scoresFromCategory, nbPlayPerGame, categories.get(i));
+            }*/
+            ArrayList<String> usedCategories = new ArrayList<String>();
+
+            for(int i = 0; i < categories.size(); i++)
+            {
+                scoresFromCategory = new ArrayList<Score>();
+                nbPlayPerGame = new ArrayList<Integer>();
+
                 for(int j = 0; j < scores.size(); j++)
                 {
-                    int nbPlay = 1; //Nb de fois où le jeu a été joué
+                    Score finalScore;
 
-                    String category = categories.get(i);
-                    System.out.println("Catégorie boucle for: "+category);
-
-                    Score score = scores.get(j);
-
-                    //On récupère un premier score de même catégorie
-                    if(score.getCategory().equals(category))
+                    if(scores.get(j).getCategory().equals(categories.get(i)))
                     {
-                        Score finalScore = scores.get(j); //Le premier score trouvé
-
-                        //On parcours à nouveau les scores pour vérifier qu'il n'y a pas de doublon
-                        for(int k = 0; k < scores.size(); k++)
-                        {
-                            //Si 2 scores pour le même jeu
-                            if(scores.get(k).getGame() == finalScore.getGame())
-                            {
-                                nbPlay++;
-
-                                //Si le score trouvé comporte une meilleur médaille que le score initial -> On remplace
-                                if(scores.get(k).getMedaille().compareTo(finalScore.getMedaille()) > 0)
-                                {
-                                    finalScore = scores.get(k);
-                                }
-                            }
-                        }
-                        scoresFromCategory.add(finalScore);
-                        nbPlayPerGame.add(nbPlay);
-
-                        afficheScoresCategory(scoresFromCategory, nbPlayPerGame, category);
+                        scoresFromCategory.add(scores.get(j));
                     }
                 }
+                afficheScoresCategory(scoresFromCategory, categories.get(i));
             }
         }
         else
         {
-            
+
         }
     }
 
-    private void afficheScoresCategory(ArrayList<Score> scoresFromCategory, ArrayList<Integer> nbPlayPerGame, String category)
+    private void afficheScoresCategory(ArrayList<Score> scoresFromCategory, String category)
     {
         LinearLayout linearLayoutCategory = (LinearLayout) getLayoutInflater().inflate(R.layout.template_score_categorie, null);
         LinearLayout linearLayoutCategoryReceiver = linearLayoutCategory.findViewById(R.id.layoutScoreGameCategory);
@@ -141,7 +173,7 @@ public class ScoreActivity extends AppCompatActivity {
         {
             int gameId = scoresFromCategory.get(i).getId();
             String medaille = scoresFromCategory.get(i).getMedaille().toString();
-            int nbPlay = nbPlayPerGame.get(i);
+            //int nbPlay = nbPlayPerGame.get(i);
             float scoreRate = scoresFromCategory.get(i).getScore();
 
             class GetGame extends AsyncTask<Void, Void, Game> {
@@ -157,7 +189,7 @@ public class ScoreActivity extends AppCompatActivity {
                     System.out.println(game.getId());
                     System.out.println(gameId);
                     System.out.println(medaille);
-                    System.out.println(nbPlay);
+                    //System.out.println(nbPlay);
                     System.out.println(scoreRate);
 
                     LinearLayout linearLayoutGame = (LinearLayout) getLayoutInflater().inflate(R.layout.template_score_game, null);
@@ -172,7 +204,7 @@ public class ScoreActivity extends AppCompatActivity {
                     scoreGameCompletionRate.setText(String.valueOf(scoreRate));
 
                     TextView scoreNbPlay = (TextView) linearLayoutGame.findViewById(R.id.scoreNbPlay);
-                    scoreNbPlay.setText(String.valueOf(String.valueOf(nbPlay)));
+                    //scoreNbPlay.setText(String.valueOf(String.valueOf(nbPlay)));
 
                     linearLayoutCategoryReceiver.addView(linearLayoutGame);
                 }

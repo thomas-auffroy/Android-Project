@@ -25,6 +25,12 @@ public interface ScoreDao {
     @Query("SELECT * FROM score WHERE user = :user AND game = :game")
     Score getScoreGameUser(String user, int game);
 
+    @Query("SELECT DISTINCT category FROM score WHERE user = :user")
+    List<String> getCategoryFromScore(String user);
+
+    @Query("SELECT DISTINCT game FROM score WHERE user = :user")
+    List<Integer> getGameFromScore(String user);
+
     @Insert
     void insert(Score score);
 
