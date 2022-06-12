@@ -73,6 +73,7 @@
 
             <LinearLayout
                 android:layout_marginTop="40dp"
+                android:layout_marginHorizontal="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -94,7 +95,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="40dp"
-                    android:text="xxxxxxxxxxxxxxxxx ?"
+                    android:textAlignment="center"
+                    android:text="xxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ?"
 
                     android:textColor="@color/white"
                     android:textSize="20sp" />
@@ -113,6 +115,7 @@
                         android:layout_alignParentStart="true"
                         android:background="@drawable/cw_cta_shadow"
                         android:onClick="checkAnswer"
+                        android:width="110dp"
                         android:paddingHorizontal="20dp"
                         android:paddingBottom="7dp"
                         android:stateListAnimator="@null"
@@ -127,6 +130,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
+                        android:width="110dp"
                         android:background="@drawable/cw_cta_shadow"
 
                         android:onClick="checkAnswer"
@@ -153,6 +157,7 @@
                         android:layout_alignParentStart="true"
                         android:background="@drawable/cw_cta_shadow"
                         android:onClick="checkAnswer"
+                        android:width="110dp"
                         android:paddingHorizontal="20dp"
                         android:paddingBottom="7dp"
 
@@ -170,6 +175,7 @@
                         android:background="@drawable/cw_cta_shadow"
                         android:onClick="checkAnswer"
                         android:paddingHorizontal="20dp"
+                        android:width="110dp"
                         android:paddingBottom="7dp"
                         android:stateListAnimator="@null"
 
