@@ -50,133 +50,153 @@
         android:onClick="backward"
         />
 
-    <LinearLayout
+    <ScrollView
+        android:layout_marginTop="60dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="80dp"
-        android:orientation="vertical"
-        android:paddingHorizontal="40dp">
+        android:paddingBottom="10dp"
+        android:scrollbars="none">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
 
-                android:text="Adresse email"
-                android:textColor="@color/lightBeige_txt"
-                android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/dataEmailConnection"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="80dp"
+                android:orientation="vertical"
+                android:paddingHorizontal="40dp">
 
-                android:backgroundTint="@color/white"
-                android:inputType="textEmailAddress"
-                android:textColor="@color/white"
-                android:textSize="17sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:text="Mot de passe"
-                android:textColor="@color/lightBeige_txt"
-                android:textSize="20sp" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <EditText
-                    android:id="@+id/dataPassword"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="Adresse email"
+                        android:textColor="@color/lightBeige_txt"
+                        android:textSize="20sp" />
+
+                    <EditText
+                        android:id="@+id/dataEmailConnection"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:backgroundTint="@color/white"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/white"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="Mot de passe"
+                        android:textColor="@color/lightBeige_txt"
+                        android:textSize="20sp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <EditText
+                            android:id="@+id/dataPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
 
 
-                    android:backgroundTint="@color/white"
-                    android:inputType="textPassword"
-                    android:textColor="@color/white"
+                            android:backgroundTint="@color/white"
+                            android:inputType="textPassword"
+                            android:textColor="@color/white"
 
-                    android:textSize="17sp" />
+                            android:textSize="17sp" />
 
-                <ImageButton
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:background="@null"
+                            android:onClick="tooglePassword"
+                            android:src="@drawable/ic_password_show" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/forgotPassword"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:src="@drawable/ic_password_show"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:onClick="tooglePassword"/>
-            </RelativeLayout>
 
-        </LinearLayout>
+                    android:layout_marginTop="20dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="forgotPassword"
 
-        <TextView
-            android:id="@+id/forgotPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+                    android:text="Mot de passe oublié ? "
+                    android:textColor="@color/lightBeige_txt"
+                    android:textStyle="italic" />
 
-            android:layout_marginTop="20dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="forgotPassword"
+                <!-- stateListAnimator sert à remove les shadows du bouton -->
+                <android.widget.Button
+                    android:id="@+id/btnConnection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
-            android:text="Mot de passe oublié ? "
-            android:textColor="@color/lightBeige_txt"
-            android:textStyle="italic" />
+                    android:layout_gravity="center"
+                    android:layout_marginTop="60dp"
+                    android:background="@drawable/cw_cta_shadow"
+                    android:onClick="connect"
+                    android:paddingHorizontal="40dp"
+                    android:paddingBottom="7dp"
 
-        <!-- stateListAnimator sert à remove les shadows du bouton -->
-        <android.widget.Button
-            android:id="@+id/btnConnection"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+                    android:stateListAnimator="@null"
+                    android:text="Se connecter"
 
-            android:layout_gravity="center"
-            android:layout_marginTop="60dp"
-            android:background="@drawable/cw_cta_shadow"
-            android:onClick="connect"
-            android:paddingHorizontal="40dp"
-            android:paddingBottom="7dp"
+                    android:textAllCaps="false"
 
-            android:stateListAnimator="@null"
-            android:text="Se connecter"
+                    android:textColor="@color/brown_txt_cta"
 
-            android:textAllCaps="false"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
-            android:textColor="@color/brown_txt_cta"
+            <TextView
+                android:id="@+id/notYetSignedUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-            android:textSize="20sp" />
-    </LinearLayout>
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginVertical="40dp"
+                android:clickable="true"
+                android:focusable="true"
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/notYetSignedUp"
+                android:onClick="signUp"
+                android:text="Pas encore de compte ? Inscrivez-vous !"
+                android:textColor="@color/lightBeige_txt" />
+        </RelativeLayout>
 
-        android:text="Pas encore de compte ? Inscrivez-vous !"
-        android:layout_marginBottom="40dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:textColor="@color/lightBeige_txt"
 
-        android:clickable="true"
-        android:focusable="true"
-        android:onClick="signUp"
-        />
+
+
+    </ScrollView>
+
+
+
 
 
 

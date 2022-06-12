@@ -60,130 +60,148 @@
         android:fontFamily="@font/gloria_hallelujah_regular"
         />
 
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/numeroQuestion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
-            android:text="Question N°3 sur 10"
-
-            android:textColor="@color/white"
-            android:textSize="18sp" />
-        <TextView
-            android:id="@+id/questionQCM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
-            android:text="xxxxxxxxxxxxxxxxx ?"
-
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:scrollbars="none">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:layout_marginHorizontal="40dp"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
 
-            <android.widget.Button
-                android:id="@+id/answerQCM1"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_marginTop="40dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:background="@drawable/cw_cta_shadow"
-                android:onClick="checkAnswer"
-                android:paddingHorizontal="20dp"
-                android:paddingBottom="7dp"
-                android:stateListAnimator="@null"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="vertical">
 
-                android:textAllCaps="false"
-                android:textColor="@color/brown_txt_cta"
+                <TextView
+                    android:id="@+id/numeroQuestion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="40dp"
+                    android:text="Question N°3 sur 10"
 
-                android:textSize="15sp" />
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
-            <android.widget.Button
-                android:id="@+id/answerQCM2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:background="@drawable/cw_cta_shadow"
+                <TextView
+                    android:id="@+id/questionQCM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="40dp"
+                    android:text="xxxxxxxxxxxxxxxxx ?"
 
-                android:onClick="checkAnswer"
-                android:paddingHorizontal="20dp"
-                android:paddingBottom="7dp"
-                android:stateListAnimator="@null"
-                android:textAllCaps="false"
-                android:textColor="@color/brown_txt_cta"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
 
-                android:textSize="15sp" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="40dp"
+                    android:layout_marginVertical="10dp"
+                    android:orientation="horizontal">
+
+                    <android.widget.Button
+                        android:id="@+id/answerQCM1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:background="@drawable/cw_cta_shadow"
+                        android:onClick="checkAnswer"
+                        android:paddingHorizontal="20dp"
+                        android:paddingBottom="7dp"
+                        android:stateListAnimator="@null"
+
+                        android:textAllCaps="false"
+                        android:textColor="@color/brown_txt_cta"
+
+                        android:textSize="15sp" />
+
+                    <android.widget.Button
+                        android:id="@+id/answerQCM2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/cw_cta_shadow"
+
+                        android:onClick="checkAnswer"
+                        android:paddingHorizontal="20dp"
+                        android:paddingBottom="7dp"
+                        android:stateListAnimator="@null"
+                        android:textAllCaps="false"
+                        android:textColor="@color/brown_txt_cta"
+
+                        android:textSize="15sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="40dp"
+                    android:layout_marginVertical="10dp"
+                    android:orientation="horizontal">
+
+                    <android.widget.Button
+                        android:id="@+id/answerQCM3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:background="@drawable/cw_cta_shadow"
+                        android:onClick="checkAnswer"
+                        android:paddingHorizontal="20dp"
+                        android:paddingBottom="7dp"
+
+                        android:stateListAnimator="@null"
+                        android:textAllCaps="false"
+                        android:textColor="@color/brown_txt_cta"
+
+                        android:textSize="15sp" />
+
+                    <android.widget.Button
+                        android:id="@+id/answerQCM4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/cw_cta_shadow"
+                        android:onClick="checkAnswer"
+                        android:paddingHorizontal="20dp"
+                        android:paddingBottom="7dp"
+                        android:stateListAnimator="@null"
+
+                        android:textAllCaps="false"
+                        android:textColor="@color/brown_txt_cta"
+
+                        android:textSize="15sp" />
+                </RelativeLayout>
+
+                <android.widget.Button
+                    android:id="@+id/btnNextQcm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="60dp"
+                    android:alpha="0.5"
+                    android:background="@drawable/cw_cta_shadow"
+                    android:onClick="next"
+                    android:paddingHorizontal="20dp"
+                    android:paddingBottom="7dp"
+                    android:stateListAnimator="@null"
+                    android:text="Suivant"
+                    android:textAllCaps="false"
+                    android:textColor="@color/brown_txt_cta"
+                    android:textSize="25sp" />
+
+            </LinearLayout>
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="40dp"
-            android:layout_marginVertical="10dp"
-            android:orientation="horizontal">
 
-            <android.widget.Button
-                android:id="@+id/answerQCM3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:background="@drawable/cw_cta_shadow"
-                android:onClick="checkAnswer"
-                android:paddingHorizontal="20dp"
-                android:paddingBottom="7dp"
 
-                android:stateListAnimator="@null"
-                android:textAllCaps="false"
-                android:textColor="@color/brown_txt_cta"
-
-                android:textSize="15sp" />
-
-            <android.widget.Button
-                android:id="@+id/answerQCM4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:background="@drawable/cw_cta_shadow"
-                android:onClick="checkAnswer"
-                android:paddingHorizontal="20dp"
-                android:paddingBottom="7dp"
-                android:stateListAnimator="@null"
-
-                android:textAllCaps="false"
-                android:textColor="@color/brown_txt_cta"
-
-                android:textSize="15sp" />
-        </RelativeLayout>
-
-        <android.widget.Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="60dp"
-            android:background="@drawable/cw_cta_shadow"
-            android:onClick="next"
-            android:paddingHorizontal="20dp"
-            android:paddingBottom="7dp"
-            android:stateListAnimator="@null"
-            android:text="Suivant"
-            android:textAllCaps="false"
-            android:id="@+id/btnNextQcm"
-            android:alpha="0.5"
-            android:textColor="@color/brown_txt_cta"
-            android:textSize="25sp" />
-
-    </LinearLayout>
+    </ScrollView>
 
 
 
