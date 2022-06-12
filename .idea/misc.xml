@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/acitivty_score.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/acitivty_score.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_connection.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_felicitation.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/activity_homepage.xml" value="0.2595108695652174" />
+        <entry key="app/src/main/res/layout/activity_list_category.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_profil.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/activity_table_multiplication.xml" value="0.18229166666666666" />
         <entry key="app/src/main/res/layout/activity_table_multiplication_reponse.xml" value="0.37604166666666666" />

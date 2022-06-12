@@ -125,7 +125,7 @@ public class ScoreActivity extends AppCompatActivity {
         }
         else
         {
-
+            
         }
     }
 
@@ -136,7 +136,6 @@ public class ScoreActivity extends AppCompatActivity {
 
         TextView titleCategorie = (TextView) linearLayoutCategory.findViewById(R.id.titleScoreCategory);
         titleCategorie.setText(category);
-        System.out.println("Catégorie affiche: "+category);
 
         for(int i = 0; i < scoresFromCategory.size(); i++)
         {
