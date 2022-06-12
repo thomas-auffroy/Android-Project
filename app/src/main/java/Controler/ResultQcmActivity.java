@@ -17,15 +17,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
+import Model.Enum.Medails;
 import Model.db.DatabaseClient;
 import Model.db.Game;
 import Model.db.Question;
 import Model.db.QuestionDao;
 import Model.db.Reponse;
+import Model.db.Score;
 import Model.db.User;
 
 public class ResultQcmActivity extends AppCompatActivity {
 
+    private DatabaseClient mDb;
     private User user;
     private Game game;
     private Integer goodAnswers;
@@ -39,6 +42,7 @@ public class ResultQcmActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_qcm);
+        mDb = DatabaseClient.getInstance(getApplicationContext());
 
         game = (Game) getIntent().getSerializableExtra("GAME");
         user = (User) getIntent().getSerializableExtra("USER");
@@ -56,7 +60,7 @@ public class ResultQcmActivity extends AppCompatActivity {
             result.setText("Vous avez obtenu " + goodAnswers + " bonne réponse sur " + totalQuestions + ". Courage, vous allez y arriver");
         }
 
-
+        majScore();
     }
 
 
@@ -75,7 +79,7 @@ public class ResultQcmActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ListGamesActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("USER", user);
-        intent.putExtra(ListGamesActivity.CATEGORY, game.getCategorie());
+        intent.putExtra("CATEGORY", game.getCategorie());
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
     }
@@ -89,5 +93,119 @@ public class ResultQcmActivity extends AppCompatActivity {
         intent.putExtra("GAME", game);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
+    }
+
+    public void majScore(){
+
+        Score score = new Score();
+
+        Medails medaille;
+        Integer gameID = game.getId();
+        String userEmail = user.getEmail();
+
+        int successPercentage = (int) (((float)goodAnswers / totalQuestions) * 100);
+
+        if(successPercentage <= 50) {
+            medaille = Medails.PARTICIPATION;
+        } else if(successPercentage <= 70) {
+            medaille = Medails.BRONZE;
+        } else if(successPercentage <= 80) {
+            medaille = Medails.ARGENT;
+        } else if(successPercentage <= 99) {
+            medaille = Medails.OR;
+        } else {
+            medaille = Medails.PLATINE;
+        }
+
+        score.setScore(successPercentage);
+        score.setMedaille(medaille);
+        score.setUser(userEmail);
+        score.setGame(gameID);
+
+        if(!user.getEmail().equals("anonymous")) {
+            class GetScore extends AsyncTask<Void, Void, Score> {
+
+                @Override
+                protected Score doInBackground(Void... voids) {
+                    // adding to database
+                    Score score = mDb.getAppDatabase().scoreDao().getScoreGameUser(user.getEmail(), gameID);
+
+                    return score;
+                }
+
+                @Override
+                protected void onPostExecute(Score scoreRecup) {
+
+                    if(scoreRecup == null) {
+                        class SaveScore extends AsyncTask<Void, Void, Score> {
+
+                            @Override
+                            protected Score doInBackground(Void... voids) {
+                                mDb.getAppDatabase().scoreDao().insert(score);
+                                return score;
+                            }
+
+                            @Override
+                            protected void onPostExecute(Score score) {
+                            }
+                        }
+
+                        // Executer tache asynchrone User
+                        SaveScore saveScore = new SaveScore();
+                        saveScore.execute();
+                    }
+                    else {
+                        class UpdateScore extends AsyncTask<Void, Void, Score> {
+
+                            @Override
+                            protected Score doInBackground(Void... voids) {
+                                mDb.getAppDatabase().scoreDao().update(score);
+                                return score;
+                            }
+
+                            @Override
+                            protected void onPostExecute(Score score) {
+                            }
+                        }
+
+                        // Executer tache asynchrone User
+                        UpdateScore updateScore = new UpdateScore();
+                        updateScore.execute();
+                    }
+                }
+            }
+            GetScore getScore = new GetScore();
+            getScore.execute();
+
+            // TEST SCORE
+
+            class PrintScore extends AsyncTask<Void, Void, List<Score>> {
+
+                @Override
+                protected List<Score> doInBackground(Void... voids) {
+                    return mDb.getAppDatabase().scoreDao().getAllScoreFromUser(user.getEmail());
+                }
+
+                @Override
+                protected void onPostExecute(List<Score> scores) {
+                    for(int i = 0; i < scores.size(); i++)
+                    {
+                        System.out.println("Medaille : "+scores.get(i).getMedaille());
+                    }
+                }
+            }
+
+            PrintScore printScore = new PrintScore();
+            printScore.execute();
+
+
+        }
+        else {
+            if(Score.scoresAnonyme == null) {
+                Score.scoresAnonyme = new ArrayList<Score>();
+            }
+
+            Score.scoresAnonyme.add(score);
+        }
     }
 }

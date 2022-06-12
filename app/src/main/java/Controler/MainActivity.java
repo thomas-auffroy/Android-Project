@@ -14,13 +14,12 @@ import Model.db.Score;
 import Model.db.User;
 
 public class MainActivity  extends AppCompatActivity {
-    public static final String USER = null;
     private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        user = (User) getIntent().getSerializableExtra(USER);
+        user = (User) getIntent().getSerializableExtra("USER");
 
         if(user == null)
         {
@@ -42,7 +41,7 @@ public class MainActivity  extends AppCompatActivity {
         {
             Intent intent = new Intent(MainActivity.this, HomePageLoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.putExtra(HomePageLoginActivity.USER, user);
+            intent.putExtra("USER", user);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
         }
@@ -57,26 +56,7 @@ public class MainActivity  extends AppCompatActivity {
                 |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                 //|View.SYSTEM_UI_FLAG_FULLSCREEN // Si on veut cacher la barre android du haut
         );
-
-
-
         super.onStart();
     }
-
-    /*
-    public void login(View view){
-        Intent intent = new Intent(this, LoginUser.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
-    }
-
-    public void play(View view){
-        Intent intent = new Intent(this, PlayActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
-
-    }
-    */
-
 
 }

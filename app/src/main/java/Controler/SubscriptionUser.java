@@ -5,23 +5,17 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.InputType;
-import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.androidapplication.R;
-
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import Model.db.DatabaseClient;
 import Model.db.User;
 
@@ -40,8 +34,6 @@ public class SubscriptionUser extends AppCompatActivity {
     private EditText email;
     private EditText motDePasse;
     private EditText dateNaissance;
-    private Button saveUser;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +50,6 @@ public class SubscriptionUser extends AppCompatActivity {
         email = findViewById(R.id.dataEmail);
         motDePasse = findViewById(R.id.dataPassword);
         dateNaissance = findViewById(R.id.dataBirthDate);
-        saveUser = findViewById(R.id.btnSubscription);
 
         // Get Current Date
         final Calendar c = Calendar.getInstance();
@@ -219,7 +210,7 @@ public class SubscriptionUser extends AppCompatActivity {
                 // Quand la tache est créée, on arrête l'activité AddTaskActivity (on l'enleve de la pile d'activités)
                 Intent intent = new Intent(SubscriptionUser.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra(MainActivity.USER, user);
+                intent.putExtra("USER", user);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
                 startActivity(intent);
             }

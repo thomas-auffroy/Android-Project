@@ -1,6 +1,5 @@
 package Controler;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -8,14 +7,11 @@ import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.androidapplication.R;
 
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,7 +28,6 @@ public class LoginUser extends AppCompatActivity {
     //VIEW
     private EditText email;
     private EditText motDePasse;
-    private Button connect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +43,6 @@ public class LoginUser extends AppCompatActivity {
         // Récupérer les vues
         email = findViewById(R.id.dataEmailConnection);
         motDePasse = findViewById(R.id.dataPassword);
-        connect = findViewById(R.id.btnConnection);
     }
 
     public void connect(View view) {
@@ -116,13 +110,9 @@ public class LoginUser extends AppCompatActivity {
 
                             @Override
                             protected void onPostExecute(User user) {
-                                /*
-                                super.onPostExecute(user);
-                                backward(null);
-                                */
                                 Intent intent = new Intent(LoginUser.this, MainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                intent.putExtra(MainActivity.USER, user);
+                                intent.putExtra("USER", user);
                                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
                                 startActivity(intent);
                             }

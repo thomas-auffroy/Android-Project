@@ -5,13 +5,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.androidapplication.R;
-
 import java.util.List;
-
 import Model.CategoryListViewAdapter;
 import Model.db.DatabaseClient;
 import Model.db.User;
@@ -21,7 +17,6 @@ public class ListCategoriesActivity extends AppCompatActivity {
     private User user;
     private List<String> categories;
     private DatabaseClient mDb;
-    private Activity thisActivity = (Activity) this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +39,7 @@ public class ListCategoriesActivity extends AppCompatActivity {
             protected void onPostExecute(List<String> jeux) {
                 ListView listView = findViewById(R.id.listViewCategories);
 
-                CategoryListViewAdapter adapter = new CategoryListViewAdapter(ListCategoriesActivity.this, categories, thisActivity, user);
+                CategoryListViewAdapter adapter = new CategoryListViewAdapter(ListCategoriesActivity.this, categories, ListCategoriesActivity.this, user);
                 listView.setAdapter(adapter);
                 super.onPostExecute(jeux);
             }

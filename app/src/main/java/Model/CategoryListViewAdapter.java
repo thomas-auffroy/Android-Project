@@ -9,18 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.example.androidapplication.R;
-
 import java.util.List;
-
 import Controler.ListGamesActivity;
 import Model.db.User;
-
-
-/**
- * Created by fbm on 05/03/2018.
- */
 
 public class CategoryListViewAdapter extends ArrayAdapter<String> {
 
@@ -61,8 +53,8 @@ public class CategoryListViewAdapter extends ArrayAdapter<String> {
             public void onClick(View view){
                 TextView name = view.findViewById(R.id.titleCategory);
                 Intent intent = new Intent(parentActivity, ListGamesActivity.class);
-                intent.putExtra(ListGamesActivity.CATEGORY, name.getText());
-                intent.putExtra(ListGamesActivity.USER, user);
+                intent.putExtra("CATEGORY", name.getText());
+                intent.putExtra("USER", user);
                 parentActivity.startActivity(intent);
 
                 parentActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)

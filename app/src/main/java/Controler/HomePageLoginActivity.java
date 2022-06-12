@@ -4,12 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
 import com.example.androidapplication.R;
-
 import Model.db.User;
 
 public class HomePageLoginActivity extends AppCompatActivity {
@@ -23,7 +20,7 @@ public class HomePageLoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage_login);
-        user = (User) getIntent().getSerializableExtra(USER);
+        user = (User) getIntent().getSerializableExtra("USER");
         nameView = findViewById(R.id.dataSurname);
         nameView.setText(user.getPrenom());
     }

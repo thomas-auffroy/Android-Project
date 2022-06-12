@@ -1,31 +1,16 @@
 package Controler;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.androidapplication.R;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import Model.db.DatabaseClient;
-import Model.db.Game;
-import Model.db.Question;
-import Model.db.QuestionDao;
-import Model.db.Reponse;
 import Model.db.User;
 
 public class ResetPasswordActivity extends AppCompatActivity {
@@ -72,8 +57,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
         String emailRegx = "^(.+)@(\\S+)$";
         Pattern emailRegxPattern = Pattern.compile(emailRegx);
         Matcher emailCheck = emailRegxPattern.matcher(email.getText());
-
-        System.out.println(!emailCheck.matches());
 
         if (!newPassword.getText().toString().equals(confirmPassword.getText().toString())){
             Toast.makeText(this, "Mot de passe différent", Toast.LENGTH_LONG).show();

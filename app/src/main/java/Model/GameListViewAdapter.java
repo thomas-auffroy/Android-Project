@@ -4,34 +4,20 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.androidapplication.R;
-
 import java.util.List;
-
 import Controler.Exercices.MathActivity;
 import Controler.GameQcmActivity;
-import Controler.ListCategoriesActivity;
-import Controler.ProfilActivity;
+import Controler.MainActivity;
 import Model.db.DatabaseClient;
 import Model.db.Game;
 import Model.db.User;
-
-
-/**
- * Created by fbm on 05/03/2018.
- */
 
 public class GameListViewAdapter extends ArrayAdapter<Game> {
 
@@ -95,7 +81,6 @@ public class GameListViewAdapter extends ArrayAdapter<Game> {
                         {
                             case "maths":
                                 intent = new Intent(parentActivity, MathActivity.class);
-                                //intent.putExtra(MathActivity.USER, user);
                                 intent.putExtra("USER", user);
                                 intent.putExtra("GAME", game);
                                 break;
@@ -105,7 +90,8 @@ public class GameListViewAdapter extends ArrayAdapter<Game> {
                                 intent.putExtra("GAME", game);
                                 break;
                             default :
-                                intent = new Intent(view.getContext(), MathActivity.class);
+                                intent = new Intent(view.getContext(), MainActivity.class);
+                                intent.putExtra("USER", user);
                                 break;
                         }
                         parentActivity.startActivity(intent);

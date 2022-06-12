@@ -6,11 +6,8 @@ import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.androidapplication.R;
-
 import Model.db.User;
 
 public class ProfilActivity extends AppCompatActivity {
@@ -23,9 +20,6 @@ public class ProfilActivity extends AppCompatActivity {
     private EditText dateNaissance;
     private EditText adresseMail;
     private EditText password;
-
-
-    public static final String USER = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,29 +43,12 @@ public class ProfilActivity extends AppCompatActivity {
 
     public void backward(View view){
         super.finish();
-        /*
-        Intent intent = new Intent(this, ModifyProfilActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra(ModifyProfilActivity.USER, user);
-
-         */
-
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
-        //startActivity(intent);
-        /*
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra(MainActivity.USER, user);
-
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
-        startActivity(intent);
-        */
     }
 
     public void logout(View view){
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
         startActivity(intent);
     }

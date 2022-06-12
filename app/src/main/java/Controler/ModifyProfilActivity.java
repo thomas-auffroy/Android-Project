@@ -66,15 +66,7 @@ public class ModifyProfilActivity extends AppCompatActivity {
 
     public void backward(View view){
         super.finish();
-        /*
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra(MainActivity.USER, user);
-
-         */
-
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
-        //startActivity(intent);
     }
 
     public void logout(View view){
@@ -140,6 +132,7 @@ public class ModifyProfilActivity extends AppCompatActivity {
 
                 return user;
             }
+
 
             @Override
             protected void onPostExecute(User user) {

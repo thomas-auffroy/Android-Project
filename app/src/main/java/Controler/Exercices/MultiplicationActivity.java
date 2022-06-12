@@ -32,6 +32,8 @@ public class MultiplicationActivity extends AppCompatActivity {
     private ArrayList<Integer> bonnesReponses;
     private ArrayList<String> questions;
 
+    private TextView nameCategory;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,9 @@ public class MultiplicationActivity extends AppCompatActivity {
         bonnesReponses = new ArrayList<Integer>();
         questions = new ArrayList<String>();
 
+        nameCategory = findViewById(R.id.nameCategoryGameMultiplication);
+        nameCategory.setText(game.getCategorie());
+
         setTableMultiplication();
     }
 
@@ -63,10 +68,8 @@ public class MultiplicationActivity extends AppCompatActivity {
 
             LinearLayout linearLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.template_calcul, null);
 
-
             TextView ligne = (TextView) linearLayout.findViewById(R.id.template_calcul);
             ligne.setText(question);
-
 
             EditText rep = (EditText) linearLayout.findViewById(R.id.template_resultat);
             reponsesTextView.add(rep);
@@ -113,15 +116,35 @@ public class MultiplicationActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void backward(View view) {
+        Intent intent = new Intent(this,ListGamesActivity.class);
+        intent.putExtra("USER", user);
+        intent.putExtra("CATEGORY", game.getCategorie());
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
+    }
+
     @Override
     public void onBackPressed() {
         // TODO Auto-generated method stub
         super.onBackPressed();
         Intent intent = new Intent(this, ListGamesActivity.class);
-        intent.putExtra(ListGamesActivity.USER, user);
-        intent.putExtra(ListGamesActivity.CATEGORY, game.getCategorie());
+        intent.putExtra("USER", user);
+        intent.putExtra("CATEGORY", game.getCategorie());
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
+    }
+
+    @Override
+    protected void onStart() {
+        // Permet de cacher la barre de navigation du bas
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                //|View.SYSTEM_UI_FLAG_FULLSCREEN // Si on veut cacher la barre android du haut
+        );
+        super.onStart();
     }
 }

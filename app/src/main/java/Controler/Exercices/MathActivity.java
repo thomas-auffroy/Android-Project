@@ -60,5 +60,16 @@ public class MathActivity  extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    protected void onStart() {
+        // Permet de cacher la barre de navigation du bas
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                //|View.SYSTEM_UI_FLAG_FULLSCREEN // Si on veut cacher la barre android du haut
+        );
+        super.onStart();
+    }
+
 
 }
