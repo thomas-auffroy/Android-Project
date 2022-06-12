@@ -58,14 +58,26 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:orientation="vertical"
-        android:paddingHorizontal="40dp">
+        android:paddingHorizontal="40dp"
+        android:id="@+id/layoutScoreTotalMedails">
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:textSize="20sp"
-            android:text="Médailles au total : 20 / 52"/>
+            android:text="Médailles au total : 20 / 52"
+            android:id="@+id/scoreTotalMedails"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="40dp"
+        android:id="@+id/layoutScorePrincipal">
+
     </LinearLayout>
 
 

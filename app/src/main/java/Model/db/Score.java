@@ -39,8 +39,11 @@ import Model.Enum.Medails;
 @TypeConverters({ConvertersMedails.class})
 
 public class Score implements Serializable {
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
     @NonNull
+    private int id;
+
+    @ColumnInfo(name = "user")
     private String user;
 
     @ColumnInfo(name = "game")
@@ -58,6 +61,10 @@ public class Score implements Serializable {
     /*
      * Getters and Setters
      * */
+    public int getId() { return id; }
+
+    public void setId(int id) { this.id = id; }
+
     public String getUser() { return user; }
 
     public void setUser(String user) { this.user = user; }
