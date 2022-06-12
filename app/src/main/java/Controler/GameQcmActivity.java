@@ -46,7 +46,7 @@ public class GameQcmActivity extends AppCompatActivity {
     private boolean haveAnswered = false;
 
     private static Integer numeroQuestion = 1;
-    private final Integer maxQuestions = 3;
+    private final Integer maxQuestions = 5;
     private static Integer goodAnswers = 0;
 
     @Override
@@ -112,8 +112,6 @@ public class GameQcmActivity extends AppCompatActivity {
             finish();
             startActivity(getIntent());
         } else {
-            resetStaticVariables();
-
             Intent intent = new Intent(this, ResultQcmActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.putExtra("USER", user);
@@ -121,6 +119,8 @@ public class GameQcmActivity extends AppCompatActivity {
 
             intent.putExtra("GOOD_ANSWERS", goodAnswers);
             intent.putExtra("TOTAL_QUESTION", maxQuestions);
+
+            resetStaticVariables();
 
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
@@ -145,8 +145,9 @@ public class GameQcmActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    private void resetStaticVariables(){
+    public static void resetStaticVariables(){
         numeroQuestion = 1;
+        goodAnswers = 0;
         availableQuestions = null;
     }
 
