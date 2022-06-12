@@ -1,29 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Controler.Exercices.MultiplicationActivity"
-    android:orientation="vertical">
+    android:background="@color/green_bg"
+    >
 
-    <LinearLayout
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/multLinearPrincip"
-        android:orientation="vertical"
-        android:layout_gravity="center">
+        android:background="@drawable/ic_equal"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="20dp"
+        />
 
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/ex5_Rep_valider"
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="VALIDER"
-        android:onClick="getResult">
-    </Button>
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/ic_plus"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/ic_minus"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/ic_plus"/>s
+    <!-- background = null sinon gris bizarre -->
+    <ImageButton
+        android:id="@+id/backward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@null"
+        android:onClick="backward"
+        android:src="@drawable/ic_backwardarrow" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="120dp"
+        android:id="@+id/nameCategoryGameMultiplication"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/gloria_hallelujah_regular"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:scrollbars="none"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/multLinearPrincip"
+                android:orientation="vertical"
+                android:layout_gravity="center">
+
+            </LinearLayout>
+
+            <!-- stateListAnimator sert à remove les shadows du bouton -->
+            <android.widget.Button
+                android:id="@+id/ex5_Rep_valider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center"
+                android:background="@drawable/cw_cta_shadow"
+                android:onClick="getResult"
+                android:paddingHorizontal="40dp"
+                android:paddingBottom="7dp"
+
+                android:stateListAnimator="@null"
+
+                android:text="Valider"
+
+                android:textAllCaps="false"
+
+                android:textColor="@color/brown_txt_cta"
+
+                android:textSize="20sp" />
+
+        </LinearLayout>
+    </ScrollView>
 
 
-</LinearLayout>
+
+
+</RelativeLayout>
