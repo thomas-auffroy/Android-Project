@@ -166,7 +166,7 @@ public class DatabaseClient {
                     db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+DatabaseClient.questionId+", 'Zero', 0)");
                     db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+DatabaseClient.questionId+", 'One', 0)");
                     db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+DatabaseClient.questionId+", 'Two', 0)");
-                    db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+DatabaseClient.questionId+", 'Tree', 1)");
+                    db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+DatabaseClient.questionId+", 'Three', 1)");
 
                     DatabaseClient.questionId += 1;
                     db.execSQL("INSERT INTO question(gameId, question, questionId) VALUES ("+id+", 'How do we say \"Homme\" ?', "+DatabaseClient.questionId+")");
@@ -207,7 +207,7 @@ public class DatabaseClient {
                     db.execSQL("INSERT INTO question(gameId, question, questionId) VALUES ("+id+", 'How do we say \"Beauté\" ?', "+DatabaseClient.questionId+")");
                     db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+DatabaseClient.questionId+", 'Ugly', 0)");
                     db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+DatabaseClient.questionId+", 'Mother', 0)");
-                    db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+DatabaseClient.questionId+", 'Shpae', 0)");
+                    db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+DatabaseClient.questionId+", 'Shape', 0)");
                     db.execSQL("INSERT INTO reponse(questionId, reponse, estVrai) VALUES ("+DatabaseClient.questionId+", 'Beauty', 1)");
                 }
             }
