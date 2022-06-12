@@ -31,6 +31,9 @@ public interface GameDao {
     @Query("SELECT * FROM game WHERE name = :name")
     Game getGame(String name);
 
+    @Query("SELECT * FROM game WHERE id = :id")
+    Game getGameById(int id);
+
 
 
 

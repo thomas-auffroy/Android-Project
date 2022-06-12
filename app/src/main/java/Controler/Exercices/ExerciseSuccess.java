@@ -110,6 +110,7 @@ public class ExerciseSuccess  extends AppCompatActivity {
         Medails medaille;
         Integer gameID = game.getId();
         String userEmail = user.getEmail();
+        String gameCategory = game.getCategorie();
 
         int nbBonnesRep = questions.size() - nb_Erreur;
         int sizeQuestion = questions.size();
@@ -145,6 +146,7 @@ public class ExerciseSuccess  extends AppCompatActivity {
         score.setMedaille(medaille);
         score.setUser(userEmail);
         score.setGame(gameID);
+        score.setCategory(gameCategory);
 
         if(!user.getEmail().equals("anonymous"))
         {
@@ -188,11 +190,6 @@ public class ExerciseSuccess  extends AppCompatActivity {
         }
         else
         {
-            if(Score.scoresAnonyme == null)
-            {
-                Score.scoresAnonyme = new ArrayList<Score>();
-            }
-
             Score.scoresAnonyme.add(score);
         }
     }
@@ -233,7 +230,10 @@ public class ExerciseSuccess  extends AppCompatActivity {
     }
 
     public void backward(View view) {
-        super.finish();
+        Intent intent = new Intent(this, ListCategoriesActivity.class);
+        intent.putExtra("USER", user);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
     }
 

@@ -102,6 +102,7 @@ public class ResultQcmActivity extends AppCompatActivity {
         Medails medaille;
         Integer gameID = game.getId();
         String userEmail = user.getEmail();
+        String category = game.getCategorie();
 
         int nbBonnesRep = goodAnswers;
         int sizeQuestion = totalQuestions;
@@ -134,6 +135,7 @@ public class ResultQcmActivity extends AppCompatActivity {
         score.setMedaille(medaille);
         score.setUser(userEmail);
         score.setGame(gameID);
+        score.setCategory(category);
 
         if(!user.getEmail().equals("anonymous"))
         {
@@ -177,11 +179,6 @@ public class ResultQcmActivity extends AppCompatActivity {
         }
         else
         {
-            if(Score.scoresAnonyme == null)
-            {
-                Score.scoresAnonyme = new ArrayList<Score>();
-            }
-
             Score.scoresAnonyme.add(score);
         }
     }

@@ -49,6 +49,9 @@ public class Score implements Serializable {
     @ColumnInfo(name = "game")
     private int game;
 
+    @ColumnInfo(name = "category")
+    private String category;
+
     @ColumnInfo(name = "score")
     private float score;
 
@@ -97,6 +100,16 @@ public class Score implements Serializable {
     public void setMedaille(Medails medaille)
     {
         this.medaille = medaille;
+    }
+
+    public void setCategory(String category)
+    {
+        this.category = category;
+    }
+
+    public String getCategory()
+    {
+        return this.category;
     }
 
 }

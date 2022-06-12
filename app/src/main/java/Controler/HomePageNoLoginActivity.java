@@ -6,6 +6,10 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import com.example.androidapplication.R;
+
+import java.util.ArrayList;
+
+import Model.db.Score;
 import Model.db.User;
 
 public class HomePageNoLoginActivity extends AppCompatActivity {
@@ -18,6 +22,11 @@ public class HomePageNoLoginActivity extends AppCompatActivity {
         setContentView(R.layout.acitvity_homepage_no_login);
 
         user = (User) getIntent().getSerializableExtra("USER");
+
+        if(Score.scoresAnonyme == null)
+        {
+            Score.scoresAnonyme = new ArrayList<Score>();
+        }
     }
 
     @Override

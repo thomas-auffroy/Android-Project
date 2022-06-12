@@ -32,6 +32,7 @@
         <activity android:name="Controler.Exercices.ExerciseSuccess"/>
         <activity android:name="Controler.ResultQcmActivity"/>
         <activity android:name="Controler.ResetPasswordActivity"/>
+        <activity android:name="Controler.ScoreActivity"/>
 
 
     </application>
