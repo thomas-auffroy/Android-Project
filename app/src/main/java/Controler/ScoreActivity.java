@@ -61,6 +61,23 @@ public class ScoreActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onStart() {
+        // Permet de cacher la barre de navigation du bas
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                //|View.SYSTEM_UI_FLAG_FULLSCREEN // Si on veut cacher la barre android du haut
+        );
+        super.onStart();
+    }
+
+    public void backward(View view) {
+        System.out.println("oui");
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
+    }
+
     private void afficheScoresCategory()
     {
         LinearLayout linearLayoutPrincipal = findViewById(R.id.layoutScorePrincipal);
@@ -101,10 +118,5 @@ public class ScoreActivity extends AppCompatActivity {
             GetGame getGame = new GetGame();
             getGame.execute();
         }
-    }
-
-    public void backward(View view) {
-        super.finish();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
     }
 }

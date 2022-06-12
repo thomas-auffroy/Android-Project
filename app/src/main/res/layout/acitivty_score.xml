@@ -36,7 +36,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="100dp"
-        android:background="@drawable/ic_plus"/>s
+        android:background="@drawable/ic_plus"/>
     <!-- background = null sinon gris bizarre -->
     <ImageButton
         android:id="@+id/backward"
@@ -52,21 +52,22 @@
         android:onClick="backward"
         android:src="@drawable/ic_backwardarrow" />
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp">
 
         <LinearLayout
+            android:id="@+id/layoutScorePrincipal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
             android:orientation="vertical"
-            android:paddingHorizontal="40dp"
-            android:id="@+id/layoutScorePrincipal">
+            android:paddingHorizontal="40dp">
 
         </LinearLayout>
 
-</ScrollView>
+    </ScrollView>
 
 
 </RelativeLayout>
