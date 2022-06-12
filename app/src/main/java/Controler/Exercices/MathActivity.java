@@ -56,6 +56,7 @@ public class MathActivity  extends AppCompatActivity {
         Intent intent = new Intent(this,MultiplicationActivity.class);
         intent.putExtra("USER", user);
         intent.putExtra("GAME", game);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 

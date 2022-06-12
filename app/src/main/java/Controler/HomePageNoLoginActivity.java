@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.example.androidapplication.R;
 
@@ -49,15 +50,23 @@ public class HomePageNoLoginActivity extends AppCompatActivity {
 
     public void login(View view){
         Intent intent = new Intent(this, LoginUser.class);
-        startActivity(intent);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
+        startActivity(intent);
     }
 
     public void play(View view){
         Intent intent = new Intent(this, ListCategoriesActivity.class);
         intent.putExtra("USER", user);
-        startActivity(intent);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
+        startActivity(intent);
+    }
 
+    @Override
+    public void onBackPressed() {
+        // TODO Auto-generated method stub
+        super.onBackPressed();
+        ActivityCompat.finishAffinity(this);
     }
 }

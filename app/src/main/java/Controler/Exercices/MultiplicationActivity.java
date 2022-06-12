@@ -8,12 +8,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.example.androidapplication.R;
 
 import java.util.ArrayList;
 import java.util.Random;
 
+import Controler.ListCategoriesActivity;
+import Controler.ListGamesActivity;
+import Controler.MainActivity;
 import Model.Exercises.Maths.TableMultiplication;
 import Model.db.Game;
 import Model.db.User;
@@ -107,5 +111,17 @@ public class MultiplicationActivity extends AppCompatActivity {
         intent.putExtra("QUESTIONS", questions);
 
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // TODO Auto-generated method stub
+        super.onBackPressed();
+        Intent intent = new Intent(this, ListGamesActivity.class);
+        intent.putExtra(ListGamesActivity.USER, user);
+        intent.putExtra(ListGamesActivity.CATEGORY, game.getCategorie());
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
     }
 }

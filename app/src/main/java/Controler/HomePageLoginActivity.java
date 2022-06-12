@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.example.androidapplication.R;
 
@@ -23,7 +24,6 @@ public class HomePageLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage_login);
         user = (User) getIntent().getSerializableExtra(USER);
-
         nameView = findViewById(R.id.dataSurname);
         nameView.setText(user.getPrenom());
     }
@@ -42,6 +42,7 @@ public class HomePageLoginActivity extends AppCompatActivity {
     public void play(View view){
         Intent intent = new Intent(this, ListCategoriesActivity.class);
         intent.putExtra("USER", user);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
     }
@@ -49,8 +50,16 @@ public class HomePageLoginActivity extends AppCompatActivity {
     public void profil(View view) {
         Intent intent = new Intent(this, ProfilActivity.class);
         intent.putExtra("USER", user);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
-
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
     }
+
+    @Override
+    public void onBackPressed() {
+        // TODO Auto-generated method stub
+        super.onBackPressed();
+        ActivityCompat.finishAffinity(this);
+    }
+
 }
