@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Controler.ListCategoriesActivity;
+import Controler.ListGamesActivity;
 import Controler.MainActivity;
 import Controler.SubscriptionUser;
 import Model.Enum.Medails;
@@ -36,11 +37,13 @@ public class ExerciseSuccess  extends AppCompatActivity {
     private ArrayList<String> questions;
     private Score score;
     private DatabaseClient mDb;
+    private TextView nameCategory;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_maths_results);
 
         mDb = DatabaseClient.getInstance(getApplicationContext());
 
@@ -55,12 +58,12 @@ public class ExerciseSuccess  extends AppCompatActivity {
         bonnesReponses = getIntent().getIntegerArrayListExtra("BONNESREPONSES");
         questions = getIntent().getStringArrayListExtra("QUESTIONS");
 
-        setContentView(R.layout.activity_maths_results);
+        nameCategory = findViewById(R.id.nameCategoryGameMultiplicationResult);
+        nameCategory.setText(game.getCategorie());
+
+
         afficherReponses();
         majScore();
-
-        System.out.println("Nombre erreur : "+nb_Erreur);
-
     }
 
 
@@ -94,7 +97,7 @@ public class ExerciseSuccess  extends AppCompatActivity {
             }
 
             TextView nbErreurs = (TextView) linearLayoutPrincipal.findViewById(R.id.nbErrors);
-            nbErreurs.setText(nb_Erreur.toString());
+            nbErreurs.setText("Nombre d'erreurs : " + nb_Erreur.toString());
 
             linearLayoutAnswers.addView(linearLayoutResult);
         }
@@ -201,6 +204,7 @@ public class ExerciseSuccess  extends AppCompatActivity {
         intent.putExtra("GAME", game);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
     }
 
     public void autreExercice(View view)
@@ -209,6 +213,7 @@ public class ExerciseSuccess  extends AppCompatActivity {
         intent.putExtra("USER", user);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
     }
 
     public void corriger(View view)
@@ -216,5 +221,20 @@ public class ExerciseSuccess  extends AppCompatActivity {
         super.finish();
     }
 
+    @Override
+    protected void onStart() {
+        // Permet de cacher la barre de navigation du bas
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                //|View.SYSTEM_UI_FLAG_FULLSCREEN // Si on veut cacher la barre android du haut
+        );
+        super.onStart();
+    }
+
+    public void backward(View view) {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); // Permet une animation de la vue (override le comportement de base)
+    }
 
 }

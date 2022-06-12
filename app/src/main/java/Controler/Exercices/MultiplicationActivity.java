@@ -112,8 +112,8 @@ public class MultiplicationActivity extends AppCompatActivity {
         intent.putExtra("REPONSESJOUEUR", reponsesJoueur);
         intent.putExtra("BONNESREPONSES", bonnesReponses);
         intent.putExtra("QUESTIONS", questions);
-
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
     }
 
     public void backward(View view) {

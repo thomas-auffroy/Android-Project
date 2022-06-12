@@ -58,6 +58,7 @@ public class MathActivity  extends AppCompatActivity {
         intent.putExtra("GAME", game);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
     }
 
     @Override

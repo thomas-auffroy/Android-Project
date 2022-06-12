@@ -1,51 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/mathsAnswersPrincipal">
+    android:background="@color/green_bg"
+    >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_equal"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="20dp"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/ic_plus"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/ic_minus"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/ic_plus"/>
+    <!-- background = null sinon gris bizarre -->
+    <ImageButton
+        android:id="@+id/backward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@null"
+        android:onClick="backward"
+        android:src="@drawable/ic_backwardarrow" />
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="120dp"
+        android:id="@+id/nameCategoryGameMultiplicationResult"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/gloria_hallelujah_regular"
+        />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="30dp"
-        android:text="Réponses">
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:paddingBottom="10dp"
+        android:scrollbars="none"
+        >
 
-    </TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:id="@+id/mathsAnswersPrincipal">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/mathsAnswers"
-        android:orientation="vertical"
-        android:layout_gravity="center">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="30dp"
+                android:textColor="@color/white"
+                android:text="Réponses"
+                android:layout_marginBottom="20dp"/>
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/mathsAnswers"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:id="@+id/nbErrors"
-        android:text="Nombre d'erreurs : ">
-    </TextView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/nbErrors"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:layout_marginBottom="20dp">
+            </TextView>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Choisir une autre table"
-        android:onClick="autreTable">
+            <!-- stateListAnimator sert à remove les shadows du bouton -->
+            <android.widget.Button
+                android:layout_marginBottom="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-    </Button>
+                android:layout_gravity="center"
+                android:background="@drawable/cw_cta_shadow"
+                android:onClick="autreTable"
+                android:paddingHorizontal="40dp"
+                android:paddingBottom="7dp"
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Choisir un autre exercice"
-        android:onClick="autreExercice">
+                android:stateListAnimator="@null"
 
-    </Button>
-</LinearLayout>
+                android:text="Rejouer"
+
+                android:textAllCaps="false"
+
+                android:textColor="@color/brown_txt_cta"
+
+                android:textSize="20sp" />
+
+
+
+            <!-- stateListAnimator sert à remove les shadows du bouton -->
+            <android.widget.Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center"
+                android:background="@drawable/cw_cta_shadow"
+                android:onClick="autreExercice"
+                android:paddingHorizontal="40dp"
+                android:paddingBottom="7dp"
+
+                android:stateListAnimator="@null"
+
+                android:text="Retour choix exercices"
+
+                android:textAllCaps="false"
+
+                android:textColor="@color/brown_txt_cta"
+
+                android:textSize="20sp" />
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+
+
+
+</RelativeLayout>
