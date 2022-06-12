@@ -88,6 +88,7 @@ public class ScoreActivity extends AppCompatActivity {
             String category = scores.get(i).getCategory();
             String medaille = scores.get(i).getMedaille().toString();
             float scoreRate = scores.get(i).getScore();
+            String scoreRateToString = String.valueOf((int)scores.get(i).getScore())+"%";
 
             class GetGame extends AsyncTask<Void, Void, Game> {
                 @Override
@@ -110,7 +111,7 @@ public class ScoreActivity extends AppCompatActivity {
                     scoreGameName.setText(game.getName());
 
                     TextView scoreGameCompletionRate = (TextView) linearLayoutCategory.findViewById(R.id.scoreGameCompletionRate);
-                    scoreGameCompletionRate.setText(String.valueOf(scoreRate));
+                    scoreGameCompletionRate.setText(scoreRateToString);
 
                     linearLayoutPrincipal.addView(linearLayoutCategory);
                 }
