@@ -81,6 +81,8 @@ public class ResultQcmActivity extends AppCompatActivity {
     }
 
     public void playAgain(View view){
+        GameQcmActivity.resetStaticVariables();
+
         Intent intent = new Intent(this, GameQcmActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("USER", user);
