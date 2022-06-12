@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/acitivty_score.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/acitvity_homepage_no_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_connection.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_felicitation.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/activity_homepage.xml" value="0.2595108695652174" />

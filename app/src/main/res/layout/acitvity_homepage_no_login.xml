@@ -107,25 +107,6 @@
         android:layout_marginHorizontal="20dp"
         android:orientation="horizontal">
 
-        <android.widget.Button
-            android:id="@+id/btnScore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_alignParentStart="true"
-            android:background="@drawable/cw_cta_shadow"
-            android:onClick="score"
-            android:paddingHorizontal="20dp"
-
-            android:stateListAnimator="@null"
-
-            android:paddingBottom="7dp"
-            android:text="Score"
-            android:textAllCaps="false"
-
-
-            android:textColor="@color/brown_txt_cta"
-            android:textSize="25sp" />
 
         <android.widget.Button
             android:id="@+id/btnConnection"

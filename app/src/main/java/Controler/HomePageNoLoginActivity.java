@@ -53,6 +53,7 @@ public class HomePageNoLoginActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
     }
 
+    /*
     public void score(View view) {
         Intent intent = new Intent(this, ScoreActivity.class);
         intent.putExtra("USER", user);
@@ -60,6 +61,8 @@ public class HomePageNoLoginActivity extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Permet une animation de la vue (override le comportement de base)
     }
+    */
+
 
     @Override
     public void onBackPressed() {

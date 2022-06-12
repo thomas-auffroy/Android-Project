@@ -31,6 +31,9 @@ public interface ScoreDao {
     @Query("SELECT DISTINCT game FROM score WHERE user = :user")
     List<Integer> getGameFromScore(String user);
 
+    @Query("SELECT * FROM score WHERE user = :user AND score in (SELECT MAX(score) FROM score GROUP BY game, user) ORDER BY category")
+    List<Score> getHighestScore(String user);
+
     @Insert
     void insert(Score score);
 
